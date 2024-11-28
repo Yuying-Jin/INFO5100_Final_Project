@@ -11,7 +11,7 @@ public class QualityManagementOrganization extends Organization{
     @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList();
-//        roles.add(new LabAssistantRole());
+        roles.add(new Role(Role.RoleType.QualityInspector));
         return roles;
     }
 }

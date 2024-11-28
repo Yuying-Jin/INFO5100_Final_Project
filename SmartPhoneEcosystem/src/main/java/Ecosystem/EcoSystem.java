@@ -8,7 +8,6 @@ package Ecosystem;
 import Ecosystem.Network.Network;
 import Ecosystem.Organization.Organization;
 import Ecosystem.Role.Role;
-import Ecosystem.Role.SystemAdminRole;
 import java.util.ArrayList;
 
 /**
@@ -31,12 +30,14 @@ public class EcoSystem extends Organization{
         networkList.add(network);
         return network;
     }
+    
     @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roleList=new ArrayList<Role>();
-        roleList.add(new SystemAdminRole());
+        roleList.add(new Role(Role.RoleType.SystemAdmin));
         return roleList;
     }
+    
     private EcoSystem(){
         super(null);
         networkList=new ArrayList<Network>();

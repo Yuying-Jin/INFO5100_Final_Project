@@ -11,7 +11,8 @@ public class DistributionTransportationOrganization extends Organization{
     @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roles = new ArrayList();
-//        roles.add(new LabAssistantRole());
+        roles.add(new Role(Role.RoleType.DistributionManager));
+        roles.add(new Role(Role.RoleType.TransportationPlanner));
         return roles;
     }
 }

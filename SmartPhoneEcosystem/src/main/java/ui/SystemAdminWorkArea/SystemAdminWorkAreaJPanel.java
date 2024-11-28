@@ -9,6 +9,7 @@ import Ecosystem.EcoSystem;
 import Ecosystem.Enterprise.Enterprise;
 import Ecosystem.Network.Network;
 import Ecosystem.Organization.Organization;
+import Ecosystem.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JPanel;
@@ -26,12 +27,17 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
      */
     JPanel userProcessContainer;
     EcoSystem ecosystem;
-    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer,EcoSystem ecosystem) {
+    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer, EcoSystem ecosystem) {
         initComponents();
-        this.userProcessContainer=userProcessContainer;
-        this.ecosystem=ecosystem;
+        this.userProcessContainer = userProcessContainer;
+        this.ecosystem = ecosystem;
         populateTree();
     }
+    
+    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem ecosystem) {
+        this(userProcessContainer, ecosystem); // Call the existing constructor
+    }
+
     
     public void populateTree(){
         DefaultTreeModel model=(DefaultTreeModel)jTree.getModel();
