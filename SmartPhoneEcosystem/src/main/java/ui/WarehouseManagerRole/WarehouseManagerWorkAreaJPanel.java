@@ -4,6 +4,8 @@
  */
 package ui.WarehouseManagerRole;
 
+import Ecosystem.EcoSystem;
+import Ecosystem.Enterprise.Enterprise;
 import Ecosystem.Organization.Organization;
 import Ecosystem.UserAccount.UserAccount;
 import javax.swing.JPanel;
@@ -17,13 +19,10 @@ public class WarehouseManagerWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form WarehouseManagerWorkAreaJPanel
      */
-    public WarehouseManagerWorkAreaJPanel() {
+    public WarehouseManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem ecosystem) {
         initComponents();
     }
 
-    public WarehouseManagerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.

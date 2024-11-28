@@ -19,15 +19,15 @@ public class Role {
     public enum RoleType {
         SystemAdmin("System Admin", "ui.SystemAdminWorkArea.SystemAdminWorkAreaJPanel"),
         EnterprisesAdmin("Enterprises Admin", "ui.EnterprisesAdminWorkArea.EnterprisesAdminWorkAreaJPanel"),
-        UIUXSpecialist("UI/UX Specialist", "ui.UIUXSpecialistWorkArea.UIUXSpecialistWorkAreaJPanel"),
-        ProductionCoordinator("Production Coordinator", "ui.ProductionCoordinatorWorkArea.ProductionCoordinatorWorkAreaJPanel"),
-        ComponentDevelopmentEngineer("Component Development Engineer", "ui.ComponentDevelopmentWorkArea.ComponentDevelopmentWorkAreaJPanel"),
-        ProductionOperator("Production Operator", "ui.ProductionOperatorWorkArea.ProductionOperatorWorkAreaJPanel"),
-        QualityInspector("Quality Inspector", "ui.QualityInspectorWorkArea.QualityInspectorWorkAreaJPanel"),
-        WarehouseManager("Warehouse Manager", "ui.WarehouseManagerWorkArea.WarehouseManagerWorkAreaJPanel"),
-        WarehouseOperator("Warehouse Operator", "ui.WarehouseOperatorWorkArea.WarehouseOperatorWorkAreaJPanel"),
-        DistributionManager("Distribution Manager", "ui.DistributionManagerWorkArea.DistributionManagerWorkAreaJPanel"),
-        TransportationPlanner("Transportation Planner", "ui.TransportationPlannerWorkArea.TransportationPlannerWorkAreaJPanel");
+        UIUXSpecialist("UI/UX Specialist", "ui.UIUXSpecialistRole.UIUXWorkAreaJPanel"),
+        ProductionCoordinator("Production Coordinator", "ui.ProductionCoordinatorRole.ProductionCoordinatorWorkAreaJPanel"),
+        ComponentDevelopmentEngineer("Component Development Engineer", "ui.ComponentDevelopmentEngineerRole.ComponentDevelopmentWorkAreaJPanel"),
+        ProductionOperator("Production Operator", "ui.ProductionOperatorRole.ProductionOperatorWorkAreaJPanel"),
+        QualityInspector("Quality Inspector", "ui.QualityInspectorRole.QualityInspectorWorkAreaJPanel"),
+        WarehouseManager("Warehouse Manager", "ui.WarehouseManagerRole.WarehouseManagerWorkAreaJPanel"),
+        WarehouseOperator("Warehouse Operator", "ui.WarehouseOperatorRole.WarehouseOperatorWorkAreaJPanel"),
+        DistributionManager("Distribution Manager", "ui.DistributionManagerRole.DistributionManagerWorkAreaJPanel"),
+        TransportationPlanner("Transportation Planner", "ui.TransportationPlannerRole.TransportationPlannerWorkAreaJPanel");
 
         private String value;
         private String workClassName;

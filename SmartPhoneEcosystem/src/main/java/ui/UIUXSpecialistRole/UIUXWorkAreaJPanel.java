@@ -4,6 +4,7 @@
  */
 package ui.UIUXSpecialistRole;
 
+import Ecosystem.EcoSystem;
 import Ecosystem.Enterprise.Enterprise;
 import Ecosystem.Organization.Organization;
 import Ecosystem.UserAccount.UserAccount;
@@ -22,8 +23,8 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    public UIUXWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public UIUXWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem ecosystem) {
+        initComponents();
     }
 
     /**

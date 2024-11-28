@@ -8,6 +8,7 @@ import Ecosystem.Enterprise.Enterprise;
 import Ecosystem.Organization.Organization;
 import Ecosystem.UserAccount.UserAccount;
 import javax.swing.JPanel;
+import Ecosystem.EcoSystem;
 
 /**
  *
@@ -22,8 +23,8 @@ public class ProductionCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
         initComponents();
     }
 
-    public ProductionCoordinatorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public ProductionCoordinatorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem ecosystem) {
+        this();
     }
 
     /**

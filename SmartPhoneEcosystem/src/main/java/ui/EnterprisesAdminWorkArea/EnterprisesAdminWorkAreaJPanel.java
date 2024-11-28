@@ -4,7 +4,9 @@
  */
 package ui.EnterprisesAdminWorkArea;
 
+import Ecosystem.EcoSystem;
 import Ecosystem.Enterprise.Enterprise;
+import Ecosystem.Organization.Organization;
 import Ecosystem.UserAccount.UserAccount;
 import javax.swing.JPanel;
 
@@ -17,7 +19,7 @@ public class EnterprisesAdminWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form EnterprisesAdminWorkAreaJPanel
      */
-    public EnterprisesAdminWorkAreaJPanel(JPanel userProcessContainer, Enterprise enterprise, UserAccount account) {
+    public EnterprisesAdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem ecosystem) {
         initComponents();
     }
 

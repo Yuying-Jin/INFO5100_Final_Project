@@ -4,6 +4,8 @@
  */
 package ui.ProductionOperatorRole;
 
+import Ecosystem.EcoSystem;
+import Ecosystem.Enterprise.Enterprise;
 import Ecosystem.Organization.Organization;
 import Ecosystem.UserAccount.UserAccount;
 import javax.swing.JPanel;
@@ -17,12 +19,8 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ProductionOperatorWorkAreaJPanel
      */
-    public ProductionOperatorWorkAreaJPanel() {
+    public ProductionOperatorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem ecosystem) {
         initComponents();
-    }
-
-    public ProductionOperatorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     /**

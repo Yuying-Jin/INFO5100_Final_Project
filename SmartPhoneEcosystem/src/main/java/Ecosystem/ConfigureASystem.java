@@ -18,6 +18,15 @@ public class ConfigureASystem {
                 employee,
                 new Role(Role.RoleType.SystemAdmin)
         );
+        
+        Employee testEmployee = system.getEmployeeDirectory().createEmployee("pro");
+       
+        UserAccount test = system.getUserAccountDirectory().createUserAccount(
+                "p",
+                "p",
+                testEmployee,
+                new Role(Role.RoleType.TransportationPlanner)
+        );
         return system;
     }
     

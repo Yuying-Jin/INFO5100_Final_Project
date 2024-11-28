@@ -4,6 +4,7 @@
  */
 package ui.ComponentDevelopmentEngineerRole;
 
+import Ecosystem.EcoSystem;
 import Ecosystem.Enterprise.Enterprise;
 import Ecosystem.Organization.Organization;
 import Ecosystem.UserAccount.UserAccount;
@@ -18,13 +19,10 @@ public class ComponentDevelopmentWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ComponentDevelopmentWorkAreaJPanel
      */
-    public ComponentDevelopmentWorkAreaJPanel() {
+    public ComponentDevelopmentWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem ecosystem) {
         initComponents();
     }
 
-    public ComponentDevelopmentWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     /**
      * This method is called from within the constructor to initialize the form.
