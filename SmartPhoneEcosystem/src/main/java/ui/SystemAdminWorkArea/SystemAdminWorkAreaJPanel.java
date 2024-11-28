@@ -35,7 +35,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     }
     
     public SystemAdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem ecosystem) {
-        this(userProcessContainer, ecosystem); // Call the existing constructor
+        this(userProcessContainer, ecosystem);
     }
 
     
