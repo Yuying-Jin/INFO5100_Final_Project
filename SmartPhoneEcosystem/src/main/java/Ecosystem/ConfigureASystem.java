@@ -130,6 +130,9 @@ public class ConfigureASystem {
         smartApple.getProductCatalog().addProduct("iPhone SE 2022", 800.00);
         smartApple.getProductCatalog().addProduct("iPhone 12", 800.00);
         smartApple.getProductCatalog().addProduct("iPhone 12 Pro", 1100.00);
+        
+        String productName = "Demo Phone";
+        int productQuant = 1000;
 
         // Create work requests
         WorkRequest designWR = new DesignWorkRequest();
@@ -138,6 +141,8 @@ public class ConfigureASystem {
         designWR.setMessage("UI design");
         designWR.setStatus("Completed");
         designWR.setCost(2000);
+        designWR.setProductName(productName);
+        designWR.setProductQuant(productQuant);
         designWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(6));
         designWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(5));
         smartApple.getOrganizationDirectory().getOrganizationList().getFirst().smartWQ().getWorkRequestList().add(designWR);
@@ -148,6 +153,8 @@ public class ConfigureASystem {
         componentWR.setMessage("Needs chips");
         componentWR.setStatus("Completed");
         componentWR.setCost(300000);
+        componentWR.setProductName("Demo chip");
+        componentWR.setProductQuant(productQuant);
         componentWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(6));
         componentWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(7));
         enterpriseList.get(1).getOrganizationDirectory().getOrganizationList().getFirst().smartWQ().getWorkRequestList().add(componentWR);
@@ -158,6 +165,8 @@ public class ConfigureASystem {
         assemblyWR.setMessage("Assembly phones");
         assemblyWR.setStatus("Completed");
         assemblyWR.setCost(25000.0);
+        assemblyWR.setProductName(productName);
+        assemblyWR.setProductQuant(productQuant);
         assemblyWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(6));
         assemblyWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(8));
         enterpriseList.get(2).getOrganizationDirectory().getOrganizationList().getFirst().smartWQ().getWorkRequestList().add(assemblyWR);
@@ -167,6 +176,8 @@ public class ConfigureASystem {
         qmWR.setMessage("Check qualities");
         qmWR.setStatus("Completed");
         qmWR.setCost(10000.0);
+        qmWR.setProductName(productName);
+        qmWR.setProductQuant(productQuant);
         qmWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(8));
         qmWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(9));
         enterpriseList.get(2).getOrganizationDirectory().getOrganizationList().getLast().smartWQ().getWorkRequestList().add(qmWR);
@@ -175,6 +186,7 @@ public class ConfigureASystem {
         assemblyWR.setMessage("Reassumbly phones");
         assemblyWR.setStatus("Completed");
         assemblyWR.setCost(25800.0);
+        assemblyWR.setFailgureQuant(80);
         assemblyWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(9));
         assemblyWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(8));
         
@@ -184,6 +196,8 @@ public class ConfigureASystem {
         smartApple.getOrganizationDirectory().getOrganizationList().getLast().smartWQ().getWorkRequestList().add(transWR);
         transWR.setMessage("Transport 1000 phones to stores");
         transWR.setStatus("Pending");
+        transWR.setProductName(productName);
+        transWR.setProductQuant(productQuant);
         transWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(6));
         transWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(12));
         enterpriseList.get(3).getOrganizationDirectory().getOrganizationList().getLast().smartWQ().getWorkRequestList().add(transWR);
@@ -194,6 +208,8 @@ public class ConfigureASystem {
         smartApple.getOrganizationDirectory().getOrganizationList().getLast().smartWQ().getWorkRequestList().add(prepareWR);
         prepareWR.setMessage("Prepare 1000 phones to transport");
         prepareWR.setStatus("Pending");
+        prepareWR.setProductName(productName);
+        prepareWR.setProductQuant(productQuant);
         prepareWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(12));
         prepareWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(10));
         enterpriseList.get(3).getOrganizationDirectory().getOrganizationList().getFirst().smartWQ().getWorkRequestList().add(prepareWR);
@@ -201,6 +217,7 @@ public class ConfigureASystem {
         // Warehouse Manager passes work request to Warehouse Operator
         prepareWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(10));
         prepareWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(11));
+        prepareWR.setProductQuantHad(rand.nextInt(200) + productQuant);
         // Warehouse Operator complete the request and set cost
         prepareWR.setCost(5000);
         prepareWR.setStatus("Completed");

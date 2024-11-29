@@ -18,9 +18,11 @@ public abstract class WorkRequest {
     private UserAccount receiver;
     private String status;
     private Date requestDate;
-    private Date resolveDate;
+    final private Date resolveDate;
     private boolean isApproved;
     private double cost;
+    private String productName;
+    private int productQuant;
     
      public WorkRequest() {
         this.message = "";
@@ -31,6 +33,8 @@ public abstract class WorkRequest {
         this.resolveDate = null;
         this.isApproved = false;
         this.cost = 0.0;
+        this.productName = "";
+        this.productQuant = 0;
     }
 
     public String getMessage() {
@@ -91,5 +95,21 @@ public abstract class WorkRequest {
 
     public void setCost(double cost) {
         this.cost = cost;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public int getProductQuant() {
+        return productQuant;
+    }
+
+    public void setProductQuant(int productQuant) {
+        this.productQuant = productQuant;
     }
 }

@@ -9,5 +9,17 @@ package Ecosystem.WorkQueue;
  * @author sunny
  */
 public class AssemblyWorkRequest extends WorkRequest {
+    private int failgureQuant;
+
+    public AssemblyWorkRequest() {
+    }
+
+    public int getFailgureQuant() {
+        return failgureQuant;
+    }
+
+    public void setFailgureQuant(int failgureQuant) {
+        this.failgureQuant = failgureQuant;
+    }
     
 }

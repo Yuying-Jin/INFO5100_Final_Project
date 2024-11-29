@@ -26,7 +26,6 @@ public class SmartphoneProductCatalog {
     }
 
     public void removeProduct(SmartphoneProduct product) {
-        // Remove the specified product from the catalog
         productCatalog.remove(product);
     }
 

@@ -11,10 +11,10 @@ package Ecosystem.Product;
 public class SmartphoneProduct {
     // Instance variables
     private String name;
-    private int id = 0;
+    private int id;
     private double budget;
     private double cost;
-    private static int count;
+    private static int count = 0;
 
     // Constructor
     public SmartphoneProduct(String name, double budget) {
