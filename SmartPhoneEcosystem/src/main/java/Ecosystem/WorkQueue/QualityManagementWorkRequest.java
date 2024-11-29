@@ -8,6 +8,6 @@ package Ecosystem.WorkQueue;
  *
  * @author sunny
  */
-public class QualityManagementWorkRequest {
+public class QualityManagementWorkRequest extends WorkRequest {
     
 }

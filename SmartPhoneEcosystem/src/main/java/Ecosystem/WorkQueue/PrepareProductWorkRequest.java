@@ -8,6 +8,16 @@ package Ecosystem.WorkQueue;
  *
  * @author sunny
  */
-public class PrepareProductWorkRequest {
+public class PrepareProductWorkRequest extends WorkRequest {
+    private int productQuantHad;
+
+    public int getProductQuantHad() {
+        return productQuantHad;
+    }
+
+    public void setProductQuantHad(int productQuantHad) {
+        this.productQuantHad = productQuantHad;
+    }
+    
     
 }
