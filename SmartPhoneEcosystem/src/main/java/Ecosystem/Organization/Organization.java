@@ -9,17 +9,18 @@ import java.util.ArrayList;
 public abstract class Organization {
 
     private String name;
-    private WorkQueue workQueue;
-    private EmployeeDirectory employeeDirectory;
+    final private int id;
     private UserAccountDirectory userAccountDirectory;
-    private int organizationID;
+    private WorkQueue workQueue;
+    private ArrayList<WorkQueue> histroyWorkQueueList;
+    private EmployeeDirectory employeeDirectory;
     private static int counter=0;
     
     public enum Type {
         Admin("Admin Organization"),
         UIUX("UI/UX Organization"),
         ManufacturingManagement("Manufacturing Management Organization"),
-        ResearchAndDevelopment("Research and Development Center"),
+        ResearchAndDevelopment("Research and Development Organization"),
         Assembly("Assembly Organization"),
         QualityManagement("Quality Management Organization"),
         WarehouseManagement("Warehouse Management Organization"),
@@ -39,23 +40,23 @@ public abstract class Organization {
 
     public Organization(String name) {
         this.name = name;
-        workQueue = new WorkQueue();
-        employeeDirectory = new EmployeeDirectory();
-        userAccountDirectory = new UserAccountDirectory();
-        organizationID = counter;
+        this.userAccountDirectory = new UserAccountDirectory();
+        this.workQueue = new WorkQueue();
+        this.histroyWorkQueueList = new ArrayList<>();
+        this.employeeDirectory = new EmployeeDirectory();
+        this.id = counter;
         ++counter;
     }
 
     public abstract ArrayList<Role> getSupportedRole();
     
+    public int getId() {
+        return id;
+    }
     public UserAccountDirectory getUserAccountDirectory() {
         return userAccountDirectory;
     }
-
-    public int getOrganizationID() {
-        return organizationID;
-    }
-
+    
     public EmployeeDirectory getEmployeeDirectory() {
         return employeeDirectory;
     }
@@ -64,16 +65,23 @@ public abstract class Organization {
         return name;
     }
 
-    public WorkQueue getWorkQueue() {
-        return workQueue;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
+    
+    public WorkQueue smartWQ() {
+        return workQueue;
+    }
 
-    public void setWorkQueue(WorkQueue workQueue) {
-        this.workQueue = workQueue;
+    public ArrayList<WorkQueue> getHistoryWorkQueueList() {
+        return histroyWorkQueueList;
+    }
+
+    public WorkQueue addHistoryWorkQueue() {
+        WorkQueue oldWorkQueue = workQueue;
+        histroyWorkQueueList.add(oldWorkQueue);
+        workQueue = new WorkQueue();  // Reset current work queue after adding to history
+        return oldWorkQueue;
     }
 
     @Override

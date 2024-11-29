@@ -8,6 +8,6 @@ package Ecosystem.WorkQueue;
  *
  * @author sunny
  */
-public class TransportationWorkRequest {
+public class TransportationWorkRequest extends WorkRequest {
     
 }

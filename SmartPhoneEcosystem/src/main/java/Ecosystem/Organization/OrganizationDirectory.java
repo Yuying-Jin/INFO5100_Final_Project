@@ -19,24 +19,21 @@ public class OrganizationDirectory {
     public Organization createOrganization(Type type) {
         Organization organization = null;
 
-        if (type.getValue().equals(Type.UIUX.getValue())) {
-            organization = new UIUXOrganization();
-        } else if (type.getValue().equals(Type.ManufacturingManagement.getValue())) {
-            organization = new ManufacturingManagementOrganization();
-        } else if (type.getValue().equals(Type.ResearchAndDevelopment.getValue())) {
-            organization = new ResearchAndDevelopmentOrganization();
-        } else if (type.getValue().equals(Type.Assembly.getValue())) {
-            organization = new AssemblyOrganization();
-        } else if (type.getValue().equals(Type.QualityManagement.getValue())) {
-            organization = new QualityManagementOrganization();
-        } else if (type.getValue().equals(Type.WarehouseManagement.getValue())) {
-            organization = new WarehouseManagementOrganization();
-        } else if (type.getValue().equals(Type.DistributionTransportation.getValue())) {
-            organization = new DistributionTransportationOrganization();
-        }
+        
+        String organizationClassName = type.getValue()
+            .replaceAll("and", "And") 
+            .replaceAll("[^\\p{L}]", ""); 
 
-        if (organization != null) {
-            organizationList.add(organization);
+        try {
+            Class<?> clazz = Class.forName("Ecosystem.Organization." + organizationClassName);
+            organization = (Organization) clazz.getDeclaredConstructor().newInstance();
+
+            if (organization != null) {
+                organizationList.add(organization);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return organization;

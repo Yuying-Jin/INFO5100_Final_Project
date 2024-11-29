@@ -8,6 +8,6 @@ package Ecosystem.WorkQueue;
  *
  * @author sunny
  */
-public class PrepareProductWorkRequest {
+public class PrepareProductWorkRequest extends WorkRequest {
     
 }

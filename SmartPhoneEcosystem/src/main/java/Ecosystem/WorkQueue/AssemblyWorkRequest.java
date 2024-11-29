@@ -8,6 +8,6 @@ package Ecosystem.WorkQueue;
  *
  * @author sunny
  */
-public class AssemblyWorkRequest {
+public class AssemblyWorkRequest extends WorkRequest {
     
 }

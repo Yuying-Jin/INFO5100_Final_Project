@@ -9,7 +9,7 @@ import java.util.Date;
 
 /**
  *
- * @author raunak
+ * @author sunny
  */
 public abstract class WorkRequest {
 
@@ -19,9 +19,18 @@ public abstract class WorkRequest {
     private String status;
     private Date requestDate;
     private Date resolveDate;
+    private boolean isApproved;
+    private double cost;
     
-    public WorkRequest(){
-        requestDate = new Date();
+     public WorkRequest() {
+        this.message = "";
+        this.sender = null;
+        this.receiver = null;
+        this.status = "";
+        this.requestDate = new Date();
+        this.resolveDate = null;
+        this.isApproved = false;
+        this.cost = 0.0;
     }
 
     public String getMessage() {
@@ -36,39 +45,51 @@ public abstract class WorkRequest {
         return sender;
     }
 
-    public void setSender(UserAccount sender) {
-        this.sender = sender;
+    public void setSender(UserAccount ua) {
+        this.sender = ua;
     }
 
     public UserAccount getReceiver() {
         return receiver;
     }
 
-    public void setReceiver(UserAccount receiver) {
-        this.receiver = receiver;
+    public void setReceiver(UserAccount ua) {
+        this.receiver = ua;
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setStatus(String s) {
+        this.status = s;
     }
 
     public Date getRequestDate() {
         return requestDate;
     }
 
-    public void setRequestDate(Date requestDate) {
-        this.requestDate = requestDate;
+    public void setRequestDate(Date d) {
+        this.requestDate = d;
     }
 
     public Date getResolveDate() {
         return resolveDate;
     }
 
-    public void setResolveDate(Date resolveDate) {
-        this.resolveDate = resolveDate;
+    public boolean getIsApproved() {
+        return isApproved;
+    }
+
+    public void setIsApproved(boolean info) {
+        this.isApproved = info;
+    }
+
+    public double getCost() {
+        return cost;
+    }
+
+    public void setCost(double cost) {
+        this.cost = cost;
     }
 }
