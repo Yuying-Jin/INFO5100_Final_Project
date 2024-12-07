@@ -37,8 +37,8 @@ public abstract class Enterprise extends Organization{
             return value;
         }
 
-        @Override
-        public String toString() {
+    @Override
+    public String toString() {
             return value;
         }
     }

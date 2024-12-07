@@ -38,6 +38,7 @@ public class ConfigureASystem {
         
         // Create Network
         Network network = system.createAndAddNetwork();
+        network.setName("smartphone");
         
         // Create Enterprises
         ArrayList<Enterprise> enterpriseList = new ArrayList<>();
