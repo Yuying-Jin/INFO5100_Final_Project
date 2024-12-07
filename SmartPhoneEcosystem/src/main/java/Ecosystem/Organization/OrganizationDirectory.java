@@ -25,6 +25,8 @@ public class OrganizationDirectory {
             .replaceAll("[^\\p{L}]", ""); 
 
         try {
+                        System.out.println("Ecosystem.Organization." + organizationClassName);
+
             Class<?> clazz = Class.forName("Ecosystem.Organization." + organizationClassName);
             organization = (Organization) clazz.getDeclaredConstructor().newInstance();
 

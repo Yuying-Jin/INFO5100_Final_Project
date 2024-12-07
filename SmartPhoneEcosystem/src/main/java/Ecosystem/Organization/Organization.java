@@ -69,7 +69,7 @@ public abstract class Organization {
         this.name = name;
     }
     
-    public WorkQueue smartWQ() {
+    public WorkQueue getWorkQueue() {
         return workQueue;
     }
 

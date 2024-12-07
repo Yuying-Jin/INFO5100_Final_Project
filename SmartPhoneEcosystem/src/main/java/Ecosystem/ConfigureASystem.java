@@ -41,7 +41,7 @@ public class ConfigureASystem {
         network.setName("smartphone");
         
         // Create Enterprises
-        ArrayList<Enterprise> enterpriseList = new ArrayList<>();
+        ArrayList<Enterprise> enterpriseList = network.getEnterpriseDirectory().getEnterpriseList();
         for (Enterprise.EnterpriseType type : Enterprise.EnterpriseType.values()) {
             String name = faker.company().name();
             Enterprise e = network.getEnterpriseDirectory().createAndAddEnterprise(name, type);
@@ -50,13 +50,13 @@ public class ConfigureASystem {
 
         
         // Create Oragnizations
-        enterpriseList.get(0).getOrganizationDirectory().createOrganization(Organization.Type.UIUX);
-        enterpriseList.get(0).getOrganizationDirectory().createOrganization(Organization.Type.ManufacturingManagement);
-        enterpriseList.get(1).getOrganizationDirectory().createOrganization(Organization.Type.ResearchAndDevelopment);
-        enterpriseList.get(2).getOrganizationDirectory().createOrganization(Organization.Type.Assembly);
-        enterpriseList.get(2).getOrganizationDirectory().createOrganization(Organization.Type.QualityManagement);
-        enterpriseList.get(3).getOrganizationDirectory().createOrganization(Organization.Type.WarehouseManagement);
-        enterpriseList.get(3).getOrganizationDirectory().createOrganization(Organization.Type.DistributionTransportation);
+        Organization deisgnOrg = enterpriseList.get(0).getOrganizationDirectory().createOrganization(Organization.Type.UIUX);
+        Organization mmOrg = enterpriseList.get(0).getOrganizationDirectory().createOrganization(Organization.Type.ManufacturingManagement);
+        Organization rdOrg = enterpriseList.get(1).getOrganizationDirectory().createOrganization(Organization.Type.ResearchAndDevelopment);
+        Organization assemblyOrg = enterpriseList.get(2).getOrganizationDirectory().createOrganization(Organization.Type.Assembly);
+        Organization qmOrg = enterpriseList.get(2).getOrganizationDirectory().createOrganization(Organization.Type.QualityManagement);
+        Organization whmOrg = enterpriseList.get(3).getOrganizationDirectory().createOrganization(Organization.Type.WarehouseManagement);
+        Organization dtOrg = enterpriseList.get(3).getOrganizationDirectory().createOrganization(Organization.Type.DistributionTransportation);
         
 
         // Create Employees
@@ -89,10 +89,10 @@ public class ConfigureASystem {
         
         roleList.add(new Role(Role.RoleType.SystemAdmin)); //0
         
-        roleList.add(new Role(Role.RoleType.EnterprisesAdmin));
-        roleList.add(new Role(Role.RoleType.EnterprisesAdmin));
-        roleList.add(new Role(Role.RoleType.EnterprisesAdmin));
-        roleList.add(new Role(Role.RoleType.EnterprisesAdmin));
+        roleList.add(new Role(Role.RoleType.EnterprisesAdmin)); // 1
+        roleList.add(new Role(Role.RoleType.EnterprisesAdmin)); // 2
+        roleList.add(new Role(Role.RoleType.EnterprisesAdmin)); // 3
+        roleList.add(new Role(Role.RoleType.EnterprisesAdmin)); // 4
 
         roleList.add(new Role(Role.RoleType.UIUXSpecialist)); // 5
         roleList.add(new Role(Role.RoleType.ProductionCoordinator)); // 6
@@ -105,17 +105,90 @@ public class ConfigureASystem {
         roleList.add(new Role(Role.RoleType.TransportationPlanner)); // 13
         
         // Create user accounts
-        int i = 0;
-        for (Role role : roleList){
-            UserAccount ua;
-            ua = system.getUserAccountDirectory().createUserAccount(
-                    userList[i],
+        system.getUserAccountDirectory().createUserAccount(
+                    userList[0],
                     password,
-                    ed.getEmployeeList().get(i),
-                    role
-                );
-            i++;
-        }
+                    ed.getEmployeeList().get(0),
+                    new Role(Role.RoleType.SystemAdmin));
+        
+        system.getUserAccountDirectory().createUserAccount(
+            userList[1],
+            password,
+            ed.getEmployeeList().get(1),
+            new Role(Role.RoleType.EnterprisesAdmin));
+        
+        system.getUserAccountDirectory().createUserAccount(
+            userList[2],
+            password,
+            ed.getEmployeeList().get(2),
+            new Role(Role.RoleType.EnterprisesAdmin));
+        
+        system.getUserAccountDirectory().createUserAccount(
+            userList[3],
+            password,
+            ed.getEmployeeList().get(3),
+            new Role(Role.RoleType.EnterprisesAdmin));
+        
+        system.getUserAccountDirectory().createUserAccount(
+            userList[4],
+            password,
+            ed.getEmployeeList().get(4),
+            new Role(Role.RoleType.EnterprisesAdmin));
+        
+        deisgnOrg.getUserAccountDirectory().createUserAccount(
+            userList[5],
+            password,
+            ed.getEmployeeList().get(5),
+            new Role(Role.RoleType.UIUXSpecialist));
+
+        mmOrg.getUserAccountDirectory().createUserAccount(
+            userList[6],
+            password,
+            ed.getEmployeeList().get(6),
+            new Role(Role.RoleType.ProductionCoordinator));
+        
+        rdOrg.getUserAccountDirectory().createUserAccount(
+            userList[7],
+            password,
+            ed.getEmployeeList().get(7),
+            new Role(Role.RoleType.ComponentDevelopmentEngineer));
+        
+        assemblyOrg.getUserAccountDirectory().createUserAccount(
+            userList[8],
+            password,
+            ed.getEmployeeList().get(8),
+            new Role(Role.RoleType.ProductionOperator));
+        
+        qmOrg.getUserAccountDirectory().createUserAccount(
+            userList[9],
+            password,
+            ed.getEmployeeList().get(9),
+            new Role(Role.RoleType.QualityInspector));
+        
+        whmOrg.getUserAccountDirectory().createUserAccount(
+            userList[10],
+            password,
+            ed.getEmployeeList().get(10),
+            new Role(Role.RoleType.WarehouseManager));
+        
+        whmOrg.getUserAccountDirectory().createUserAccount(
+            userList[11],
+            password,
+            ed.getEmployeeList().get(11),
+            new Role(Role.RoleType.WarehouseOperator));
+        
+        dtOrg.getUserAccountDirectory().createUserAccount(
+            userList[12],
+            password,
+            ed.getEmployeeList().get(12),
+            new Role(Role.RoleType.DistributionManager));
+        
+        dtOrg.getUserAccountDirectory().createUserAccount(
+            userList[13],
+            password,
+            ed.getEmployeeList().get(13),
+            new Role(Role.RoleType.TransportationPlanner));
+
         
         // Create smartphone products
         SmartphoneEnterprise smartApple = (SmartphoneEnterprise)enterpriseList.get(0);
@@ -137,8 +210,8 @@ public class ConfigureASystem {
 
         // Create work requests
         WorkRequest designWR = new DesignWorkRequest();
-        WorkQueue smartWQ = smartApple.getOrganizationDirectory().getOrganizationList().getLast().smartWQ();
-        smartApple.getOrganizationDirectory().getOrganizationList().getLast().smartWQ().getWorkRequestList().add(designWR);
+        WorkQueue smartWQ = smartApple.getOrganizationDirectory().getOrganizationList().getLast().getWorkQueue();
+        smartApple.getOrganizationDirectory().getOrganizationList().getLast().getWorkQueue().getWorkRequestList().add(designWR);
         designWR.setMessage("UI design");
         designWR.setStatus("Completed");
         designWR.setCost(2000);
@@ -146,11 +219,11 @@ public class ConfigureASystem {
         designWR.setProductQuant(productQuant);
         designWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(6));
         designWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(5));
-        smartApple.getOrganizationDirectory().getOrganizationList().getFirst().smartWQ().getWorkRequestList().add(designWR);
+        smartApple.getOrganizationDirectory().getOrganizationList().getFirst().getWorkQueue().getWorkRequestList().add(designWR);
         
         
         ComponentWorkRequest componentWR = new ComponentWorkRequest();
-        smartApple.getOrganizationDirectory().getOrganizationList().getLast().smartWQ().getWorkRequestList().add(componentWR);
+        smartApple.getOrganizationDirectory().getOrganizationList().getLast().getWorkQueue().getWorkRequestList().add(componentWR);
         componentWR.setMessage("Needs chips");
         componentWR.setStatus("Completed");
         componentWR.setCost(300000);
@@ -158,11 +231,11 @@ public class ConfigureASystem {
         componentWR.setProductQuant(productQuant);
         componentWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(6));
         componentWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(7));
-        enterpriseList.get(1).getOrganizationDirectory().getOrganizationList().getFirst().smartWQ().getWorkRequestList().add(componentWR);
+        enterpriseList.get(1).getOrganizationDirectory().getOrganizationList().getFirst().getWorkQueue().getWorkRequestList().add(componentWR);
 
                 
         AssemblyWorkRequest assemblyWR = new AssemblyWorkRequest();
-        smartApple.getOrganizationDirectory().getOrganizationList().getLast().smartWQ().getWorkRequestList().add(assemblyWR);
+        smartApple.getOrganizationDirectory().getOrganizationList().getLast().getWorkQueue().getWorkRequestList().add(assemblyWR);
         assemblyWR.setMessage("Assembly phones");
         assemblyWR.setStatus("Completed");
         assemblyWR.setCost(25000.0);
@@ -170,7 +243,7 @@ public class ConfigureASystem {
         assemblyWR.setProductQuant(productQuant);
         assemblyWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(6));
         assemblyWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(8));
-        enterpriseList.get(2).getOrganizationDirectory().getOrganizationList().getFirst().smartWQ().getWorkRequestList().add(assemblyWR);
+        enterpriseList.get(2).getOrganizationDirectory().getOrganizationList().getFirst().getWorkQueue().getWorkRequestList().add(assemblyWR);
         
         
         QualityManagementWorkRequest qmWR = new QualityManagementWorkRequest();
@@ -181,7 +254,7 @@ public class ConfigureASystem {
         qmWR.setProductQuant(productQuant);
         qmWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(8));
         qmWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(9));
-        enterpriseList.get(2).getOrganizationDirectory().getOrganizationList().getLast().smartWQ().getWorkRequestList().add(qmWR);
+        enterpriseList.get(2).getOrganizationDirectory().getOrganizationList().getLast().getWorkQueue().getWorkRequestList().add(qmWR);
         
         // Reassumbly due to failgure
         assemblyWR.setMessage("Reassumbly phones");
@@ -194,26 +267,26 @@ public class ConfigureASystem {
         
         // Smartphone Enterprise Production Operator requests Distribution Manager
         TransportationWorkRequest transWR = new TransportationWorkRequest();
-        smartApple.getOrganizationDirectory().getOrganizationList().getLast().smartWQ().getWorkRequestList().add(transWR);
+        smartApple.getOrganizationDirectory().getOrganizationList().getLast().getWorkQueue().getWorkRequestList().add(transWR);
         transWR.setMessage("Transport 1000 phones to stores");
         transWR.setStatus("Pending");
         transWR.setProductName(productName);
         transWR.setProductQuant(productQuant);
         transWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(6));
         transWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(12));
-        enterpriseList.get(3).getOrganizationDirectory().getOrganizationList().getLast().smartWQ().getWorkRequestList().add(transWR);
+        enterpriseList.get(3).getOrganizationDirectory().getOrganizationList().getLast().getWorkQueue().getWorkRequestList().add(transWR);
 
         
         // Distribution Manager requests WarehouseManager to prepare products
         PrepareProductWorkRequest prepareWR = new PrepareProductWorkRequest();
-        smartApple.getOrganizationDirectory().getOrganizationList().getLast().smartWQ().getWorkRequestList().add(prepareWR);
+        smartApple.getOrganizationDirectory().getOrganizationList().getLast().getWorkQueue().getWorkRequestList().add(prepareWR);
         prepareWR.setMessage("Prepare 1000 phones to transport");
         prepareWR.setStatus("Pending");
         prepareWR.setProductName(productName);
         prepareWR.setProductQuant(productQuant);
         prepareWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(12));
         prepareWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(10));
-        enterpriseList.get(3).getOrganizationDirectory().getOrganizationList().getFirst().smartWQ().getWorkRequestList().add(prepareWR);
+        enterpriseList.get(3).getOrganizationDirectory().getOrganizationList().getFirst().getWorkQueue().getWorkRequestList().add(prepareWR);
         
         // Warehouse Manager passes work request to Warehouse Operator
         prepareWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(10));

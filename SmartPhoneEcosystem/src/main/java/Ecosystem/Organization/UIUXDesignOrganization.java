@@ -2,9 +2,9 @@ package Ecosystem.Organization;
 import Ecosystem.Role.Role;
 import java.util.ArrayList;
 
-public class UIUXOrganization extends Organization{
+public class UIUXDesignOrganization extends Organization{
 
-    public UIUXOrganization() {
+    public UIUXDesignOrganization() {
         super(Organization.Type.UIUX.getValue());
     }
 
