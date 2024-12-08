@@ -4,18 +4,14 @@
  */
 package ui.WarehouseOperatorRole;
 
-import Ecosystem.Organization.DistributionTransportationOrganization;
 import Ecosystem.Organization.Organization;
 import Ecosystem.Organization.WarehouseManagementOrganization;
 import Ecosystem.WorkQueue.PrepareProductWorkRequest;
 import Ecosystem.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
-import java.awt.Font;
-import static java.awt.Font.BOLD;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import ui.TransportationPlannerRole.ProcessTransportationJPanel;
 
 /**
  *
@@ -45,6 +41,7 @@ public class ManageProductRequestJPanel extends javax.swing.JPanel {
         processButton = new javax.swing.JButton();
         refreshJButton = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 245, 175));
 
@@ -91,6 +88,15 @@ public class ManageProductRequestJPanel extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel10.setText("Process Product Request");
 
+        btnBack.setBackground(new java.awt.Color(204, 225, 152));
+        btnBack.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,7 +107,8 @@ public class ManageProductRequestJPanel extends javax.swing.JPanel {
                     .addComponent(processButton)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
+                        .addComponent(btnBack)
+                        .addGap(31, 31, 31)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(refreshJButton)))
@@ -113,7 +120,8 @@ public class ManageProductRequestJPanel extends javax.swing.JPanel {
                 .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(refreshJButton)
-                    .addComponent(jLabel10))
+                    .addComponent(jLabel10)
+                    .addComponent(btnBack))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -140,7 +148,7 @@ public class ManageProductRequestJPanel extends javax.swing.JPanel {
                 row[6] = request.getStatus();
                 row[5] = request.getCost();
                 model.addRow(row);
-            }
+            }   
         }
     }
     private void processButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processButtonActionPerformed
@@ -168,8 +176,15 @@ public class ManageProductRequestJPanel extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        userProcessContainer.remove(this);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton processButton;

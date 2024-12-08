@@ -4,13 +4,20 @@
  */
 package ui.DistributionManagerRole;
 
+import Ecosystem.EcoSystem;
+import Ecosystem.Enterprise.Enterprise;
+import Ecosystem.Network.Network;
+import Ecosystem.Organization.AssemblyOrganization;
 import Ecosystem.Organization.DistributionTransportationOrganization;
 import Ecosystem.Organization.ManufacturingManagementOrganization;
 import Ecosystem.Organization.Organization;
+import Ecosystem.UserAccount.UserAccount;
 import Ecosystem.WorkQueue.PrepareProductWorkRequest;
 import Ecosystem.WorkQueue.TransportationWorkRequest;
 import Ecosystem.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,9 +26,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RequestTransportationPlannerJPanel extends javax.swing.JPanel {
     private Organization organization;
-    public RequestTransportationPlannerJPanel(Organization organization) {
+    private JPanel workArea;
+    private UserAccount account;
+    
+    public RequestTransportationPlannerJPanel(JPanel workArea, UserAccount userAccount, Organization organization) {
         initComponents();
+        
         this.organization = (DistributionTransportationOrganization) organization;
+        this.workArea = workArea;
+        this.account = userAccount;
         populateTable();
     }
 
@@ -39,21 +52,24 @@ public class RequestTransportationPlannerJPanel extends javax.swing.JPanel {
         sendButton = new javax.swing.JButton();
         refreshJButton = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
+
+        setBackground(new java.awt.Color(255, 245, 175));
 
         workRequestJTable.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Product Name", "Message", "Sender", "Receiver", "Quant"
+                "Product Name", "Message", "Sender", "Receiver", "Quant", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Object.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -83,6 +99,15 @@ public class RequestTransportationPlannerJPanel extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel10.setText("Request Warehouse");
 
+        btnBack.setBackground(new java.awt.Color(204, 225, 152));
+        btnBack.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -91,30 +116,29 @@ public class RequestTransportationPlannerJPanel extends javax.swing.JPanel {
                 .addGap(72, 72, 72)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel10)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(refreshJButton)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(sendButton)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(btnBack)
+                        .addGap(77, 77, 77)
+                        .addComponent(jLabel10))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(refreshJButton)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(sendButton))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jLabel10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(btnBack))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(refreshJButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(12, 12, 12)
                 .addComponent(sendButton)
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -127,15 +151,16 @@ public class RequestTransportationPlannerJPanel extends javax.swing.JPanel {
         }
         
         for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
-            if (request.getStatus().equals("")) {
-                Object[] row = new Object[5];
+//            if (request.getStatus().equals("")) {
+                Object[] row = new Object[6];
                 row[0] = request.getProductName();
                 row[1] = request;
                 row[2] = request.getSender() != null ? request.getSender().getEmployee().getName() : "N/A"; 
                 row[3] = request.getReceiver() != null ? request.getReceiver().getEmployee().getName() : "N/A"; 
                 row[4] = request.getProductQuant();
+                row[5] = request.getStatus();
                 model.addRow(row);
-            }
+//            }
         }
     }
     private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
@@ -148,12 +173,27 @@ public class RequestTransportationPlannerJPanel extends javax.swing.JPanel {
 
         PrepareProductWorkRequest request = (PrepareProductWorkRequest) workRequestJTable.getValueAt(selectedRow, 1);
 
-        if ("Pending".equals(request.getStatus())) {
+        if ("Sent".equals(request.getStatus())) {
             JOptionPane.showMessageDialog(null, "This request is already being sent.");
             return;
         }
-
-        request.setStatus("Pending");
+        
+        Organization org = null;
+        for(Network network : EcoSystem.getInstance().getNetworkList()){
+            for(Enterprise e : network.getEnterpriseDirectory().getEnterpriseList()){
+                for (Organization o : e.getOrganizationDirectory().getOrganizationList()){
+                        if (o instanceof AssemblyOrganization){
+                        org = o;
+                        break;
+                    }
+                }
+            }
+        }
+        if (org!=null){
+            org.getWorkQueue().getWorkRequestList().add(request);
+            account.getWorkQueue().getWorkRequestList().add(request);
+        }
+        request.setStatus("Sent");
         populateTable();
     }//GEN-LAST:event_sendButtonActionPerformed
 
@@ -161,8 +201,15 @@ public class RequestTransportationPlannerJPanel extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        workArea.remove(this);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.previous(workArea);
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshJButton;

@@ -53,6 +53,8 @@ public class CheckAssemblyRequestJPanel extends javax.swing.JPanel {
         lblFailureQuant = new javax.swing.JLabel();
         txtFailureQuant = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 245, 175));
+
         btnBack.setBackground(new java.awt.Color(204, 225, 152));
         btnBack.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
         btnBack.setText("<< Back");
@@ -144,8 +146,7 @@ public class CheckAssemblyRequestJPanel extends javax.swing.JPanel {
                     .addComponent(txtFailureQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(1, 1, 1)
-                        .addComponent(lblFailureQuant)
-                        .addGap(4, 4, 4)))
+                        .addComponent(lblFailureQuant)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -173,6 +174,13 @@ public class CheckAssemblyRequestJPanel extends javax.swing.JPanel {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
 
         qualityManagementWorkRequest.setStatus("Completed");
+        
+        if("0".equals(txtFailureQuant.getText()))
+            qualityManagementWorkRequest.getAssemblyWorkRequest().setStatus("Completed");
+        else{
+            qualityManagementWorkRequest.getAssemblyWorkRequest().setStatus("Checked");
+        }
+        
         qualityManagementWorkRequest.getAssemblyWorkRequest().setFailgureQuant(Integer.parseInt(txtFailureQuant.getText()));
         qualityManagementWorkRequest.setCost(Double.parseDouble(txtCost.getText()));
         JOptionPane.showMessageDialog(null, "Message processed");

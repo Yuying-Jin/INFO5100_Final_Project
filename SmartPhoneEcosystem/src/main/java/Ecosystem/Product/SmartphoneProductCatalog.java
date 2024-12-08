@@ -32,5 +32,17 @@ public class SmartphoneProductCatalog {
     public ArrayList<SmartphoneProduct> getProductCatalog() {
         return productCatalog;
     }
+    
+    public SmartphoneProduct searchProductByName(String name){
+        for (SmartphoneProduct product : productCatalog) {
+            System.out.println("Product name: " + name);
+
+            if (product.getName().equalsIgnoreCase(name)) {
+                System.out.println("Product found: " + product);
+                return product; 
+            }
+        }
+        return null;
+    }
 
 }

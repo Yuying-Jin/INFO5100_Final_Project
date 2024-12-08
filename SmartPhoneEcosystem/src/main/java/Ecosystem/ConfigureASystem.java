@@ -6,7 +6,6 @@ import Ecosystem.Enterprise.Enterprise;
 import Ecosystem.Enterprise.SmartphoneEnterprise;
 import Ecosystem.Network.Network;
 import Ecosystem.Organization.Organization;
-import Ecosystem.Product.SmartphoneProduct;
 import Ecosystem.Role.Role;
 import Ecosystem.UserAccount.UserAccount;
 import Ecosystem.WorkQueue.AssemblyWorkRequest;
@@ -45,8 +44,7 @@ public class ConfigureASystem {
         ArrayList<Enterprise> enterpriseList = network.getEnterpriseDirectory().getEnterpriseList();
         for (Enterprise.EnterpriseType type : Enterprise.EnterpriseType.values()) {
             String name = faker.company().name();
-            Enterprise e = network.getEnterpriseDirectory().createAndAddEnterprise(name, type);
-            enterpriseList.add(e);
+            network.getEnterpriseDirectory().createAndAddEnterprise(name, type);
         }
         
         // Create Oragnizations
@@ -304,10 +302,10 @@ public class ConfigureASystem {
         // Distribution Manager requests WarehouseManager to prepare products
         PrepareProductWorkRequest prepareWR = new PrepareProductWorkRequest();
         org7.getWorkQueue().getWorkRequestList().add(prepareWR);
-//         org2.getWorkQueue().getWorkRequestList().add(prepareWR);
-//         pc.getWorkQueue().getWorkRequestList().add(prepareWR);
+        org2.getWorkQueue().getWorkRequestList().add(prepareWR);
+        pc.getWorkQueue().getWorkRequestList().add(prepareWR);
         prepareWR.setMessage("Prepare 1000 phones to transport");
-//        prepareWR.setStatus("Pending");
+        prepareWR.setStatus("Pending");
         prepareWR.setProductName(productName);
         prepareWR.setProductQuant(productQuant);
         prepareWR.setSender(org7.getUserAccountDirectory().getUserAccountList().get(0));
@@ -320,15 +318,15 @@ public class ConfigureASystem {
         prepareWR.setReceiver(org6.getUserAccountDirectory().getUserAccountList().get(1));
         prepareWR.setProductQuantHad(rand.nextInt(200) + productQuant);
         // Warehouse Operator complete the request and set cost
-//        prepareWR.setCost(5000);
+        prepareWR.setCost(5000);
 //        prepareWR.setStatus("Completed");
 
         // After product prepared, Distribution Manager pass work request to Transportation Planner
         transWR.setSender(org7.getUserAccountDirectory().getUserAccountList().get(0));
         transWR.setReceiver(org7.getUserAccountDirectory().getUserAccountList().get(1));
         // Transportation Planner complete the request and set cost
-//        transWR.setCost(50000);
-//        transWR.setStatus("Complete");
+        transWR.setCost(50000);
+//        transWR.setStatus("Completed");
 
         
         

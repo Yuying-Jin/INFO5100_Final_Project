@@ -8,9 +8,11 @@ import Ecosystem.Organization.Organization;
 import Ecosystem.Organization.WarehouseManagementOrganization;
 import Ecosystem.WorkQueue.PrepareProductWorkRequest;
 import Ecosystem.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
 import java.awt.Font;
 import static java.awt.Font.BOLD;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,7 +21,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class RequestPrepareProductsJPanel extends javax.swing.JPanel {
     private Organization organization;
-    public RequestPrepareProductsJPanel(Organization organization) {
+    private JPanel workArea;
+    public RequestPrepareProductsJPanel(JPanel workArea, Organization organization) {
         initComponents();
         workRequestJTable.getTableHeader().setFont(new Font("Helvetica Neue", BOLD, 14));
         
@@ -36,7 +39,7 @@ public class RequestPrepareProductsJPanel extends javax.swing.JPanel {
         }
         
         for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
-            if (request.getStatus().equals("Pending") || request.getStatus().equals("Accepted")) {
+//            if (request.getStatus().equals("Pending") || request.getStatus().equals("Accepted")) {
                 Object[] row = new Object[7];
                 row[0] = request.getProductName();
                 row[1] = request;
@@ -46,7 +49,7 @@ public class RequestPrepareProductsJPanel extends javax.swing.JPanel {
                 row[5] = request.getCost();
                 row[6] = request.getStatus();
                 model.addRow(row);
-            }
+//            }
         }
     }
 
@@ -59,6 +62,7 @@ public class RequestPrepareProductsJPanel extends javax.swing.JPanel {
         acceptButton = new javax.swing.JButton();
         refreshJButton = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 245, 175));
 
@@ -105,6 +109,15 @@ public class RequestPrepareProductsJPanel extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel10.setText("Request Prepare Products");
 
+        btnBack.setBackground(new java.awt.Color(204, 225, 152));
+        btnBack.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -115,7 +128,8 @@ public class RequestPrepareProductsJPanel extends javax.swing.JPanel {
                     .addComponent(acceptButton)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
+                        .addComponent(btnBack)
+                        .addGap(30, 30, 30)
                         .addComponent(jLabel10)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(refreshJButton)))
@@ -127,7 +141,8 @@ public class RequestPrepareProductsJPanel extends javax.swing.JPanel {
                 .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
-                    .addComponent(refreshJButton))
+                    .addComponent(refreshJButton)
+                    .addComponent(btnBack))
                 .addGap(21, 21, 21)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
@@ -160,9 +175,16 @@ public class RequestPrepareProductsJPanel extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        workArea.remove(this);
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.previous(workArea);
+    }//GEN-LAST:event_btnBackActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton acceptButton;
+    private javax.swing.JButton btnBack;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshJButton;

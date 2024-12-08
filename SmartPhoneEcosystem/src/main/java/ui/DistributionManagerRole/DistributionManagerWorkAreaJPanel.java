@@ -42,6 +42,10 @@ public class DistributionManagerWorkAreaJPanel extends javax.swing.JPanel {
         btnManageProductRequest = new javax.swing.JButton();
         warehouseLabel = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 245, 175));
+
+        btnManageProductRequest.setBackground(new java.awt.Color(204, 225, 152));
+        btnManageProductRequest.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btnManageProductRequest.setText("Manage Distribution Request");
         btnManageProductRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -57,11 +61,14 @@ public class DistributionManagerWorkAreaJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(135, 135, 135)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnManageProductRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(warehouseLabel))
-                .addContainerGap(132, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(warehouseLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(112, 112, 112)
+                        .addComponent(btnManageProductRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -70,12 +77,12 @@ public class DistributionManagerWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(warehouseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(33, 33, 33)
                 .addComponent(btnManageProductRequest)
-                .addContainerGap(156, Short.MAX_VALUE))
+                .addContainerGap(155, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManageProductRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageProductRequestActionPerformed
-        RequestTransportationPlannerJPanel managerTransportationJPanel = new RequestTransportationPlannerJPanel(organization);
+        RequestTransportationPlannerJPanel managerTransportationJPanel = new RequestTransportationPlannerJPanel(userProcessContainer, account, organization);
         userProcessContainer.add("managerTransportationJPanel", managerTransportationJPanel);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

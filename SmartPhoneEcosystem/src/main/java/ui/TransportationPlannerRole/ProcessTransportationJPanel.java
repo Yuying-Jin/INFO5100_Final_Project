@@ -51,6 +51,8 @@ public class ProcessTransportationJPanel extends javax.swing.JPanel {
         lblResult2 = new javax.swing.JLabel();
         txtCost = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 245, 175));
+
         lblResult1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblResult1.setText("Product Name:");
 

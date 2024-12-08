@@ -15,6 +15,7 @@ import java.awt.Component;
 import java.awt.event.KeyEvent;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import ui.helper.JTextFieldLimit;
 import ui.helper.TextFieldUtils;
 
 /**
@@ -154,6 +155,7 @@ private JPanel userProcessContainer;
         jLabel9.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel9.setText("Phone Number");
 
+        phoneNumberJTextField.setDocument(new JTextFieldLimit(14));
         phoneNumberJTextField.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         phoneNumberJTextField.setForeground(new java.awt.Color(102, 102, 102));
         phoneNumberJTextField.setText("(000) 000-0000");

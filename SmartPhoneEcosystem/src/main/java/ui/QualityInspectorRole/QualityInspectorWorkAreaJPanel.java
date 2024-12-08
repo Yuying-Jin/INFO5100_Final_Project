@@ -65,6 +65,9 @@ public class QualityInspectorWorkAreaJPanel extends javax.swing.JPanel {
         tblReassemblyWorkRequests = new javax.swing.JTable();
         btnRefresh = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 245, 175));
+
+        lblHeading.setBackground(new java.awt.Color(255, 245, 175));
         lblHeading.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         lblHeading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHeading.setText("Quality Inspector Work Area");
@@ -277,7 +280,7 @@ public class QualityInspectorWorkAreaJPanel extends javax.swing.JPanel {
             request.setStatus("Processing");
 
             CheckAssemblyRequestJPanel processWorkRequestJPanel = new CheckAssemblyRequestJPanel(workArea, request);
-            workArea.add("processWorkRequestJPanel", processWorkRequestJPanel);
+            workArea.add("CheckAssemblyRequestJPanel", processWorkRequestJPanel);
             CardLayout layout = (CardLayout) workArea.getLayout();
             layout.next(workArea);
         } else {
@@ -303,6 +306,12 @@ public class QualityInspectorWorkAreaJPanel extends javax.swing.JPanel {
                 JOptionPane.showMessageDialog(null, "Request is being checked.");
                 return;
             }
+            
+            if (qmRequest.getStatus().equalsIgnoreCase("Completed") && assemblyWorkRequest.getFailgureQuant() == 0) {
+                JOptionPane.showMessageDialog(null, "Request not need to return.");
+                return;
+            }
+            
             
             if(userAccount.getWorkQueue().getWorkRequestList().indexOf(qmRequest) == -1){
                 JOptionPane.showMessageDialog(null, "This request wasn't assigned to you.");

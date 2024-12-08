@@ -13,6 +13,7 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,8 +38,8 @@ public class ManageWorkRequestJPanel extends javax.swing.JPanel {
         this.enterprise = enterprise;
         this.ecosystem = business;
         
+        workRequestJTable.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION );
         
-      
         populateTable();
     }
 
@@ -167,16 +168,20 @@ public class ManageWorkRequestJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(null, "Please select a row to approve.");
             return;
         }
+        
+        
+        int[] selectedRows = workRequestJTable.getSelectedRows();
+            int statusColumn = 0; // Column index for "Status"
 
-        WorkRequest selectedRequest = (WorkRequest) workRequestJTable.getValueAt(selectedRow, 1);
-
-        if (selectedRequest.getStatus().equals("Approved") || selectedRequest.getStatus().equals("Processing")) {
-            JOptionPane.showMessageDialog(null, "This request is already processed or approved.");
-            return;
+        // Set value for each selected row
+        for (int row : selectedRows) {
+            workRequestJTable.setValueAt(true, row, statusColumn);
+            WorkRequest selectedRequest = (WorkRequest) workRequestJTable.getValueAt(row, 1);
+            selectedRequest.setStatus("Approved");
+            selectedRequest.setIsApproved(true);
         }
 
-        selectedRequest.setStatus("Approved");
-        selectedRequest.setIsApproved(true);
+
         JOptionPane.showMessageDialog(null, "Request approved successfully.");
         populateTable();
     }
@@ -205,6 +210,7 @@ public class ManageWorkRequestJPanel extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
+    
     private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
         userProcessContainer.remove(this);
        

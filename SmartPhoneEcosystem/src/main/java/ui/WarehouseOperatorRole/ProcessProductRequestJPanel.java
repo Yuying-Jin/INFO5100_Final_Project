@@ -4,16 +4,11 @@
  */
 package ui.WarehouseOperatorRole;
 
-import Ecosystem.Organization.DistributionTransportationOrganization;
-import Ecosystem.Organization.Organization;
-import Ecosystem.Organization.WarehouseManagementOrganization;
 import Ecosystem.WorkQueue.PrepareProductWorkRequest;
-import Ecosystem.WorkQueue.TransportationWorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import ui.TransportationPlannerRole.ManagerTransportationJPanel;
 
 /**
  *
@@ -48,14 +43,20 @@ public class ProcessProductRequestJPanel extends javax.swing.JPanel {
         btnSubmit = new javax.swing.JButton();
         lblHeading = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 245, 175));
+
         lblResult2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblResult2.setText("Cost:");
+
+        txtName.setEnabled(false);
 
         lblResult1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblResult1.setText("Product Name:");
 
         lblResult.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblResult.setText("Product Quant:");
+
+        txtQuant.setEnabled(false);
 
         btnBack.setBackground(new java.awt.Color(204, 225, 152));
         btnBack.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class LogisticsEnterprise extends Enterprise {
     
     public LogisticsEnterprise(String name){
-        super(name,EnterpriseType.SmartphoneEnterprise);
+        super(name,EnterpriseType.LogisticsEnterprise);
     }
     @Override
     public ArrayList<Role> getSupportedRole() {

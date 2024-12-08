@@ -291,7 +291,7 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
             request.setStatus("Processing");
 
             ProcessAssemblyRequestJPanel processWorkRequestJPanel = new ProcessAssemblyRequestJPanel(workArea, request);
-            workArea.add("processWorkRequestJPanel", processWorkRequestJPanel);
+            workArea.add("ProcessAssemblyRequestJPanel", processWorkRequestJPanel);
             CardLayout layout = (CardLayout) workArea.getLayout();
             layout.next(workArea);
         } else {

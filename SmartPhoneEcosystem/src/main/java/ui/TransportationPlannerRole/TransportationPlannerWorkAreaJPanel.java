@@ -43,6 +43,9 @@ public class TransportationPlannerWorkAreaJPanel extends javax.swing.JPanel {
         btnManageProductRequest = new javax.swing.JButton();
         warehouseLabel = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 245, 175));
+
+        btnManageProductRequest.setBackground(new java.awt.Color(204, 225, 152));
         btnManageProductRequest.setText("Manage Transportation Request");
         btnManageProductRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
