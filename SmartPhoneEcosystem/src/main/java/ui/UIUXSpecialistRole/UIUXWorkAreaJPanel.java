@@ -102,7 +102,7 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane2.setViewportView(tblWorkRequests);
 
         btnRefresh.setBackground(new java.awt.Color(204, 225, 152));
-        btnRefresh.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnRefresh.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnRefresh.setText("Refresh");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,7 +116,7 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1.setOpaque(false);
 
         btnAssign.setBackground(new java.awt.Color(204, 225, 152));
-        btnAssign.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnAssign.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnAssign.setText("Assign to me");
         btnAssign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,7 +125,7 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         btnProcess.setBackground(new java.awt.Color(204, 225, 152));
-        btnProcess.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnProcess.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnProcess.setText("Process");
         btnProcess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -146,10 +146,12 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAssign)
-                    .addComponent(btnProcess))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(btnAssign)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnProcess, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
