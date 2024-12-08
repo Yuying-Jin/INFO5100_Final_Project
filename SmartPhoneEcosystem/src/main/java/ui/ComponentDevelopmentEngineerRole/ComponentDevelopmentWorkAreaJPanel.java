@@ -8,19 +8,36 @@ import Ecosystem.EcoSystem;
 import Ecosystem.Enterprise.Enterprise;
 import Ecosystem.Organization.Organization;
 import Ecosystem.UserAccount.UserAccount;
+import Ecosystem.WorkQueue.ComponentWorkRequest;
+import Ecosystem.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
+import java.awt.Font;
+import static java.awt.Font.BOLD;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author sunny
  */
 public class ComponentDevelopmentWorkAreaJPanel extends javax.swing.JPanel {
-
+      private Organization organization;
+      private JPanel userProcessContainer;
+      private UserAccount userAccount;
+     
     /**
      * Creates new form ComponentDevelopmentWorkAreaJPanel
      */
-    public ComponentDevelopmentWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem ecosystem) {
+    public ComponentDevelopmentWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem systems) {
         initComponents();
+        this.organization = organization;
+        this.userProcessContainer = userProcessContainer;
+        this.userAccount = account; 
+      
+        
+        workRequestJTable.getTableHeader().setFont(new Font("Helvetica Neue", BOLD, 14));
+        populateTable();
     }
 
 
@@ -33,19 +50,189 @@ public class ComponentDevelopmentWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        workRequestJTable = new javax.swing.JTable();
+        refreshJButton = new javax.swing.JButton();
+        assignJButton = new javax.swing.JButton();
+        processJButton = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 245, 175));
+
+        workRequestJTable.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Product Name", "Message", "Sender", "Receiver", "Quant", "Cost", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(workRequestJTable);
+
+        refreshJButton.setBackground(new java.awt.Color(204, 225, 152));
+        refreshJButton.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        refreshJButton.setText("Refresh");
+        refreshJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshJButtonActionPerformed(evt);
+            }
+        });
+
+        assignJButton.setBackground(new java.awt.Color(204, 225, 152));
+        assignJButton.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        assignJButton.setText("Assign to me");
+        assignJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                assignJButtonActionPerformed(evt);
+            }
+        });
+
+        processJButton.setBackground(new java.awt.Color(204, 225, 152));
+        processJButton.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        processJButton.setText("Process");
+        processJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                processJButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel10.setText("Component Development Work Area");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel10)
+                        .addGap(65, 65, 65)
+                        .addComponent(refreshJButton))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(assignJButton)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(processJButton))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(refreshJButton)
+                    .addComponent(jLabel10))
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(processJButton)
+                    .addComponent(assignJButton))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
+        populateTable();
+    }//GEN-LAST:event_refreshJButtonActionPerformed
+    
+     void populateTable() {
+       DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
+        model.setRowCount(0);
+        if (organization == null || organization.getWorkQueue() == null) {
+            System.out.println("No organization or no workqueue");
+            return;
+        }
+        
+        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
+            Object[] row = new Object[7];
+            row[0] = request instanceof ComponentWorkRequest ? ((ComponentWorkRequest) request).getProductName() : "N/A";
+            row[1] = request;
+            row[2] = request.getSender() != null ? request.getSender().getEmployee().getName() : "N/A"; 
+            row[3] = request.getReceiver() != null ? request.getReceiver().getEmployee().getName() : "N/A"; 
+            row[4] = request instanceof ComponentWorkRequest ? ((ComponentWorkRequest) request).getProductQuant() : "N/A";
+            row[5] = request instanceof ComponentWorkRequest ? ((ComponentWorkRequest) request).getCost() : "N/A";
+            row[6] = request.getStatus();
+            model.addRow(row);
+        }
+    }
+    
+    
+    private void assignJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_assignJButtonActionPerformed
+
+        int selectedRow = workRequestJTable.getSelectedRow();
+        
+        if (selectedRow < 0){
+            JOptionPane.showMessageDialog(this, "Please select a row to assign.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        WorkRequest request = (WorkRequest) workRequestJTable.getValueAt(selectedRow, 1);
+        
+        if (request.getStatus().equalsIgnoreCase("Completed")) {
+            JOptionPane.showMessageDialog(null, "Request already processed.");
+            return;
+        }
+        
+        request.setReceiver(userAccount);
+        request.setStatus("Pending");
+        populateTable();
+
+    }//GEN-LAST:event_assignJButtonActionPerformed
+
+    private void processJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processJButtonActionPerformed
+
+        int selectedRow = workRequestJTable.getSelectedRow();
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a row to process.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        Object value = workRequestJTable.getValueAt(selectedRow, 1);
+        if (!(value instanceof ComponentWorkRequest)) {
+            JOptionPane.showMessageDialog(this, "Selected row does not contain a valid Component Work Request.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        ComponentWorkRequest request = (ComponentWorkRequest) value;
+        
+        if (request.getStatus().equalsIgnoreCase("Completed")) {
+            JOptionPane.showMessageDialog(null, "Request already processed.");
+            return;
+        }
+
+        ProcessComponentRequestJPanel processComponentRequestJPanel = 
+            new ProcessComponentRequestJPanel(userProcessContainer, organization, request);
+
+        userProcessContainer.add("processComponentRequestJPanel", processComponentRequestJPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_processJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton assignJButton;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton processJButton;
+    private javax.swing.JButton refreshJButton;
+    private javax.swing.JTable workRequestJTable;
     // End of variables declaration//GEN-END:variables
+
+   
 }
