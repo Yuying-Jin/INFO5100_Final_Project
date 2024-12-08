@@ -45,12 +45,11 @@ public class RequestPrepareProductsJPanel extends javax.swing.JPanel {
         
         for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
             Object[] row = new Object[5];
-
-            row[0] = request.getIsApproved();
-            row[1] = request.getMessage();
-            row[2] = request.getSender() != null ? request.getSender().getEmployee().getName() : "N/A"; 
-            row[3] = request.getReceiver() != null ? request.getReceiver().getEmployee().getName() : "N/A"; 
-            row[4] = request.getStatus();
+            row[0] = request.getProductName();
+            row[1] = request.getSender() != null ? request.getSender().getEmployee().getName() : "N/A"; 
+            row[2] = request.getReceiver() != null ? request.getReceiver().getEmployee().getName() : "N/A"; 
+            row[3] = request.getProductQuant();
+            row[4] = request.getCost();
 
             model.addRow(row);
         }
@@ -78,22 +77,15 @@ public class RequestPrepareProductsJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Approved", "Message", "Sender", "Receiver", "Status"
+                "Product Name", "Sender", "Receiver", "Quant", "Cost"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                true, false, true, true, false
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(workRequestJTable);
