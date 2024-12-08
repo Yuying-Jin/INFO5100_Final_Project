@@ -187,7 +187,6 @@ public class RequestComponentJPanel extends javax.swing.JPanel {
         }
 
         ComponentWorkRequest request = new ComponentWorkRequest();
-        request.setMessage(message);
         request.setProductName(productName);
         request.setProductQuant(Integer.parseInt(quant));
         request.setSender(userAccount);

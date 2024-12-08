@@ -252,7 +252,7 @@ public class ConfigureASystem {
         po.getWorkQueue().getWorkRequestList().add(assemblyWR);
         
         
-        QualityManagementWorkRequest qmWR = new QualityManagementWorkRequest();
+        QualityManagementWorkRequest qmWR = new QualityManagementWorkRequest(assemblyWR);
         qmWR.setMessage("Check qualities");
         qmWR.setStatus("Completed");
         qmWR.setCost(10000.0);
