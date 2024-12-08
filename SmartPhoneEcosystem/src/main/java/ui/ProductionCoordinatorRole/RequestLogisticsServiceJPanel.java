@@ -4,17 +4,28 @@
  */
 package ui.ProductionCoordinatorRole;
 
+import Ecosystem.EcoSystem;
+import Ecosystem.UserAccount.UserAccount;
+import javax.swing.JPanel;
+
 /**
  *
  * @author sunny
  */
 public class RequestLogisticsServiceJPanel extends javax.swing.JPanel {
-
+    private JPanel workArea;
+    private UserAccount userAccount;
+    private EcoSystem system;
+    
     /**
      * Creates new form RequestLogisticsServiceJPanel
      */
-    public RequestLogisticsServiceJPanel() {
+    public RequestLogisticsServiceJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem ecosystem) {
         initComponents();
+        
+        this.workArea = userProcessContainer;
+        this.userAccount = account;
+        this.system = ecosystem;
     }
 
     /**

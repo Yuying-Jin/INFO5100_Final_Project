@@ -189,11 +189,12 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
         int selectedRow = tblWorkRequests.getSelectedRow();
 
         if (selectedRow >= 0) {
-            WorkRequest request = (WorkRequest) tblWorkRequests.getValueAt(selectedRow, 0);
+            WorkRequest request = (WorkRequest) tblWorkRequests.getValueAt(selectedRow, 1);
             if (request.getStatus().equalsIgnoreCase("Completed")) {
                 JOptionPane.showMessageDialog(null, "Request already processed.");
                 return;
             } else {
+                userAccount.getWorkQueue().getWorkRequestList().add(request);
                 request.setReceiver(userAccount);
                 request.setStatus("Pending");
                 populateTable();
@@ -209,8 +210,11 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
         int selectedRow = tblWorkRequests.getSelectedRow();
 
         if (selectedRow >= 0) {
-            DesignWorkRequest request = (DesignWorkRequest) tblWorkRequests.getValueAt(selectedRow, 0);
-
+            DesignWorkRequest request = (DesignWorkRequest) tblWorkRequests.getValueAt(selectedRow, 1);
+            if(userAccount.getWorkQueue().getWorkRequestList().indexOf(request) == -1){
+                JOptionPane.showMessageDialog(null, "This request wasn't assigned to you.");
+                return;
+            }
             request.setStatus("Processing");
 
             ProcessDesignRequestJPanel processWorkRequestJPanel = new ProcessDesignRequestJPanel(userProcessContainer, request);
