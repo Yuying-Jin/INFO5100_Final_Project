@@ -17,7 +17,6 @@ import static java.awt.Font.BOLD;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import static javax.swing.text.StyleConstants.Bold;
 
 /**
  *
@@ -73,20 +72,20 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
         tblWorkRequests.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Product Name", "Message", "Sender", "Receiver", "Status"
+                "Product Name", "Message", "Result Message", "Sender", "Receiver", "Cost", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -251,13 +250,15 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
 
         model.setRowCount(0);
 
-        for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()) {
-            Object[] row = new Object[5];
+        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
+            Object[] row = new Object[7];
             row[0] = request.getProductName();
             row[1] = request;
-            row[2] = request.getSender().getEmployee().getName();
-            row[3] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
-            row[4] = request.getStatus();
+            row[2] = ((DesignWorkRequest)request).getResult();
+            row[3] = request.getSender().getEmployee().getName();
+            row[4] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
+            row[5] = request.getCost();
+            row[6] = request.getStatus();
 
             model.addRow(row);
         }
