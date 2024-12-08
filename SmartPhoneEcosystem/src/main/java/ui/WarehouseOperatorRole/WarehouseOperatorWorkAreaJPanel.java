@@ -42,7 +42,6 @@ public class WarehouseOperatorWorkAreaJPanel extends javax.swing.JPanel {
 
         btnManageProductRequest = new javax.swing.JButton();
         warehouseLabel = new javax.swing.JLabel();
-        valueLabel = new javax.swing.JLabel();
 
         btnManageProductRequest.setText("Process Product Request");
         btnManageProductRequest.addActionListener(new java.awt.event.ActionListener() {
@@ -52,37 +51,25 @@ public class WarehouseOperatorWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         warehouseLabel.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        warehouseLabel.setText("Warehouse :");
-
-        valueLabel.setText("<value>");
+        warehouseLabel.setText("Warehouse Operator");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(btnManageProductRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(102, 102, 102)
-                        .addComponent(warehouseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 30, 30)
-                        .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addGap(135, 135, 135)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(warehouseLabel)
+                    .addComponent(btnManageProductRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(218, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(warehouseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
-                        .addComponent(valueLabel)))
-                .addGap(29, 29, 29)
+                .addGap(120, 120, 120)
+                .addComponent(warehouseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
                 .addComponent(btnManageProductRequest)
                 .addContainerGap(234, Short.MAX_VALUE))
         );
@@ -98,7 +85,6 @@ public class WarehouseOperatorWorkAreaJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnManageProductRequest;
-    private javax.swing.JLabel valueLabel;
     private javax.swing.JLabel warehouseLabel;
     // End of variables declaration//GEN-END:variables
 }

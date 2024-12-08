@@ -131,7 +131,7 @@ public class ProcessProductRequestJPanel extends javax.swing.JPanel {
         PrepareProductWorkRequest request = (PrepareProductWorkRequest) workRequestJTable.getValueAt(selectedRow, 1);
 
         if ("Completed".equals(request.getStatus())) {
-            JOptionPane.showMessageDialog(null, "This request is already being processed or approved.");
+            JOptionPane.showMessageDialog(null, "This request is already being Completed.");
             return;
         }
 
