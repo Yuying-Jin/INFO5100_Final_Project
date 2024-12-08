@@ -4,6 +4,7 @@
  */
 package ui;
 
+import Ecosystem.ConfigureASystem;
 import Ecosystem.EcoSystem;
 import Ecosystem.DB4OUtil.DB4OUtil;
 import Ecosystem.Enterprise.Enterprise;
@@ -24,12 +25,15 @@ public class MainJFrame extends javax.swing.JFrame {
      * Creates new form MainJFrame
      */
     private EcoSystem system;
-    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+//    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
 
     public MainJFrame() {
         initComponents();
-        system = dB4OUtil.retrieveSystem();
-        this.setSize(1680, 1050);
+        
+//        system = dB4OUtil.retrieveSystem();
+        system = ConfigureASystem.configure();
+
+        this.setSize(1000, 600);
     }
 
     /**
@@ -53,6 +57,9 @@ public class MainJFrame extends javax.swing.JFrame {
         container = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setMaximumSize(new java.awt.Dimension(1500, 1000));
+
+        jSplitPane1.setPreferredSize(new java.awt.Dimension(300, 500));
 
         loginJButton.setText("Login");
         loginJButton.addActionListener(new java.awt.event.ActionListener() {
@@ -135,23 +142,32 @@ public class MainJFrame extends javax.swing.JFrame {
         Enterprise inEnterprise=null;
         Organization inOrganization=null;
         
+        System.out.println("1userAccount: " + userAccount);
+
+//        if (!userAccount.toString().split(" ")[1].equalsIgnoreCase("admin")){
         if (userAccount==null){
+
             //Step 2: Go inside each network and check each enterprise
             for(Network network:system.getNetworkList()){
                 //Step 2.a: check against each enterprise
                 for(Enterprise enterprise:network.getEnterpriseDirectory().getEnterpriseList()){
+                    System.out.println("enterprise: " + enterprise);
+
                     userAccount=enterprise.getUserAccountDirectory().authenticateUser(userName, password);
                     if(userAccount==null){
                        //Step 3:check against each organization for each enterprise
                        for(Organization organization:enterprise.getOrganizationDirectory().getOrganizationList()){
+                            System.out.println("organization: " + organization);
+                            
                            userAccount=organization.getUserAccountDirectory().authenticateUser(userName, password);
                            if(userAccount!=null){
+                                       
+
                                inEnterprise=enterprise;
                                inOrganization=organization;
                                break;
                            }
                        }
-                        
                     }
                     else{
                        inEnterprise=enterprise;
@@ -166,7 +182,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 }
             }
         }
-        
+        System.out.println("2userAccount: " + userAccount);
+
         if(userAccount==null){
             JOptionPane.showMessageDialog(null, "Invalid credentials");
             return;
@@ -174,6 +191,12 @@ public class MainJFrame extends javax.swing.JFrame {
         else{
             CardLayout layout=(CardLayout)container.getLayout();
             System.out.println(userAccount.getRole().getRoleType());
+            System.out.println("---------------");
+            System.out.println(container);
+            System.out.println(userAccount);
+            System.out.println(inOrganization);
+            System.out.println(inEnterprise);
+            
             container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, inOrganization, inEnterprise, system));
             layout.next(container);
         }
@@ -198,7 +221,7 @@ public class MainJFrame extends javax.swing.JFrame {
         container.add("blank", blankJP);
         CardLayout crdLyt = (CardLayout) container.getLayout();
         crdLyt.next(container);
-        dB4OUtil.storeSystem(system);
+//        dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_logoutJButtonActionPerformed
 
     /**

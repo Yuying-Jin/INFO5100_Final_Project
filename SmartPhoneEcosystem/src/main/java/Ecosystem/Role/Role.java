@@ -65,6 +65,7 @@ public class Role {
     public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem business) {
         try {
             // Use reflection to dynamically load the JPanel class
+            System.out.println(roleType.getWorkClassName());
             Class<?> clazz = Class.forName(roleType.getWorkClassName());
             return (JPanel) clazz.getDeclaredConstructor(
                     JPanel.class, UserAccount.class, Organization.class, Enterprise.class, EcoSystem.class)
@@ -77,6 +78,6 @@ public class Role {
 
     @Override
     public String toString() {
-        return this.getClass().getName();
+        return this.roleType.getValue();
     } 
 }
