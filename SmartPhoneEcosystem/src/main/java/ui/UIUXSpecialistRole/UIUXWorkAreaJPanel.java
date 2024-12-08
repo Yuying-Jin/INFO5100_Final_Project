@@ -196,7 +196,6 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
                 request.setStatus("Pending");
                 populateTable();
             }
-
         } else {
             JOptionPane.showMessageDialog(null, "Choose a reuest to process.");
             return;
@@ -205,7 +204,6 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAssignActionPerformed
 
     private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
-
         int selectedRow = tblWorkRequests.getSelectedRow();
 
         if (selectedRow >= 0) {
@@ -217,7 +215,6 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
             userProcessContainer.add("processWorkRequestJPanel", processWorkRequestJPanel);
             CardLayout layout = (CardLayout) userProcessContainer.getLayout();
             layout.next(userProcessContainer);
-
         } else {
             JOptionPane.showMessageDialog(null, "Please select a request message to process.");
             return;
