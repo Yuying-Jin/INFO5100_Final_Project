@@ -47,9 +47,7 @@ public class RequestComponentJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jLabel10 = new javax.swing.JLabel();
-        txtBudget = new javax.swing.JTextField();
         btnBack = new javax.swing.JButton();
-        lblBudget = new javax.swing.JLabel();
         lblProduct = new javax.swing.JLabel();
         cbbProduct = new javax.swing.JComboBox<>();
         btnRequest = new javax.swing.JButton();
@@ -58,7 +56,7 @@ public class RequestComponentJPanel extends javax.swing.JPanel {
         lblProduct1 = new javax.swing.JLabel();
         txtOther = new javax.swing.JTextField();
         lblProduct2 = new javax.swing.JLabel();
-        txtOther1 = new javax.swing.JTextField();
+        txtQuant = new javax.swing.JTextField();
 
         jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel10.setText("Send Request Component");
@@ -70,9 +68,6 @@ public class RequestComponentJPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
-
-        lblBudget.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblBudget.setText("Budget:");
 
         lblProduct.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblProduct.setText("Select a component:");
@@ -101,9 +96,7 @@ public class RequestComponentJPanel extends javax.swing.JPanel {
         txtOther.setEnabled(false);
 
         lblProduct2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblProduct2.setText("Component Quantity:");
-
-        txtOther1.setEnabled(false);
+        lblProduct2.setText("Quantity:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -115,24 +108,19 @@ public class RequestComponentJPanel extends javax.swing.JPanel {
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblProduct2)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtOther1))
-                        .addComponent(lblBudget)
-                        .addComponent(txtBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnRequest)
-                        .addComponent(lblMessage)
-                        .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(lblProduct)
-                                .addComponent(lblProduct1))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txtOther)
-                                .addComponent(cbbProduct, 0, 132, Short.MAX_VALUE)))))
+                    .addComponent(btnRequest)
+                    .addComponent(lblMessage)
+                    .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblProduct)
+                            .addComponent(lblProduct1)
+                            .addComponent(lblProduct2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtQuant)
+                            .addComponent(txtOther)
+                            .addComponent(cbbProduct, 0, 132, Short.MAX_VALUE))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -153,18 +141,14 @@ public class RequestComponentJPanel extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblProduct2)
-                    .addComponent(txtOther1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(29, 29, 29)
                 .addComponent(lblMessage)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
-                .addComponent(lblBudget)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtBudget, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(26, 26, 26)
                 .addComponent(btnRequest)
-                .addGap(24, 24, 24))
+                .addGap(65, 65, 65))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -181,14 +165,31 @@ public class RequestComponentJPanel extends javax.swing.JPanel {
     private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
 
         String message = txtMessage.getText();
+        String quant = txtQuant.getText();
         if(message.equals("") || message.isEmpty()){
             JOptionPane.showMessageDialog(null, "Please enter something to send.");
             return;
         }
+        
+        if(cbbProduct.getSelectedItem()==null){
+            JOptionPane.showMessageDialog(null, "Please select a product.");
+            return;
+        }
+        
+        if(quant.equals("") || quant.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please enter the product quantity.");
+            return;
+        }
+        
+        String productName = txtOther.getText();
+        if(productName.equals("")){
+            productName = cbbProduct.getSelectedItem().toString();
+        }
 
         ComponentWorkRequest request = new ComponentWorkRequest();
         request.setMessage(message);
-
+        request.setProductName(productName);
+        request.setProductQuant(Integer.parseInt(quant));
         request.setSender(userAccount);
         request.setStatus("Sent");
 
@@ -210,8 +211,11 @@ public class RequestComponentJPanel extends javax.swing.JPanel {
         }
 
         JOptionPane.showMessageDialog(null, "Request message sent");
+        cbbProduct.setSelectedItem(null);
+        txtQuant.setText("");
         txtMessage.setText("");
-        txtBudget.setText("");
+        txtOther.setText("");
+        
     }//GEN-LAST:event_btnRequestActionPerformed
 
     private void cbbProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbProductActionPerformed
@@ -231,14 +235,12 @@ public class RequestComponentJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnRequest;
     private javax.swing.JComboBox<String> cbbProduct;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel lblBudget;
     private javax.swing.JLabel lblMessage;
     private javax.swing.JLabel lblProduct;
     private javax.swing.JLabel lblProduct1;
     private javax.swing.JLabel lblProduct2;
-    private javax.swing.JTextField txtBudget;
     private javax.swing.JTextField txtMessage;
     private javax.swing.JTextField txtOther;
-    private javax.swing.JTextField txtOther1;
+    private javax.swing.JTextField txtQuant;
     // End of variables declaration//GEN-END:variables
 }

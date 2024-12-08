@@ -9,6 +9,11 @@ import Ecosystem.Organization.Organization;
 import Ecosystem.UserAccount.UserAccount;
 import javax.swing.JPanel;
 import Ecosystem.EcoSystem;
+import Ecosystem.Enterprise.EMSEnterprise;
+import Ecosystem.Enterprise.LogisticsEnterprise;
+import Ecosystem.Enterprise.SmartphoneEnterprise;
+import Ecosystem.Network.Network;
+import Ecosystem.Product.SmartphoneProductCatalog;
 import Ecosystem.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import javax.swing.table.DefaultTableModel;
@@ -24,6 +29,9 @@ public class ProductionCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
     private Enterprise enterprise;
     private EcoSystem system;
     
+    private SmartphoneProductCatalog smartphoneProductCatalog;
+
+    
     /**
      * Creates new form ProductionCoordinatorWorkAreaJPanel
      */
@@ -38,6 +46,7 @@ public class ProductionCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
         this.organization = organization;
         this.enterprise = enterprise;
         this.system = ecosystem;
+        this.smartphoneProductCatalog = ((SmartphoneEnterprise)enterprise).getProductCatalog();
         
         populateRequestTable();
     }
@@ -200,16 +209,38 @@ public class ProductionCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnRequestAssemblyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestAssemblyActionPerformed
         // TODO add your handling code here:
-//        CardLayout layout = (CardLayout) workArea.getLayout();
-//        workArea.add("RequestAssemblyJPanel", new RequestAssemblyJPanel(workArea, userAccount, system));
-//        layout.next(workArea);
+        
+        Enterprise emsEnterprise = null;
+        for(Network n : system.getNetworkList()){
+            for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()){
+                if (e instanceof EMSEnterprise){
+                    emsEnterprise = e;
+                    break;
+                }
+            }
+        }
+        
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        workArea.add("RequestAssemblyJPanel", new RequestAssemblyJPanel(workArea, userAccount, smartphoneProductCatalog, emsEnterprise, system));
+        layout.next(workArea);
     }//GEN-LAST:event_btnRequestAssemblyActionPerformed
 
     private void btnRequestLogisticsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestLogisticsActionPerformed
         // TODO add your handling code here:
-//        CardLayout layout = (CardLayout) workArea.getLayout();
-//        workArea.add("RequestLabTestJPanel", new RequestLogisticsServiceJPanel(workArea, userAccount, system));
-//        layout.next(workArea);
+        
+        Enterprise enter = null;
+        for(Network n : system.getNetworkList()){
+            for (Enterprise e : n.getEnterpriseDirectory().getEnterpriseList()){
+                if (e instanceof LogisticsEnterprise){
+                    enter = e;
+                    break;
+                }
+            }
+        }
+        
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        workArea.add("RequestLabTestJPanel", new RequestLogisticsServiceJPanel(workArea, userAccount, smartphoneProductCatalog, enter, system));
+        layout.next(workArea);
     }//GEN-LAST:event_btnRequestLogisticsActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
@@ -234,7 +265,7 @@ public class ProductionCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) tblWorkRequests.getModel();
         
         model.setRowCount(0);
-        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
+        for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()){
             Object[] row = new Object[7];
             row[0] = request.getProductName();
             row[1] = request.getMessage();
@@ -247,4 +278,5 @@ public class ProductionCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
             model.addRow(row);
         }
     }
+    
 }

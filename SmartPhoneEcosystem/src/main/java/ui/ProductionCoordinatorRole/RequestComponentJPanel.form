@@ -22,27 +22,20 @@
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jLabel10" alignment="0" pref="378" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <Component id="lblProduct2" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="txtOther1" max="32767" attributes="0"/>
+                  <Component id="btnRequest" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblMessage" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtMessage" alignment="0" min="-2" pref="217" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="lblProduct" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblProduct1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblProduct2" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="lblBudget" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtBudget" alignment="0" min="-2" pref="217" max="-2" attributes="0"/>
-                      <Component id="btnRequest" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblMessage" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="txtMessage" alignment="0" min="-2" pref="217" max="-2" attributes="0"/>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="lblProduct" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="lblProduct1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="txtOther" max="32767" attributes="0"/>
-                              <Component id="cbbProduct" pref="132" max="32767" attributes="0"/>
-                          </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="txtQuant" max="32767" attributes="0"/>
+                          <Component id="txtOther" max="32767" attributes="0"/>
+                          <Component id="cbbProduct" pref="132" max="32767" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -71,19 +64,15 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblProduct2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtOther1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtQuant" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
               <Component id="lblMessage" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="txtMessage" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-              <Component id="lblBudget" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="txtBudget" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
               <Component id="btnRequest" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="65" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -97,8 +86,6 @@
         <Property name="text" type="java.lang.String" value="Send Request Component"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtBudget">
-    </Component>
     <Component class="javax.swing.JButton" name="btnBack">
       <Properties>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -109,14 +96,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="lblBudget">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="11" style="1"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Budget:"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblProduct">
       <Properties>
@@ -190,13 +169,10 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Component Quantity:"/>
+        <Property name="text" type="java.lang.String" value="Quantity:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtOther1">
-      <Properties>
-        <Property name="enabled" type="boolean" value="false"/>
-      </Properties>
+    <Component class="javax.swing.JTextField" name="txtQuant">
     </Component>
   </SubComponents>
 </Form>

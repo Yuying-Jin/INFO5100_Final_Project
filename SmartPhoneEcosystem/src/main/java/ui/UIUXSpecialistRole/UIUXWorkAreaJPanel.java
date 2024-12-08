@@ -47,7 +47,6 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
         this.organization = (UIUXDesignOrganization) organization;
             
         tblWorkRequests.getTableHeader().setFont(new Font("Hevetica Neue", BOLD, 14));
-
         
         populateTable();
     }
@@ -61,7 +60,6 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblWorkRequests = new javax.swing.JTable();
         btnRefresh = new javax.swing.JButton();
@@ -211,6 +209,12 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
 
         if (selectedRow >= 0) {
             DesignWorkRequest request = (DesignWorkRequest) tblWorkRequests.getValueAt(selectedRow, 1);
+            
+            if (request.getStatus().equalsIgnoreCase("Completed")) {
+                JOptionPane.showMessageDialog(null, "Request already processed.");
+                return;
+            }
+            
             if(userAccount.getWorkQueue().getWorkRequestList().indexOf(request) == -1){
                 JOptionPane.showMessageDialog(null, "This request wasn't assigned to you.");
                 return;
@@ -236,7 +240,6 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnAssign;
     private javax.swing.JButton btnProcess;
     private javax.swing.JButton btnRefresh;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -248,9 +251,9 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
 
         model.setRowCount(0);
 
-        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
+        for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()) {
             Object[] row = new Object[5];
-            row[0] = "Phone";
+            row[0] = request.getProductName();
             row[1] = request;
             row[2] = request.getSender().getEmployee().getName();
             row[3] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();

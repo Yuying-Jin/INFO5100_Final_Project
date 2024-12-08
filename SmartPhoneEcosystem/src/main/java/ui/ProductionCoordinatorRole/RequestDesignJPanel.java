@@ -55,8 +55,6 @@ public class RequestDesignJPanel extends javax.swing.JPanel {
         btnRequest = new javax.swing.JButton();
         lblMessage = new javax.swing.JLabel();
         txtMessage = new javax.swing.JTextField();
-        txtBudget = new javax.swing.JTextField();
-        lblBudget = new javax.swing.JLabel();
         lblProduct = new javax.swing.JLabel();
         cbbProduct = new javax.swing.JComboBox<>();
 
@@ -81,9 +79,6 @@ public class RequestDesignJPanel extends javax.swing.JPanel {
         lblMessage.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblMessage.setText("Message:");
 
-        lblBudget.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        lblBudget.setText("Budget:");
-
         lblProduct.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         lblProduct.setText("Select a product:");
 
@@ -99,8 +94,6 @@ public class RequestDesignJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblBudget)
-                            .addComponent(txtBudget, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnRequest)
                             .addComponent(lblMessage)
                             .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -126,11 +119,7 @@ public class RequestDesignJPanel extends javax.swing.JPanel {
                 .addComponent(lblMessage)
                 .addGap(18, 18, 18)
                 .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(lblBudget)
-                .addGap(13, 13, 13)
-                .addComponent(txtBudget, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(81, 81, 81)
                 .addComponent(btnRequest)
                 .addGap(50, 50, 50))
         );
@@ -160,6 +149,7 @@ public class RequestDesignJPanel extends javax.swing.JPanel {
         }
         
         DesignWorkRequest request = new DesignWorkRequest();
+        
         request.setProductName(cbbProduct.getSelectedItem().toString());
         request.setMessage(message);
         request.setSender(userAccount);
@@ -180,7 +170,6 @@ public class RequestDesignJPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Request message sent");
         cbbProduct.setSelectedItem(null);
         txtMessage.setText("");
-        txtBudget.setText("");
 
     }//GEN-LAST:event_btnRequestActionPerformed
 
@@ -196,10 +185,8 @@ public class RequestDesignJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnRequest;
     private javax.swing.JComboBox<Object> cbbProduct;
     private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel lblBudget;
     private javax.swing.JLabel lblMessage;
     private javax.swing.JLabel lblProduct;
-    private javax.swing.JTextField txtBudget;
     private javax.swing.JTextField txtMessage;
     // End of variables declaration//GEN-END:variables
 }
