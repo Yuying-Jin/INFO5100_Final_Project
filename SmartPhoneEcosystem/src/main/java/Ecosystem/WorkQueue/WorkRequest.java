@@ -112,4 +112,13 @@ public abstract class WorkRequest {
     public void setProductQuant(int productQuant) {
         this.productQuant = productQuant;
     }
+    
+    public boolean isIsApproved() {
+        return isApproved;
+    }
+    
+    @Override
+    public String toString(){
+        return message;
+    }
 }

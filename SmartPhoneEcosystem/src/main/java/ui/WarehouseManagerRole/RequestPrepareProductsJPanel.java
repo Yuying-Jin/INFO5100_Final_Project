@@ -38,15 +38,15 @@ public class RequestPrepareProductsJPanel extends javax.swing.JPanel {
     public void populateTable() {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
         model.setRowCount(0);
-        if (organization == null || organization.smartWQ() == null) {
+        if (organization == null || organization.getWorkQueue() == null) {
             System.out.println("No organization or no workqueue");
             return;
         }
         
-        for (WorkRequest request : organization.smartWQ().getWorkRequestList()) {
+        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
             Object[] row = new Object[5];
 
-//            row[0] = request.isApproved();
+            row[0] = request.getIsApproved();
             row[1] = request.getMessage();
             row[2] = request.getSender() != null ? request.getSender().getEmployee().getName() : "N/A"; 
             row[3] = request.getReceiver() != null ? request.getReceiver().getEmployee().getName() : "N/A"; 
