@@ -190,6 +190,7 @@ public class RequestComponentJPanel extends javax.swing.JPanel {
         request.setProductName(productName);
         request.setProductQuant(Integer.parseInt(quant));
         request.setSender(userAccount);
+        request.setMessage(message);
         request.setStatus("Sent");
 
         Organization org = null;
