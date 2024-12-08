@@ -227,7 +227,7 @@ public class ConfigureASystem {
         ComponentWorkRequest componentWR = new ComponentWorkRequest();
         org2.getWorkQueue().getWorkRequestList().add(componentWR);
         componentWR.setMessage("Needs chips");
-//        componentWR.setStatus("Completed");
+        componentWR.setStatus("Completed");
         componentWR.setCost(300000);
         componentWR.setProductName("Demo chip");
         componentWR.setProductQuant(productQuant);
