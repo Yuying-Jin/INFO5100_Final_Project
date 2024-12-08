@@ -28,19 +28,19 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="lblResult" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="txtResults" min="-2" pref="294" max="-2" attributes="0"/>
+                          <Component id="txtMessage" min="-2" pref="294" max="-2" attributes="0"/>
                       </Group>
                       <Component id="btnSubmit" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblResult1" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblCost" min="-2" max="-2" attributes="0"/>
                           <Component id="btnBack" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="32767" attributes="0"/>
-                              <Component id="txtResults1" min="-2" pref="294" max="-2" attributes="0"/>
+                              <Component id="txtCost" min="-2" pref="294" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -65,13 +65,13 @@
               </Group>
               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="txtResults1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="lblResult1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtCost" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="lblCost" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblResult" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="txtResults" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="txtMessage" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
               <Component id="btnSubmit" min="-2" max="-2" attributes="0"/>
@@ -89,7 +89,7 @@
         <Property name="text" type="java.lang.String" value="Result Message:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtResults">
+    <Component class="javax.swing.JTextField" name="txtMessage">
     </Component>
     <Component class="javax.swing.JButton" name="btnBack">
       <Properties>
@@ -127,12 +127,12 @@
         <Property name="text" type="java.lang.String" value="Result Submission"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="txtResults1">
+    <Component class="javax.swing.JTextField" name="txtCost">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtResults1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txtCostActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="lblResult1">
+    <Component class="javax.swing.JLabel" name="lblCost">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Helvetica Neue" size="14" style="0"/>

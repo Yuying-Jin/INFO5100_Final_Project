@@ -41,9 +41,7 @@ public class ProcessDesignRequestJPanel extends javax.swing.JPanel {
         btnSubmit = new javax.swing.JButton();
         lblHeading = new javax.swing.JLabel();
         txtCost = new javax.swing.JTextField();
-        lblResult1 = new javax.swing.JLabel();
-        lblProductName = new javax.swing.JLabel();
-        txtProductName = new javax.swing.JTextField();
+        lblCost = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 245, 175));
 
@@ -71,17 +69,14 @@ public class ProcessDesignRequestJPanel extends javax.swing.JPanel {
         lblHeading.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         lblHeading.setText("Result Submission");
 
-        txtResults1.addActionListener(new java.awt.event.ActionListener() {
+        txtCost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtResults1ActionPerformed(evt);
+                txtCostActionPerformed(evt);
             }
         });
 
-        lblResult1.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        lblResult1.setText("Cost:");
-
-        lblProductName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblProductName.setText("Product Name:");
+        lblCost.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        lblCost.setText("Cost:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -89,10 +84,16 @@ public class ProcessDesignRequestJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(lblResult)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnSubmit))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblResult1)
+                            .addComponent(lblCost)
                             .addComponent(btnBack))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -103,7 +104,6 @@ public class ProcessDesignRequestJPanel extends javax.swing.JPanel {
                                 .addGap(57, 57, 57)
                                 .addComponent(lblHeading)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
-
                 .addContainerGap(109, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -113,23 +113,17 @@ public class ProcessDesignRequestJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblHeading)
                     .addComponent(btnBack))
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblProductName)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblResult1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lblResult))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(30, 30, 30)
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCost))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblResult)
+                    .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
                 .addComponent(btnSubmit)
-                .addContainerGap(191, Short.MAX_VALUE))
+                .addContainerGap(206, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -154,20 +148,18 @@ public class ProcessDesignRequestJPanel extends javax.swing.JPanel {
 
     }//GEN-LAST:event_btnSubmitActionPerformed
 
-    private void txtResults1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtResults1ActionPerformed
+    private void txtCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtResults1ActionPerformed
+    }//GEN-LAST:event_txtCostActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JLabel lblCost;
     private javax.swing.JLabel lblHeading;
-    private javax.swing.JLabel lblProductName;
     private javax.swing.JLabel lblResult;
-    private javax.swing.JLabel lblResult1;
     private javax.swing.JTextField txtCost;
     private javax.swing.JTextField txtMessage;
-    private javax.swing.JTextField txtProductName;
     // End of variables declaration//GEN-END:variables
 }
