@@ -296,7 +296,7 @@ public class ConfigureASystem {
         prepareWR.setProductQuantHad(rand.nextInt(200) + productQuant);
         // Warehouse Operator complete the request and set cost
         prepareWR.setCost(5000);
-        prepareWR.setStatus("Completed");
+//        prepareWR.setStatus("Completed");
 
         // After product prepared, Distribution Manager pass work request to Transportation Planner
         transWR.setSender(org7.getUserAccountDirectory().getUserAccountList().get(0));

@@ -4,15 +4,11 @@
  */
 package ui.WarehouseManagerRole;
 
-import Ecosystem.EcoSystem;
-import Ecosystem.Enterprise.Enterprise;
 import Ecosystem.Organization.Organization;
 import Ecosystem.Organization.WarehouseManagementOrganization;
-import Ecosystem.UserAccount.UserAccount;
 import Ecosystem.WorkQueue.PrepareProductWorkRequest;
 import Ecosystem.WorkQueue.WorkRequest;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -20,18 +16,10 @@ import javax.swing.table.DefaultTableModel;
  * @author sunny
  */
 public class RequestPrepareProductsJPanel extends javax.swing.JPanel {
-    JPanel userProcessContainer;
-    EcoSystem ecosystem;
     private Organization organization;
-    private Enterprise enterprise;
-    private UserAccount account;
-    public RequestPrepareProductsJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem ecosystem) {
+    public RequestPrepareProductsJPanel(Organization organization) {
         initComponents();
-        this.userProcessContainer = userProcessContainer;
-        this.ecosystem = ecosystem;
-        this.account = account;
         this.organization = (WarehouseManagementOrganization)organization;
-        this.enterprise = enterprise;
         populateTable();
     }
     
@@ -44,14 +32,17 @@ public class RequestPrepareProductsJPanel extends javax.swing.JPanel {
         }
         
         for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
-            Object[] row = new Object[5];
-            row[0] = request.getProductName();
-            row[1] = request.getSender() != null ? request.getSender().getEmployee().getName() : "N/A"; 
-            row[2] = request.getReceiver() != null ? request.getReceiver().getEmployee().getName() : "N/A"; 
-            row[3] = request.getProductQuant();
-            row[4] = request.getCost();
-
-            model.addRow(row);
+            if (request.getStatus().equals("Pending") || request.getStatus().equals("Accepted")) {
+                Object[] row = new Object[7];
+                row[0] = request.getProductName();
+                row[1] = request;
+                row[2] = request.getSender() != null ? request.getSender().getEmployee().getName() : "N/A"; 
+                row[3] = request.getReceiver() != null ? request.getReceiver().getEmployee().getName() : "N/A"; 
+                row[4] = request.getProductQuant();
+                row[5] = request.getCost();
+                row[6] = request.getStatus();
+                model.addRow(row);
+            }
         }
     }
 
@@ -71,17 +62,17 @@ public class RequestPrepareProductsJPanel extends javax.swing.JPanel {
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Product Name", "Sender", "Receiver", "Quant", "Cost"
+                "Product Name", "Message", "Sender", "Receiver", "Quant", "Cost", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.Double.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -91,7 +82,7 @@ public class RequestPrepareProductsJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(workRequestJTable);
 
         approvalJButton.setBackground(new java.awt.Color(255, 153, 153));
-        approvalJButton.setText("Approve");
+        approvalJButton.setText("Accept");
         approvalJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 approvalJButtonActionPerformed(evt);
@@ -111,27 +102,23 @@ public class RequestPrepareProductsJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
+                .addGap(72, 72, 72)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(392, 392, 392)
-                        .addComponent(refreshJButton))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(approvalJButton)))
-                .addContainerGap(69, Short.MAX_VALUE))
+                    .addComponent(approvalJButton)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(refreshJButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
+                .addGap(62, 62, 62)
                 .addComponent(refreshJButton)
-                .addGap(5, 5, 5)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(approvalJButton)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap(201, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -140,18 +127,19 @@ public class RequestPrepareProductsJPanel extends javax.swing.JPanel {
         int selectedRow = workRequestJTable.getSelectedRow();
 
         if (selectedRow < 0) {
-            JOptionPane.showMessageDialog(null, "Please select a row to approve.");
+            JOptionPane.showMessageDialog(null, "Please select a row to accept.");
             return;
         }
 
-        PrepareProductWorkRequest request = (PrepareProductWorkRequest) workRequestJTable.getValueAt(selectedRow, 0);
+        PrepareProductWorkRequest request = (PrepareProductWorkRequest) workRequestJTable.getValueAt(selectedRow, 1);
 
-        if ("Processing".equals(request.getStatus()) || "Approved".equals(request.getStatus())) {
+        if ("Accepted".equals(request.getStatus())) {
             JOptionPane.showMessageDialog(null, "This request is already being processed or approved.");
             return;
         }
 
-        request.setStatus("Processing");
+        request.setStatus("Accepted");
+        populateTable();
     }//GEN-LAST:event_approvalJButtonActionPerformed
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
