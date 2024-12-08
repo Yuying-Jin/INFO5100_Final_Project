@@ -7,8 +7,10 @@ package ui.WarehouseManagerRole;
 import Ecosystem.EcoSystem;
 import Ecosystem.Enterprise.Enterprise;
 import Ecosystem.Organization.Organization;
+import Ecosystem.Organization.WarehouseManagementOrganization;
 import Ecosystem.UserAccount.UserAccount;
 import Ecosystem.WorkQueue.PrepareProductWorkRequest;
+import Ecosystem.WorkQueue.WorkRequest;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -28,7 +30,7 @@ public class RequestPrepareProductsJPanel extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;
         this.account = account;
-        this.organization = organization;
+        this.organization = (WarehouseManagementOrganization)organization;
         this.enterprise = enterprise;
         populateTable();
     }
@@ -36,21 +38,22 @@ public class RequestPrepareProductsJPanel extends javax.swing.JPanel {
     public void populateTable() {
         DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
         model.setRowCount(0);
-//        if (organization == null || organization.getWorkQueue() == null) {
-//            return;
-//        }
+        if (organization == null || organization.smartWQ() == null) {
+            System.out.println("No organization or no workqueue");
+            return;
+        }
         
-//        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
-//            Object[] row = new Object[5];
-//
+        for (WorkRequest request : organization.smartWQ().getWorkRequestList()) {
+            Object[] row = new Object[5];
+
 //            row[0] = request.isApproved();
-//            row[1] = request.getMessage();
-//            row[2] = request.getSender() != null ? request.getSender().getEmployee().getName() : "N/A"; 
-//            row[3] = request.getReceiver() != null ? request.getReceiver().getEmployee().getName() : "N/A"; 
-//            row[4] = request.getStatus();
-//
-//             model.addRow(row);
-//        }
+            row[1] = request.getMessage();
+            row[2] = request.getSender() != null ? request.getSender().getEmployee().getName() : "N/A"; 
+            row[3] = request.getReceiver() != null ? request.getReceiver().getEmployee().getName() : "N/A"; 
+            row[4] = request.getStatus();
+
+            model.addRow(row);
+        }
     }
 
     /**
