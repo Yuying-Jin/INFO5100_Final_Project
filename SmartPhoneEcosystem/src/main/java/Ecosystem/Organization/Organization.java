@@ -18,7 +18,7 @@ public abstract class Organization {
     
     public enum Type {
         Admin("Admin Organization"),
-        UIUX("UI/UX Organization"),
+        UIUXDesign("UI/UX Design Organization"),
         ManufacturingManagement("Manufacturing Management Organization"),
         ResearchAndDevelopment("Research and Development Organization"),
         Assembly("Assembly Organization"),

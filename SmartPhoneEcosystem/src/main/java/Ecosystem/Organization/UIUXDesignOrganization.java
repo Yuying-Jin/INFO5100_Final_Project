@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class UIUXDesignOrganization extends Organization{
 
     public UIUXDesignOrganization() {
-        super(Organization.Type.UIUX.getValue());
+        super(Organization.Type.UIUXDesign.getValue());
     }
 
     @Override

@@ -6,6 +6,7 @@ import Ecosystem.Enterprise.Enterprise;
 import Ecosystem.Enterprise.SmartphoneEnterprise;
 import Ecosystem.Network.Network;
 import Ecosystem.Organization.Organization;
+import Ecosystem.Product.SmartphoneProduct;
 import Ecosystem.Role.Role;
 import Ecosystem.UserAccount.UserAccount;
 import Ecosystem.WorkQueue.AssemblyWorkRequest;
@@ -47,17 +48,15 @@ public class ConfigureASystem {
             Enterprise e = network.getEnterpriseDirectory().createAndAddEnterprise(name, type);
             enterpriseList.add(e);
         }
-
         
         // Create Oragnizations
-        Organization deisgnOrg = enterpriseList.get(0).getOrganizationDirectory().createOrganization(Organization.Type.UIUX);
-        Organization mmOrg = enterpriseList.get(0).getOrganizationDirectory().createOrganization(Organization.Type.ManufacturingManagement);
-        Organization rdOrg = enterpriseList.get(1).getOrganizationDirectory().createOrganization(Organization.Type.ResearchAndDevelopment);
-        Organization assemblyOrg = enterpriseList.get(2).getOrganizationDirectory().createOrganization(Organization.Type.Assembly);
-        Organization qmOrg = enterpriseList.get(2).getOrganizationDirectory().createOrganization(Organization.Type.QualityManagement);
-        Organization whmOrg = enterpriseList.get(3).getOrganizationDirectory().createOrganization(Organization.Type.WarehouseManagement);
-        Organization dtOrg = enterpriseList.get(3).getOrganizationDirectory().createOrganization(Organization.Type.DistributionTransportation);
-        
+        Organization org1 = enterpriseList.get(0).getOrganizationDirectory().createOrganization(Organization.Type.UIUXDesign);
+        Organization org2 = enterpriseList.get(0).getOrganizationDirectory().createOrganization(Organization.Type.ManufacturingManagement);
+        Organization org3 = enterpriseList.get(1).getOrganizationDirectory().createOrganization(Organization.Type.ResearchAndDevelopment);
+        Organization org4 = enterpriseList.get(2).getOrganizationDirectory().createOrganization(Organization.Type.Assembly);
+        Organization org5 = enterpriseList.get(2).getOrganizationDirectory().createOrganization(Organization.Type.QualityManagement);
+        Organization org6 = enterpriseList.get(3).getOrganizationDirectory().createOrganization(Organization.Type.WarehouseManagement);
+        Organization org7 = enterpriseList.get(3).getOrganizationDirectory().createOrganization(Organization.Type.DistributionTransportation);
 
         // Create Employees
         EmployeeDirectory ed = system.getEmployeeDirectory();
@@ -105,90 +104,91 @@ public class ConfigureASystem {
         roleList.add(new Role(Role.RoleType.TransportationPlanner)); // 13
         
         // Create user accounts
-        system.getUserAccountDirectory().createUserAccount(
-                    userList[0],
-                    password,
-                    ed.getEmployeeList().get(0),
-                    new Role(Role.RoleType.SystemAdmin));
-        
-        system.getUserAccountDirectory().createUserAccount(
-            userList[1],
-            password,
-            ed.getEmployeeList().get(1),
-            new Role(Role.RoleType.EnterprisesAdmin));
-        
-        system.getUserAccountDirectory().createUserAccount(
-            userList[2],
-            password,
-            ed.getEmployeeList().get(2),
-            new Role(Role.RoleType.EnterprisesAdmin));
-        
-        system.getUserAccountDirectory().createUserAccount(
-            userList[3],
-            password,
-            ed.getEmployeeList().get(3),
-            new Role(Role.RoleType.EnterprisesAdmin));
-        
-        system.getUserAccountDirectory().createUserAccount(
-            userList[4],
-            password,
-            ed.getEmployeeList().get(4),
-            new Role(Role.RoleType.EnterprisesAdmin));
-        
-        deisgnOrg.getUserAccountDirectory().createUserAccount(
-            userList[5],
-            password,
-            ed.getEmployeeList().get(5),
-            new Role(Role.RoleType.UIUXSpecialist));
+        {
+            system.getUserAccountDirectory().createUserAccount(
+                        userList[0],
+                        password,
+                        ed.getEmployeeList().get(0),
+                        new Role(Role.RoleType.SystemAdmin));
 
-        mmOrg.getUserAccountDirectory().createUserAccount(
-            userList[6],
-            password,
-            ed.getEmployeeList().get(6),
-            new Role(Role.RoleType.ProductionCoordinator));
-        
-        rdOrg.getUserAccountDirectory().createUserAccount(
-            userList[7],
-            password,
-            ed.getEmployeeList().get(7),
-            new Role(Role.RoleType.ComponentDevelopmentEngineer));
-        
-        assemblyOrg.getUserAccountDirectory().createUserAccount(
-            userList[8],
-            password,
-            ed.getEmployeeList().get(8),
-            new Role(Role.RoleType.ProductionOperator));
-        
-        qmOrg.getUserAccountDirectory().createUserAccount(
-            userList[9],
-            password,
-            ed.getEmployeeList().get(9),
-            new Role(Role.RoleType.QualityInspector));
-        
-        whmOrg.getUserAccountDirectory().createUserAccount(
-            userList[10],
-            password,
-            ed.getEmployeeList().get(10),
-            new Role(Role.RoleType.WarehouseManager));
-        
-        whmOrg.getUserAccountDirectory().createUserAccount(
-            userList[11],
-            password,
-            ed.getEmployeeList().get(11),
-            new Role(Role.RoleType.WarehouseOperator));
-        
-        dtOrg.getUserAccountDirectory().createUserAccount(
-            userList[12],
-            password,
-            ed.getEmployeeList().get(12),
-            new Role(Role.RoleType.DistributionManager));
-        
-        dtOrg.getUserAccountDirectory().createUserAccount(
-            userList[13],
-            password,
-            ed.getEmployeeList().get(13),
-            new Role(Role.RoleType.TransportationPlanner));
+            system.getUserAccountDirectory().createUserAccount(
+                userList[1],
+                password,
+                ed.getEmployeeList().get(1),
+                new Role(Role.RoleType.EnterprisesAdmin));
 
+            system.getUserAccountDirectory().createUserAccount(
+                userList[2],
+                password,
+                ed.getEmployeeList().get(2),
+                new Role(Role.RoleType.EnterprisesAdmin));
+
+            system.getUserAccountDirectory().createUserAccount(
+                userList[3],
+                password,
+                ed.getEmployeeList().get(3),
+                new Role(Role.RoleType.EnterprisesAdmin));
+
+            system.getUserAccountDirectory().createUserAccount(
+                userList[4],
+                password,
+                ed.getEmployeeList().get(4),
+                new Role(Role.RoleType.EnterprisesAdmin));
+
+            org1.getUserAccountDirectory().createUserAccount(
+                userList[5],
+                password,
+                ed.getEmployeeList().get(5),
+                new Role(Role.RoleType.UIUXSpecialist));
+
+            org2.getUserAccountDirectory().createUserAccount(
+                userList[6],
+                password,
+                ed.getEmployeeList().get(6),
+                new Role(Role.RoleType.ProductionCoordinator));
+
+            org3.getUserAccountDirectory().createUserAccount(
+                userList[7],
+                password,
+                ed.getEmployeeList().get(7),
+                new Role(Role.RoleType.ComponentDevelopmentEngineer));
+
+            org4.getUserAccountDirectory().createUserAccount(
+                userList[8],
+                password,
+                ed.getEmployeeList().get(8),
+                new Role(Role.RoleType.ProductionOperator));
+
+            org5.getUserAccountDirectory().createUserAccount(
+                userList[9],
+                password,
+                ed.getEmployeeList().get(9),
+                new Role(Role.RoleType.QualityInspector));
+
+            org6.getUserAccountDirectory().createUserAccount(
+                userList[10],
+                password,
+                ed.getEmployeeList().get(10),
+                new Role(Role.RoleType.WarehouseManager));
+
+            org6.getUserAccountDirectory().createUserAccount(
+                userList[11],
+                password,
+                ed.getEmployeeList().get(11),
+                new Role(Role.RoleType.WarehouseOperator));
+
+            org7.getUserAccountDirectory().createUserAccount(
+                userList[12],
+                password,
+                ed.getEmployeeList().get(12),
+                new Role(Role.RoleType.DistributionManager));
+
+            org7.getUserAccountDirectory().createUserAccount(
+                userList[13],
+                password,
+                ed.getEmployeeList().get(13),
+                new Role(Role.RoleType.TransportationPlanner));
+    }
         
         // Create smartphone products
         SmartphoneEnterprise smartApple = (SmartphoneEnterprise)enterpriseList.get(0);
@@ -205,45 +205,47 @@ public class ConfigureASystem {
         smartApple.getProductCatalog().addProduct("iPhone 12", 800.00);
         smartApple.getProductCatalog().addProduct("iPhone 12 Pro", 1100.00);
         
-        String productName = "Demo Phone";
+        String productName = smartApple.getProductCatalog().getProductCatalog().getFirst().getName();
         int productQuant = 1000;
 
         // Create work requests
         WorkRequest designWR = new DesignWorkRequest();
-        WorkQueue smartWQ = smartApple.getOrganizationDirectory().getOrganizationList().getLast().getWorkQueue();
-        smartApple.getOrganizationDirectory().getOrganizationList().getLast().getWorkQueue().getWorkRequestList().add(designWR);
+        WorkQueue smartWQ = org2.getWorkQueue();
+        org2.getHistoryWorkQueueList().add(smartWQ); // add the current work queue to the history work queue for data analysis later
+        
+        org2.getWorkQueue().getWorkRequestList().add(designWR);
         designWR.setMessage("UI design");
         designWR.setStatus("Completed");
         designWR.setCost(2000);
         designWR.setProductName(productName);
         designWR.setProductQuant(productQuant);
-        designWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(6));
-        designWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(5));
-        smartApple.getOrganizationDirectory().getOrganizationList().getFirst().getWorkQueue().getWorkRequestList().add(designWR);
+        designWR.setSender(org2.getUserAccountDirectory().getUserAccountList().get(0));
+        designWR.setReceiver(org1.getUserAccountDirectory().getUserAccountList().get(0));
+        org1.getWorkQueue().getWorkRequestList().add(designWR);
         
         
         ComponentWorkRequest componentWR = new ComponentWorkRequest();
-        smartApple.getOrganizationDirectory().getOrganizationList().getLast().getWorkQueue().getWorkRequestList().add(componentWR);
+        org2.getWorkQueue().getWorkRequestList().add(componentWR);
         componentWR.setMessage("Needs chips");
         componentWR.setStatus("Completed");
         componentWR.setCost(300000);
         componentWR.setProductName("Demo chip");
         componentWR.setProductQuant(productQuant);
-        componentWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(6));
-        componentWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(7));
-        enterpriseList.get(1).getOrganizationDirectory().getOrganizationList().getFirst().getWorkQueue().getWorkRequestList().add(componentWR);
+        componentWR.setSender(org2.getUserAccountDirectory().getUserAccountList().get(0));
+        componentWR.setReceiver(org3.getUserAccountDirectory().getUserAccountList().get(0));
+        org3.getWorkQueue().getWorkRequestList().add(componentWR);
 
                 
         AssemblyWorkRequest assemblyWR = new AssemblyWorkRequest();
-        smartApple.getOrganizationDirectory().getOrganizationList().getLast().getWorkQueue().getWorkRequestList().add(assemblyWR);
+        org2.getWorkQueue().getWorkRequestList().add(assemblyWR);
         assemblyWR.setMessage("Assembly phones");
         assemblyWR.setStatus("Completed");
         assemblyWR.setCost(25000.0);
         assemblyWR.setProductName(productName);
         assemblyWR.setProductQuant(productQuant);
-        assemblyWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(6));
-        assemblyWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(8));
-        enterpriseList.get(2).getOrganizationDirectory().getOrganizationList().getFirst().getWorkQueue().getWorkRequestList().add(assemblyWR);
+        assemblyWR.setSender(org2.getUserAccountDirectory().getUserAccountList().get(0));
+        assemblyWR.setReceiver(org4.getUserAccountDirectory().getUserAccountList().get(0));
+        org4.getWorkQueue().getWorkRequestList().add(assemblyWR);
         
         
         QualityManagementWorkRequest qmWR = new QualityManagementWorkRequest();
@@ -252,59 +254,57 @@ public class ConfigureASystem {
         qmWR.setCost(10000.0);
         qmWR.setProductName(productName);
         qmWR.setProductQuant(productQuant);
-        qmWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(8));
-        qmWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(9));
-        enterpriseList.get(2).getOrganizationDirectory().getOrganizationList().getLast().getWorkQueue().getWorkRequestList().add(qmWR);
+        qmWR.setSender(org4.getUserAccountDirectory().getUserAccountList().get(0));
+        qmWR.setReceiver(org5.getUserAccountDirectory().getUserAccountList().get(0));
+        org5.getWorkQueue().getWorkRequestList().add(qmWR);
         
         // Reassumbly due to failgure
         assemblyWR.setMessage("Reassumbly phones");
         assemblyWR.setStatus("Completed");
         assemblyWR.setCost(25800.0);
         assemblyWR.setFailgureQuant(80);
-        assemblyWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(9));
-        assemblyWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(8));
+        assemblyWR.setSender(org5.getUserAccountDirectory().getUserAccountList().get(0));
+        assemblyWR.setReceiver(org4.getUserAccountDirectory().getUserAccountList().get(0));
         
         
         // Smartphone Enterprise Production Operator requests Distribution Manager
         TransportationWorkRequest transWR = new TransportationWorkRequest();
-        smartApple.getOrganizationDirectory().getOrganizationList().getLast().getWorkQueue().getWorkRequestList().add(transWR);
+        org2.getWorkQueue().getWorkRequestList().add(transWR);
         transWR.setMessage("Transport 1000 phones to stores");
         transWR.setStatus("Pending");
         transWR.setProductName(productName);
         transWR.setProductQuant(productQuant);
-        transWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(6));
-        transWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(12));
-        enterpriseList.get(3).getOrganizationDirectory().getOrganizationList().getLast().getWorkQueue().getWorkRequestList().add(transWR);
+        transWR.setSender(org2.getUserAccountDirectory().getUserAccountList().get(0));
+        transWR.setReceiver(org7.getUserAccountDirectory().getUserAccountList().get(0));
+        org7.getWorkQueue().getWorkRequestList().add(transWR);
 
         
         // Distribution Manager requests WarehouseManager to prepare products
         PrepareProductWorkRequest prepareWR = new PrepareProductWorkRequest();
-        smartApple.getOrganizationDirectory().getOrganizationList().getLast().getWorkQueue().getWorkRequestList().add(prepareWR);
+        org2.getWorkQueue().getWorkRequestList().add(prepareWR);
         prepareWR.setMessage("Prepare 1000 phones to transport");
         prepareWR.setStatus("Pending");
         prepareWR.setProductName(productName);
         prepareWR.setProductQuant(productQuant);
-        prepareWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(12));
-        prepareWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(10));
-        enterpriseList.get(3).getOrganizationDirectory().getOrganizationList().getFirst().getWorkQueue().getWorkRequestList().add(prepareWR);
+        prepareWR.setSender(org7.getUserAccountDirectory().getUserAccountList().get(0));
+        prepareWR.setReceiver(org6.getUserAccountDirectory().getUserAccountList().get(0));
+        org6.getWorkQueue().getWorkRequestList().add(prepareWR);
         
         // Warehouse Manager passes work request to Warehouse Operator
-        prepareWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(10));
-        prepareWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(11));
+        prepareWR.setSender(org6.getUserAccountDirectory().getUserAccountList().get(0));
+        prepareWR.setReceiver(org6.getUserAccountDirectory().getUserAccountList().get(1));
         prepareWR.setProductQuantHad(rand.nextInt(200) + productQuant);
         // Warehouse Operator complete the request and set cost
         prepareWR.setCost(5000);
         prepareWR.setStatus("Completed");
 
         // After product prepared, Distribution Manager pass work request to Transportation Planner
-        transWR.setSender(system.getUserAccountDirectory().getUserAccountList().get(12));
-        transWR.setReceiver(system.getUserAccountDirectory().getUserAccountList().get(13));
+        transWR.setSender(org7.getUserAccountDirectory().getUserAccountList().get(0));
+        transWR.setReceiver(org7.getUserAccountDirectory().getUserAccountList().get(1));
         // Transportation Planner complete the request and set cost
         transWR.setCost(50000);
         transWR.setStatus("Complete");
         
-        // workflow done, add the current work queue to the history work queue
-        smartApple.getOrganizationDirectory().getOrganizationList().getLast().getHistoryWorkQueueList().add(smartWQ);
         
         return system;
     }

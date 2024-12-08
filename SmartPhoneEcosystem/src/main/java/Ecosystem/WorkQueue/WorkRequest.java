@@ -112,4 +112,9 @@ public abstract class WorkRequest {
     public void setProductQuant(int productQuant) {
         this.productQuant = productQuant;
     }
+    
+    @Override
+    public String toString(){
+        return message;
+    }
 }

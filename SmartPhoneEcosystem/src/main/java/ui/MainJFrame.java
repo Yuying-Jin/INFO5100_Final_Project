@@ -4,6 +4,7 @@
  */
 package ui;
 
+import Ecosystem.ConfigureASystem;
 import Ecosystem.EcoSystem;
 import Ecosystem.DB4OUtil.DB4OUtil;
 import Ecosystem.Enterprise.Enterprise;
@@ -24,12 +25,15 @@ public class MainJFrame extends javax.swing.JFrame {
      * Creates new form MainJFrame
      */
     private EcoSystem system;
-    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+//    private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
 
     public MainJFrame() {
         initComponents();
-        system = dB4OUtil.retrieveSystem();
-        this.setSize(800, 600);
+        
+//        system = dB4OUtil.retrieveSystem();
+        system = ConfigureASystem.configure();
+
+        this.setSize(1000, 600);
     }
 
     /**
@@ -217,7 +221,7 @@ public class MainJFrame extends javax.swing.JFrame {
         container.add("blank", blankJP);
         CardLayout crdLyt = (CardLayout) container.getLayout();
         crdLyt.next(container);
-        dB4OUtil.storeSystem(system);
+//        dB4OUtil.storeSystem(system);
     }//GEN-LAST:event_logoutJButtonActionPerformed
 
     /**
