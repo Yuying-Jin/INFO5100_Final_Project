@@ -246,7 +246,7 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
-            Object[] row = new Object[4];
+            Object[] row = new Object[5];
             row[0] = "Phone";
             row[1] = request;
             row[2] = request.getSender().getEmployee().getName();
