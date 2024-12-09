@@ -7,20 +7,47 @@ package ui.ProductionOperatorRole;
 import Ecosystem.EcoSystem;
 import Ecosystem.Enterprise.Enterprise;
 import Ecosystem.Organization.Organization;
+import Ecosystem.Organization.QualityManagementOrganization;
 import Ecosystem.UserAccount.UserAccount;
+import Ecosystem.WorkQueue.AssemblyWorkRequest;
+import Ecosystem.WorkQueue.QualityManagementWorkRequest;
+import Ecosystem.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
+import java.awt.Font;
+import static java.awt.Font.BOLD;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author sunny
  */
 public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
-
+    
+    private JPanel workArea;
+    private UserAccount userAccount;
+    private Organization organization;
+    private Enterprise enterprise;
+    private EcoSystem system;
+    
     /**
      * Creates new form ProductionOperatorWorkAreaJPanel
      */
     public ProductionOperatorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem ecosystem) {
         initComponents();
+        
+        tblWorkRequests.getTableHeader().setFont(new Font("Helvetica Neue", BOLD, 14));
+        tblUserWorkRequests.getTableHeader().setFont(new Font("Helvetica Neue", BOLD, 14));
+        
+        this.workArea = userProcessContainer;
+        this.userAccount = account;
+        this.organization = organization;
+        this.enterprise = enterprise;
+        this.system = ecosystem;
+        
+        populateAssemblyRequestsTable();
+        populateQualityRequestsTable();
     }
 
     /**
@@ -32,19 +59,361 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnRefresh = new javax.swing.JButton();
+        lblHeading = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        btnAssign = new javax.swing.JButton();
+        btnProcess = new javax.swing.JButton();
+        btnRequestQualityManagement = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblWorkRequests = new javax.swing.JTable();
+        lblProductName1 = new javax.swing.JLabel();
+        lblProductName2 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblUserWorkRequests = new javax.swing.JTable();
+
+        setBackground(new java.awt.Color(255, 245, 175));
+
+        btnRefresh.setBackground(new java.awt.Color(204, 225, 152));
+        btnRefresh.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+
+        lblHeading.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        lblHeading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHeading.setText("Production Operator Work Area");
+
+        jPanel1.setOpaque(false);
+
+        btnAssign.setBackground(new java.awt.Color(204, 225, 152));
+        btnAssign.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        btnAssign.setText("Assign to me");
+        btnAssign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignActionPerformed(evt);
+            }
+        });
+
+        btnProcess.setBackground(new java.awt.Color(204, 225, 152));
+        btnProcess.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        btnProcess.setText("Process");
+        btnProcess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProcessActionPerformed(evt);
+            }
+        });
+
+        btnRequestQualityManagement.setBackground(new java.awt.Color(204, 225, 152));
+        btnRequestQualityManagement.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        btnRequestQualityManagement.setText("Request Quality Management");
+        btnRequestQualityManagement.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRequestQualityManagementActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(btnAssign)
+                .addGap(18, 18, 18)
+                .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnRequestQualityManagement)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAssign)
+                    .addComponent(btnProcess)
+                    .addComponent(btnRequestQualityManagement))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        tblWorkRequests.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        tblWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Product Name", "Message", "Sender", "Receiver", "Quant", "Failuare Quant", "Cost", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tblWorkRequests);
+
+        lblProductName1.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        lblProductName1.setText("Assembly Organization Work Request Table:");
+
+        lblProductName2.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        lblProductName2.setText("User Work Request Table:");
+
+        tblUserWorkRequests.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        tblUserWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Product Name", "Message", "Sender", "Receiver", "Quant", "Failure Quant", "Cost", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(tblUserWorkRequests);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(144, 144, 144)
+                        .addComponent(lblHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnRefresh)
+                        .addGap(14, 14, 14))
+                    .addComponent(jScrollPane3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblProductName1)
+                                    .addComponent(lblProductName2))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblHeading)
+                    .addComponent(btnRefresh))
+                .addGap(5, 5, 5)
+                .addComponent(lblProductName1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblProductName2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        populateAssemblyRequestsTable();
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
+
+        int selectedRow = tblWorkRequests.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            WorkRequest request = (WorkRequest) tblWorkRequests.getValueAt(selectedRow, 1);
+            if (request.getStatus().equalsIgnoreCase("Completed")) {
+                JOptionPane.showMessageDialog(null, "Request already processed.");
+                return;
+            } else {
+                userAccount.getWorkQueue().getWorkRequestList().add(request);
+                request.setReceiver(userAccount);
+                request.setStatus("Pending");
+                populateAssemblyRequestsTable();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Choose a reuest to process.");
+            return;
+        }
+    }//GEN-LAST:event_btnAssignActionPerformed
+
+    private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
+        int selectedRow = tblWorkRequests.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            AssemblyWorkRequest request = (AssemblyWorkRequest) tblWorkRequests.getValueAt(selectedRow, 1);
+            if (request.getStatus().equalsIgnoreCase("Uncheck") || request.getStatus().equalsIgnoreCase("Completed")) {
+                JOptionPane.showMessageDialog(null, "Request already processed.");
+                return;
+            }
+
+            if(userAccount.getWorkQueue().getWorkRequestList().indexOf(request) == -1){
+                JOptionPane.showMessageDialog(null, "This request wasn't assigned to you.");
+                return;
+            }
+            request.setStatus("Processing");
+
+            ProcessAssemblyRequestJPanel processWorkRequestJPanel = new ProcessAssemblyRequestJPanel(workArea, request);
+            workArea.add("processWorkRequestJPanel", processWorkRequestJPanel);
+            CardLayout layout = (CardLayout) workArea.getLayout();
+            layout.next(workArea);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a request message to process.");
+            return;
+        }
+    }//GEN-LAST:event_btnProcessActionPerformed
+
+    private void btnRequestQualityManagementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestQualityManagementActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblWorkRequests.getSelectedRow();
+        
+        if (selectedRow >= 0) {
+            AssemblyWorkRequest request = (AssemblyWorkRequest) tblWorkRequests.getValueAt(selectedRow, 1);
+            
+            if (request.getStatus().equalsIgnoreCase("Pending") || request.getStatus().equalsIgnoreCase("Processing") ) {
+                JOptionPane.showMessageDialog(null, "Request not processed yet.");
+                return;
+            }
+
+            if (request.getStatus().equalsIgnoreCase("Completed")) {
+                JOptionPane.showMessageDialog(null, "Request already processed.");
+                return;
+            }
+
+            if (request.getStatus().equalsIgnoreCase("Checking")) {
+                JOptionPane.showMessageDialog(null, "Request already created.");
+                return;
+            }
+            
+            if(userAccount.getWorkQueue().getWorkRequestList().indexOf(request) == -1){
+                JOptionPane.showMessageDialog(null, "This request wasn't assigned to you.");
+                return;
+            }
+            
+            
+            
+            request.setStatus("Checking");
+            
+            QualityManagementWorkRequest qualityWorkRequest = new QualityManagementWorkRequest(request);
+            qualityWorkRequest.setProductName(request.getProductName());
+            qualityWorkRequest.setProductQuant(request.getProductQuant());
+            qualityWorkRequest.setSender(userAccount);
+            qualityWorkRequest.setStatus("Sent");
+            qualityWorkRequest.setMessage("Check quality");
+            
+            Organization org = null;
+            for (Organization o : enterprise.getOrganizationDirectory().getOrganizationList()){
+                if (o instanceof QualityManagementOrganization){
+                    org = o;
+                    break;
+                }
+            }
+            
+            if (org!=null){
+                org.getWorkQueue().getWorkRequestList().add(qualityWorkRequest);
+                userAccount.getWorkQueue().getWorkRequestList().add(qualityWorkRequest);
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a request message to process.");
+            return;
+        }
+        
+        populateQualityRequestsTable();
+        populateAssemblyRequestsTable();
+        
+    }//GEN-LAST:event_btnRequestQualityManagementActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAssign;
+    private javax.swing.JButton btnProcess;
+    private javax.swing.JButton btnRefresh;
+    private javax.swing.JButton btnRequestQualityManagement;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel lblHeading;
+    private javax.swing.JLabel lblProductName1;
+    private javax.swing.JLabel lblProductName2;
+    private javax.swing.JTable tblUserWorkRequests;
+    private javax.swing.JTable tblWorkRequests;
     // End of variables declaration//GEN-END:variables
+
+    public void populateAssemblyRequestsTable(){
+        DefaultTableModel model = (DefaultTableModel) tblWorkRequests.getModel();
+        
+        model.setRowCount(0);
+        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
+            Object[] row = new Object[8];
+            row[0] = request.getProductName();
+            row[1] = request;
+            row[2] = request.getSender();
+            row[3] = request.getReceiver();
+            row[4] = request.getProductQuant();
+            row[5] = ((AssemblyWorkRequest) request).getFailgureQuant();
+            row[6] = request.getCost();
+            row[7] = request.getStatus();
+            
+            model.addRow(row);
+        }
+    }
+    
+    public void populateQualityRequestsTable(){
+        DefaultTableModel model = (DefaultTableModel) tblUserWorkRequests.getModel();
+        model.setRowCount(0);
+        for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()){
+            if (request instanceof QualityManagementWorkRequest) { 
+                Object[] row = new Object[8];
+                row[0] = request.getProductName();
+                row[1] = request;
+                row[2] = request.getSender();
+                row[3] = request.getReceiver();
+                row[4] = request.getProductQuant();
+                row[5] = ((QualityManagementWorkRequest) request).getAssemblyWorkRequest().getFailgureQuant();
+                row[6] = request.getCost();
+                row[7] = request.getStatus();
+
+                model.addRow(row);
+            }
+            
+        }
+    }
+
 }

@@ -8,6 +8,7 @@ import Ecosystem.EcoSystem;
 import Ecosystem.Enterprise.Enterprise;
 import Ecosystem.Organization.Organization;
 import Ecosystem.UserAccount.UserAccount;
+import Ecosystem.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import ui.EnterprisesAdminWorkArea.ManageWorkRequestJPanel;
@@ -23,6 +24,7 @@ public class EnterprisesAdminWorkAreaJPanel extends javax.swing.JPanel {
     private Organization organization;
     private Enterprise enterprise;
     private UserAccount account;
+   
 
     /**
      * Creates new form EnterprisesAdminWorkAreaJPanel
@@ -34,6 +36,7 @@ public class EnterprisesAdminWorkAreaJPanel extends javax.swing.JPanel {
         this.account = account;
         this.organization = organization;
         this.enterprise = enterprise;
+ 
     }
 
     /**
@@ -98,10 +101,15 @@ public class EnterprisesAdminWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManageWorkRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageWorkRequestActionPerformed
-       ManageWorkRequestJPanel manageWorkRequestJPanel = new ManageWorkRequestJPanel(userProcessContainer, account, organization, enterprise, ecosystem);
-       userProcessContainer.add("manageWorkRequestJPanel", manageWorkRequestJPanel);
-       CardLayout layout=(CardLayout)userProcessContainer.getLayout();
-       layout.next(userProcessContainer);
+      ManageWorkRequestJPanel manageWorkRequestJPanel = new ManageWorkRequestJPanel(
+        userProcessContainer, 
+        account, 
+        enterprise, 
+        ecosystem
+        );
+      userProcessContainer.add("manageWorkRequestJPanel", manageWorkRequestJPanel);
+      CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+      layout.next(userProcessContainer);
       
     }//GEN-LAST:event_btnManageWorkRequestActionPerformed
 

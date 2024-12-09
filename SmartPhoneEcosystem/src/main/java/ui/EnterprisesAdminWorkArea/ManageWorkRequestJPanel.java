@@ -20,20 +20,24 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ManageWorkRequestJPanel extends javax.swing.JPanel {
     JPanel userProcessContainer;
-    EcoSystem ecosystem;
     private Organization organization;
     private Enterprise enterprise;
     private UserAccount account;
+    private EcoSystem ecosystem;
+   
+    
     /**
      * Creates new form ManageWorkRequestJPanel
      */
-    public ManageWorkRequestJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem ecosystem) {
+    public ManageWorkRequestJPanel(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, EcoSystem business) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
-        this.ecosystem = ecosystem;
         this.account = account;
-        this.organization = organization;
         this.enterprise = enterprise;
+        this.ecosystem = business;
+        
+        
+      
         populateTable();
     }
 
@@ -56,20 +60,20 @@ public class ManageWorkRequestJPanel extends javax.swing.JPanel {
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Approved", "Message", "Sender", "Receiver", "Status"
+                "Approved", "Message", "Sender", "Receiver", "Cost", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, true, true, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -92,6 +96,7 @@ public class ManageWorkRequestJPanel extends javax.swing.JPanel {
         });
 
         refreshJButton.setBackground(new java.awt.Color(204, 225, 152));
+        refreshJButton.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,54 +145,50 @@ public class ManageWorkRequestJPanel extends javax.swing.JPanel {
 
     private void approvalJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_approvalJButtonActionPerformed
 
-        int selectedRow = workRequestJTable.getSelectedRow();
-
+       int selectedRow = workRequestJTable.getSelectedRow();
         if (selectedRow < 0) {
-        JOptionPane.showMessageDialog(null, "Please select a row to approve.");
-        return;
+            JOptionPane.showMessageDialog(null, "Please select a row to approve.");
+            return;
+        }
+
+        WorkRequest selectedRequest = (WorkRequest) workRequestJTable.getValueAt(selectedRow, 1);
+
+        if (selectedRequest.getStatus().equals("Approved") || selectedRequest.getStatus().equals("Processing")) {
+            JOptionPane.showMessageDialog(null, "This request is already processed or approved.");
+            return;
+        }
+
+        selectedRequest.setStatus("Approved");
+        JOptionPane.showMessageDialog(null, "Request approved successfully.");
+        populateTable();
     }
 
-        WorkRequest request = (WorkRequest) workRequestJTable.getValueAt(selectedRow, 0);
+    private void populateTable() {
+      
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
+        model.setRowCount(0);
+        for(Organization o : enterprise.getOrganizationDirectory().getOrganizationList()){
         
-        if ("Processing".equals(request.getStatus()) || "Approved".equals(request.getStatus())) {
-        JOptionPane.showMessageDialog(null, "This request is already being processed or approved.");
-        return;
-    }
-
-        request.setStatus("Processing");
-
-        //ManageWorkRequestJPanel manageWorkRequestJPanel = new ManageWorkRequestJPanel(userProcessContainer, request);
-//        userProcessContainer.add("manageWorkRequestJPanel", manageWorkRequestJPanel);
-//        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
-//        layout.next(userProcessContainer);
-
+            for (WorkRequest wr : o.getWorkQueue().getWorkRequestList()) {
+                Object[] row = new Object[6];
+                row[0] = wr.getIsApproved();
+                row[1] = wr;
+                row[2] = wr.getSender().getEmployee().getName();
+                row[3] = (wr.getReceiver() != null) ? wr.getReceiver().getEmployee().getName() : "N/A";
+                row[4] = wr.getCost();
+                row[5] = wr.getStatus();
+                
+                model.addRow(row);
+            }
+        }
     }//GEN-LAST:event_approvalJButtonActionPerformed
 
     private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
         populateTable();
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
-    private void populateTable() {
-        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
-        model.setRowCount(0);
-        
-//        if (organization == null || organization.getWorkQueue() == null) {
-//        return;
-//        }
-        
-//        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
-//            Object[] row = new Object[5];
-//
-//            row[0] = request.isApproved();
-//            row[1] = request.getMessage();
-//            row[2] = request.getSender() != null ? request.getSender().getEmployee().getName() : "N/A"; 
-//            row[3] = request.getReceiver() != null ? request.getReceiver().getEmployee().getName() : "N/A"; 
-//            row[4] = request.getStatus();
-//
-//             model.addRow(row);
-//        }
-}
-
+  
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton approvalJButton;
     private javax.swing.JLabel jLabel10;

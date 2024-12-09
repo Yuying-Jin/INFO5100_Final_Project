@@ -24,8 +24,8 @@ public class ProcessDesignRequestJPanel extends javax.swing.JPanel {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.request = request;
-        
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,12 +36,12 @@ public class ProcessDesignRequestJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         lblResult = new javax.swing.JLabel();
-        txtResults = new javax.swing.JTextField();
+        txtMessage = new javax.swing.JTextField();
         btnBack = new javax.swing.JButton();
         btnSubmit = new javax.swing.JButton();
         lblHeading = new javax.swing.JLabel();
-        txtResults1 = new javax.swing.JTextField();
-        lblResult1 = new javax.swing.JLabel();
+        txtCost = new javax.swing.JTextField();
+        lblCost = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 245, 175));
 
@@ -69,14 +69,14 @@ public class ProcessDesignRequestJPanel extends javax.swing.JPanel {
         lblHeading.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         lblHeading.setText("Result Submission");
 
-        txtResults1.addActionListener(new java.awt.event.ActionListener() {
+        txtCost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtResults1ActionPerformed(evt);
+                txtCostActionPerformed(evt);
             }
         });
 
-        lblResult1.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
-        lblResult1.setText("Cost:");
+        lblCost.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        lblCost.setText("Cost:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -89,16 +89,16 @@ public class ProcessDesignRequestJPanel extends javax.swing.JPanel {
                         .addGroup(layout.createSequentialGroup()
                             .addComponent(lblResult)
                             .addGap(18, 18, 18)
-                            .addComponent(txtResults, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(btnSubmit))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblResult1)
+                            .addComponent(lblCost)
                             .addComponent(btnBack))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtResults1, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(2, 2, 2))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(57, 57, 57)
@@ -115,12 +115,12 @@ public class ProcessDesignRequestJPanel extends javax.swing.JPanel {
                     .addComponent(btnBack))
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtResults1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblResult1))
+                    .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblCost))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblResult)
-                    .addComponent(txtResults, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(38, 38, 38)
                 .addComponent(btnSubmit)
                 .addContainerGap(206, Short.MAX_VALUE))
@@ -139,24 +139,28 @@ public class ProcessDesignRequestJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        request.setResult(txtResults.getText());
+        request.setResult(txtMessage.getText());
         request.setStatus("Completed");
+        request.setCost(Double.parseDouble(txtCost.getText()));
         JOptionPane.showMessageDialog(null, "Message processed");
+        
+        txtCost.setText("");
+        txtMessage.setText("");
 
     }//GEN-LAST:event_btnSubmitActionPerformed
 
-    private void txtResults1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtResults1ActionPerformed
+    private void txtCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtResults1ActionPerformed
+    }//GEN-LAST:event_txtCostActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JLabel lblCost;
     private javax.swing.JLabel lblHeading;
     private javax.swing.JLabel lblResult;
-    private javax.swing.JLabel lblResult1;
-    private javax.swing.JTextField txtResults;
-    private javax.swing.JTextField txtResults1;
+    private javax.swing.JTextField txtCost;
+    private javax.swing.JTextField txtMessage;
     // End of variables declaration//GEN-END:variables
 }

@@ -17,7 +17,6 @@ import static java.awt.Font.BOLD;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import static javax.swing.text.StyleConstants.Bold;
 
 /**
  *
@@ -35,6 +34,7 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
      */
     public UIUXWorkAreaJPanel() {
         initComponents();
+        tblWorkRequests.getTableHeader().setFont(new Font("Helvetica Neue", BOLD, 14));
     }
 
     public UIUXWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem ecosystem) {
@@ -47,7 +47,6 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
         this.organization = (UIUXDesignOrganization) organization;
             
         tblWorkRequests.getTableHeader().setFont(new Font("Hevetica Neue", BOLD, 14));
-
         
         populateTable();
     }
@@ -61,7 +60,6 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblWorkRequests = new javax.swing.JTable();
         btnRefresh = new javax.swing.JButton();
@@ -75,20 +73,20 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
         tblWorkRequests.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         tblWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "Product Name", "Message", "Sender", "Receiver", "Status"
+                "Product Name", "Message", "Result Message", "Sender", "Receiver", "Cost", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -189,11 +187,12 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
         int selectedRow = tblWorkRequests.getSelectedRow();
 
         if (selectedRow >= 0) {
-            WorkRequest request = (WorkRequest) tblWorkRequests.getValueAt(selectedRow, 0);
+            WorkRequest request = (WorkRequest) tblWorkRequests.getValueAt(selectedRow, 1);
             if (request.getStatus().equalsIgnoreCase("Completed")) {
                 JOptionPane.showMessageDialog(null, "Request already processed.");
                 return;
             } else {
+                userAccount.getWorkQueue().getWorkRequestList().add(request);
                 request.setReceiver(userAccount);
                 request.setStatus("Pending");
                 populateTable();
@@ -209,8 +208,17 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
         int selectedRow = tblWorkRequests.getSelectedRow();
 
         if (selectedRow >= 0) {
-            DesignWorkRequest request = (DesignWorkRequest) tblWorkRequests.getValueAt(selectedRow, 0);
-
+            DesignWorkRequest request = (DesignWorkRequest) tblWorkRequests.getValueAt(selectedRow, 1);
+            
+            if (request.getStatus().equalsIgnoreCase("Completed")) {
+                JOptionPane.showMessageDialog(null, "Request already processed.");
+                return;
+            }
+            
+            if(userAccount.getWorkQueue().getWorkRequestList().indexOf(request) == -1){
+                JOptionPane.showMessageDialog(null, "This request wasn't assigned to you.");
+                return;
+            }
             request.setStatus("Processing");
 
             ProcessDesignRequestJPanel processWorkRequestJPanel = new ProcessDesignRequestJPanel(userProcessContainer, request);
@@ -232,7 +240,6 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnAssign;
     private javax.swing.JButton btnProcess;
     private javax.swing.JButton btnRefresh;
-    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -245,12 +252,14 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
 
         for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
-            Object[] row = new Object[5];
-            row[0] = "Phone";
+            Object[] row = new Object[7];
+            row[0] = request.getProductName();
             row[1] = request;
-            row[2] = request.getSender().getEmployee().getName();
-            row[3] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
-            row[4] = request.getStatus();
+            row[2] = ((DesignWorkRequest)request).getResult();
+            row[3] = request.getSender().getEmployee().getName();
+            row[4] = request.getReceiver() == null ? null : request.getReceiver().getEmployee().getName();
+            row[5] = request.getCost();
+            row[6] = request.getStatus();
 
             model.addRow(row);
         }
