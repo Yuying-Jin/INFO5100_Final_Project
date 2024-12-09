@@ -30,6 +30,7 @@ public class ProcessAssemblyRequestJPanel extends javax.swing.JPanel {
         
         txtProductName.setText(request.getProductName());
         txtProductQuant.setText(String.valueOf(request.getProductQuant()));
+        txtFailureQuant.setText(String.valueOf(request.getFailgureQuant()));
     }
 
     /**
@@ -50,6 +51,8 @@ public class ProcessAssemblyRequestJPanel extends javax.swing.JPanel {
         txtProductName = new javax.swing.JTextField();
         lblProductQuant = new javax.swing.JLabel();
         txtProductQuant = new javax.swing.JTextField();
+        lblFailureQuant = new javax.swing.JLabel();
+        txtFailureQuant = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(255, 245, 175));
 
@@ -87,6 +90,11 @@ public class ProcessAssemblyRequestJPanel extends javax.swing.JPanel {
 
         txtProductQuant.setEnabled(false);
 
+        lblFailureQuant.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblFailureQuant.setText("Failure Quant:");
+
+        txtFailureQuant.setEnabled(false);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -101,6 +109,7 @@ public class ProcessAssemblyRequestJPanel extends javax.swing.JPanel {
                     .addComponent(btnSubmit)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
+
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                 .addComponent(lblProductName)
@@ -131,11 +140,17 @@ public class ProcessAssemblyRequestJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblProductQuant)
                     .addComponent(txtProductQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtFailureQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(lblFailureQuant)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 223, Short.MAX_VALUE))
+                        .addGap(0, 201, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(lblResult1)
                         .addGap(29, 29, 29)
@@ -157,22 +172,36 @@ public class ProcessAssemblyRequestJPanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         
-        assemblyWorkRequest.setStatus("Completed");
-        assemblyWorkRequest.setCost(Double.parseDouble(txtCost.getText()));
+        assemblyWorkRequest.setStatus("Unchecked");
+        
+        double cost = Double.parseDouble(txtCost.getText());
+        
+        if(assemblyWorkRequest.getCost() == 0){
+            assemblyWorkRequest.setCost(cost);
+        }else{
+            double failureCost = assemblyWorkRequest.getFailgureCost() + cost;
+            assemblyWorkRequest.setFailgureCost(failureCost);
+        }
+        
+        assemblyWorkRequest.setCost(cost);
         JOptionPane.showMessageDialog(null, "Message processed");
         
         txtCost.setText("");
+        
+        
     }//GEN-LAST:event_btnSubmitActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JLabel lblFailureQuant;
     private javax.swing.JLabel lblHeading;
     private javax.swing.JLabel lblProductName;
     private javax.swing.JLabel lblProductQuant;
     private javax.swing.JLabel lblResult1;
     private javax.swing.JTextField txtCost;
+    private javax.swing.JTextField txtFailureQuant;
     private javax.swing.JTextField txtProductName;
     private javax.swing.JTextField txtProductQuant;
     // End of variables declaration//GEN-END:variables
