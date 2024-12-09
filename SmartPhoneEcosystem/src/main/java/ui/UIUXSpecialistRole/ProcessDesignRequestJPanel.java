@@ -141,6 +141,7 @@ public class ProcessDesignRequestJPanel extends javax.swing.JPanel {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         request.setResult(txtMessage.getText());
         request.setStatus("Completed");
+        request.setCost(Double.parseDouble(txtCost.getText()));
         JOptionPane.showMessageDialog(null, "Message processed");
         
         txtCost.setText("");
