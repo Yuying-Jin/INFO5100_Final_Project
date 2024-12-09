@@ -16,6 +16,8 @@ import Ecosystem.Network.Network;
 import Ecosystem.Product.SmartphoneProductCatalog;
 import Ecosystem.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.awt.Font;
+import static java.awt.Font.BOLD;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,6 +39,7 @@ public class ProductionCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
      */
     public ProductionCoordinatorWorkAreaJPanel() {
         initComponents();
+        tblWorkRequests.getTableHeader().setFont(new Font("Helvetica Neue", BOLD, 14));
     }
 
     public ProductionCoordinatorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem ecosystem) {
@@ -70,10 +73,13 @@ public class ProductionCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
         btnRequestAssembly = new javax.swing.JButton();
         btnRequestLogistics = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 245, 175));
+
         lblHeading.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         lblHeading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblHeading.setText("Production Coordinator Work Area");
 
+        tblWorkRequests.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         tblWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -102,6 +108,8 @@ public class ProductionCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane2.setViewportView(tblWorkRequests);
 
+        btnRefresh.setBackground(new java.awt.Color(204, 225, 152));
+        btnRefresh.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnRefresh.setText("Refresh");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -110,7 +118,10 @@ public class ProductionCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         jPanel1.setOpaque(false);
+        jPanel1.setLayout(new java.awt.GridLayout());
 
+        btnRequestDesign.setBackground(new java.awt.Color(204, 225, 152));
+        btnRequestDesign.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnRequestDesign.setText("Request UI/UX Design");
         btnRequestDesign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,6 +129,8 @@ public class ProductionCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnRequestComponent.setBackground(new java.awt.Color(204, 225, 152));
+        btnRequestComponent.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnRequestComponent.setText("Request Component");
         btnRequestComponent.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +138,8 @@ public class ProductionCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnRequestAssembly.setBackground(new java.awt.Color(204, 225, 152));
+        btnRequestAssembly.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnRequestAssembly.setText("Request Assembly");
         btnRequestAssembly.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,6 +147,8 @@ public class ProductionCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnRequestLogistics.setBackground(new java.awt.Color(204, 225, 152));
+        btnRequestLogistics.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnRequestLogistics.setText("Request Logistics Service");
         btnRequestLogistics.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,61 +156,44 @@ public class ProductionCoordinatorWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(btnRequestDesign)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRequestComponent)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRequestAssembly)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnRequestLogistics)
-                .addContainerGap(30, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnRequestDesign)
-                    .addComponent(btnRequestComponent)
-                    .addComponent(btnRequestAssembly)
-                    .addComponent(btnRequestLogistics))
-                .addContainerGap(16, Short.MAX_VALUE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblHeading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnRefresh))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(37, 37, 37))
+                .addComponent(lblHeading, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnRefresh)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addComponent(btnRequestDesign, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRequestComponent, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRequestAssembly, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnRequestLogistics))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING))
+                .addContainerGap(229, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblHeading)
-                    .addComponent(btnRefresh))
-                .addGap(47, 47, 47)
+                .addComponent(lblHeading)
+                .addGap(4, 4, 4)
+                .addComponent(btnRefresh)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnRequestDesign)
+                    .addComponent(btnRequestComponent)
+                    .addComponent(btnRequestAssembly)
+                    .addComponent(btnRequestLogistics))
+                .addContainerGap(129, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

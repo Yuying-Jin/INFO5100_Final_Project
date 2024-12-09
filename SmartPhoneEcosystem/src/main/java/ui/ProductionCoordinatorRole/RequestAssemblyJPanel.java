@@ -63,13 +63,16 @@ public class RequestAssemblyJPanel extends javax.swing.JPanel {
         lblQuant = new javax.swing.JLabel();
         txtQuant = new javax.swing.JTextField();
 
-        lblProduct.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        setBackground(new java.awt.Color(255, 245, 175));
+
+        lblProduct.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         lblProduct.setText("Select a product:");
 
         jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel10.setText("Send Request Assembly ");
 
-        btnBack.setBackground(new java.awt.Color(255, 153, 153));
+        btnBack.setBackground(new java.awt.Color(204, 225, 152));
+        btnBack.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,6 +80,8 @@ public class RequestAssemblyJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnRequest.setBackground(new java.awt.Color(204, 225, 152));
+        btnRequest.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnRequest.setText("Request");
         btnRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,10 +89,10 @@ public class RequestAssemblyJPanel extends javax.swing.JPanel {
             }
         });
 
-        lblMessage.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblMessage.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         lblMessage.setText("Message:");
 
-        lblQuant.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lblQuant.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         lblQuant.setText("Quantity:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -99,20 +104,20 @@ public class RequestAssemblyJPanel extends javax.swing.JPanel {
                 .addComponent(btnBack)
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 451, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnRequest)
                             .addComponent(lblMessage)
-                            .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblProduct)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbbProduct, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblQuant)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(txtQuant, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblProduct)
+                                    .addComponent(lblQuant))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtQuant, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbbProduct, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtMessage))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -123,7 +128,7 @@ public class RequestAssemblyJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel10)
                     .addComponent(btnBack))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
+                .addGap(57, 57, 57)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblProduct)
                     .addComponent(cbbProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -170,6 +175,18 @@ public class RequestAssemblyJPanel extends javax.swing.JPanel {
         if(quant.equals("") || quant.isEmpty()){
             JOptionPane.showMessageDialog(null, "Please enter the product quantity.");
             return;
+        }
+        
+        int quantity;
+        try {
+        quantity = Integer.parseInt(quant);
+        if (quantity <= 0) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid positive number for the quantity.");
+            return;
+        }
+        } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Quantity must be a valid number.");
+        return;
         }
         
         if(productName.equals("") || productName.isEmpty()){
