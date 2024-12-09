@@ -303,7 +303,7 @@ public class ConfigureASystem {
         transWR.setReceiver(org7.getUserAccountDirectory().getUserAccountList().get(1));
         // Transportation Planner complete the request and set cost
         transWR.setCost(50000);
-        transWR.setStatus("Complete");
+//        transWR.setStatus("Complete");
         
         
         return system;
