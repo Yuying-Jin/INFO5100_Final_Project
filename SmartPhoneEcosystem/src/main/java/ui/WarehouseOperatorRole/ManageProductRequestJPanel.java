@@ -2,53 +2,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.TransportationPlannerRole;
+package ui.WarehouseOperatorRole;
 
 import Ecosystem.Organization.DistributionTransportationOrganization;
 import Ecosystem.Organization.Organization;
-import Ecosystem.WorkQueue.TransportationWorkRequest;
+import Ecosystem.Organization.WarehouseManagementOrganization;
+import Ecosystem.WorkQueue.PrepareProductWorkRequest;
 import Ecosystem.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.awt.Font;
+import static java.awt.Font.BOLD;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import ui.UIUXSpecialistRole.ProcessDesignRequestJPanel;
+import ui.TransportationPlannerRole.ProcessTransportationJPanel;
 
 /**
  *
  * @author sunny
  */
-public class ManagerTransportationJPanel extends javax.swing.JPanel {
+public class ManageProductRequestJPanel extends javax.swing.JPanel {
     private Organization organization;
     private JPanel userProcessContainer;
-    public ManagerTransportationJPanel(JPanel userProcessContainer, Organization organization) {
+    public ManageProductRequestJPanel(JPanel userProcessContainer, Organization organization) {
         initComponents();
-        this.organization = (DistributionTransportationOrganization)organization;
+        this.organization = (WarehouseManagementOrganization)organization;
         this.userProcessContainer = userProcessContainer;
         populateTable();
-    }
-    
-    public void populateTable() {
-        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
-        model.setRowCount(0);
-        if (organization == null || organization.getWorkQueue() == null) {
-            System.out.println("No organization or no workqueue");
-            return;
-        }
-        
-        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
-            if (request.getStatus().equals("Pending") || request.getStatus().equals("Completed")) {
-                Object[] row = new Object[7];
-                row[0] = request.getProductName();
-                row[1] = request;
-                row[2] = request.getSender() != null ? request.getSender().getEmployee().getName() : "N/A"; 
-                row[3] = request.getReceiver() != null ? request.getReceiver().getEmployee().getName() : "N/A"; 
-                row[4] = request.getProductQuant();
-                row[5] = request.getCost();
-                row[6] = request.getStatus();
-                model.addRow(row);
-            }
-        }
     }
 
     /**
@@ -64,8 +44,11 @@ public class ManagerTransportationJPanel extends javax.swing.JPanel {
         workRequestJTable = new javax.swing.JTable();
         processButton = new javax.swing.JButton();
         refreshJButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 245, 175));
+
+        workRequestJTable.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -87,7 +70,8 @@ public class ManagerTransportationJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(workRequestJTable);
 
-        processButton.setBackground(new java.awt.Color(255, 153, 153));
+        processButton.setBackground(new java.awt.Color(204, 225, 152));
+        processButton.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         processButton.setText("Process");
         processButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,7 +79,8 @@ public class ManagerTransportationJPanel extends javax.swing.JPanel {
             }
         });
 
-        refreshJButton.setBackground(new java.awt.Color(255, 153, 153));
+        refreshJButton.setBackground(new java.awt.Color(204, 225, 152));
+        refreshJButton.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,9 +88,8 @@ public class ManagerTransportationJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Process Transportation Request");
+        jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel10.setText("Process Product Request");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -113,31 +97,52 @@ public class ManagerTransportationJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(72, 72, 72)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(processButton)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(refreshJButton, javax.swing.GroupLayout.Alignment.TRAILING))
-                .addContainerGap(44, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(197, 197, 197))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(refreshJButton)))
+                .addContainerGap(47, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(refreshJButton)
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(refreshJButton)
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(processButton)
-                .addContainerGap(192, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    public void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
+        model.setRowCount(0);
+        if (organization == null || organization.getWorkQueue() == null) {
+            System.out.println("No organization or no workqueue");
+            return;
+        }
+        
+        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
+            if (request.getStatus().equals("Accepted") || request.getStatus().equals("Completed")) {
+                Object[] row = new Object[7];
+                row[0] = request.getProductName();
+                row[1] = request;
+                row[2] = request.getSender() != null ? request.getSender().getEmployee().getName() : "N/A"; 
+                row[3] = request.getReceiver() != null ? request.getReceiver().getEmployee().getName() : "N/A"; 
+                row[4] = request.getProductQuant();
+                row[6] = request.getStatus();
+                row[5] = request.getCost();
+                model.addRow(row);
+            }
+        }
+    }
     private void processButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_processButtonActionPerformed
 
         int selectedRow = workRequestJTable.getSelectedRow();
@@ -147,14 +152,14 @@ public class ManagerTransportationJPanel extends javax.swing.JPanel {
             return;
         }
 
-        TransportationWorkRequest request = (TransportationWorkRequest) workRequestJTable.getValueAt(selectedRow, 1);
-
+        PrepareProductWorkRequest request = (PrepareProductWorkRequest) workRequestJTable.getValueAt(selectedRow, 1);
+        
         if ("Completed".equals(request.getStatus())) {
             JOptionPane.showMessageDialog(null, "This request is already being Completed.");
             return;
         }
-        ProcessTransportationJPanel processTransportationJPanel =  new ProcessTransportationJPanel(userProcessContainer, request);
-        userProcessContainer.add("processTransportationJPanel", processTransportationJPanel);
+        ProcessProductRequestJPanel processProductRequestJPanel =  new ProcessProductRequestJPanel(userProcessContainer, request);
+        userProcessContainer.add("processProductRequestJPanel", processProductRequestJPanel);
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.next(userProcessContainer);
     }//GEN-LAST:event_processButtonActionPerformed
@@ -165,10 +170,11 @@ public class ManagerTransportationJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton processButton;
     private javax.swing.JButton refreshJButton;
     private javax.swing.JTable workRequestJTable;
     // End of variables declaration//GEN-END:variables
+
 }

@@ -83,7 +83,7 @@ public class WarehouseOperatorWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManageProductRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageProductRequestActionPerformed
-        ProcessProductRequestJPanel processProductRequestJPanel = new ProcessProductRequestJPanel(organization);
+        ManageProductRequestJPanel processProductRequestJPanel = new ManageProductRequestJPanel(userProcessContainer ,organization);
         userProcessContainer.add("processProductRequestJPanel", processProductRequestJPanel);
         CardLayout layout = (CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);

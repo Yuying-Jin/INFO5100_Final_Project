@@ -2,31 +2,34 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package ui.WarehouseOperatorRole;
+package ui.TransportationPlannerRole;
 
-import Ecosystem.Organization.DistributionTransportationOrganization;
-import Ecosystem.Organization.Organization;
-import Ecosystem.Organization.WarehouseManagementOrganization;
-import Ecosystem.WorkQueue.PrepareProductWorkRequest;
 import Ecosystem.WorkQueue.TransportationWorkRequest;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import ui.TransportationPlannerRole.ManagerTransportationJPanel;
 
 /**
  *
  * @author sunny
  */
-public class ProcessProductRequestJPanel extends javax.swing.JPanel {
+public class ProcessTransportationJPanel extends javax.swing.JPanel {
+
     JPanel userProcessContainer;
-    PrepareProductWorkRequest request;
-    public ProcessProductRequestJPanel(JPanel userProcessContainer, PrepareProductWorkRequest request) {
+    TransportationWorkRequest request;
+    public ProcessTransportationJPanel(JPanel userProcessContainer, TransportationWorkRequest request) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.request = request;
         populate();
+    }
+    
+    private void populate() {
+        txtName.setText(request.getProductName());
+        txtQuant.setText(String.valueOf(request.getProductQuant()));
+        txtName.setEnabled(false);
+        txtQuant.setEnabled(false);
     }
 
     /**
@@ -38,8 +41,6 @@ public class ProcessProductRequestJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        lblResult2 = new javax.swing.JLabel();
-        txtCost = new javax.swing.JTextField();
         txtName = new javax.swing.JTextField();
         lblResult1 = new javax.swing.JLabel();
         lblResult = new javax.swing.JLabel();
@@ -47,9 +48,8 @@ public class ProcessProductRequestJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         btnSubmit = new javax.swing.JButton();
         lblHeading = new javax.swing.JLabel();
-
-        lblResult2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblResult2.setText("Cost:");
+        lblResult2 = new javax.swing.JLabel();
+        txtCost = new javax.swing.JTextField();
 
         lblResult1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         lblResult1.setText("Product Name:");
@@ -78,6 +78,9 @@ public class ProcessProductRequestJPanel extends javax.swing.JPanel {
         lblHeading.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         lblHeading.setText("Result Submission");
 
+        lblResult2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblResult2.setText("Cost:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,7 +108,7 @@ public class ProcessProductRequestJPanel extends javax.swing.JPanel {
                                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addComponent(btnSubmit)
                     .addComponent(btnBack))
-                .addContainerGap(107, Short.MAX_VALUE))
+                .addContainerGap(92, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,20 +131,15 @@ public class ProcessProductRequestJPanel extends javax.swing.JPanel {
                     .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnSubmit)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
-    private void populate() {
-        txtName.setText(request.getProductName());
-        txtQuant.setText(String.valueOf(request.getProductQuant()));
-        txtName.setEnabled(false);
-        txtQuant.setEnabled(false);
-    }
+
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         userProcessContainer.remove(this);
         Component[] componentArray = userProcessContainer.getComponents();
         Component component = componentArray[componentArray.length - 1];
-        ManageProductRequestJPanel jpanel = (ManageProductRequestJPanel) component;
+        ManagerTransportationJPanel jpanel = (ManagerTransportationJPanel) component;
         jpanel.populateTable();
         CardLayout layout = (CardLayout) userProcessContainer.getLayout();
         layout.previous(userProcessContainer);

@@ -4,17 +4,25 @@
  */
 package ui.DistributionManagerRole;
 
+import Ecosystem.Organization.DistributionTransportationOrganization;
+import Ecosystem.Organization.ManufacturingManagementOrganization;
+import Ecosystem.Organization.Organization;
+import Ecosystem.WorkQueue.PrepareProductWorkRequest;
+import Ecosystem.WorkQueue.TransportationWorkRequest;
+import Ecosystem.WorkQueue.WorkRequest;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author sunny
  */
 public class RequestTransportationPlannerJPanel extends javax.swing.JPanel {
-
-    /**
-     * Creates new form RequestTransportationPlannerJPanel
-     */
-    public RequestTransportationPlannerJPanel() {
+    private Organization organization;
+    public RequestTransportationPlannerJPanel(Organization organization) {
         initComponents();
+        this.organization = (DistributionTransportationOrganization) organization;
+        populateTable();
     }
 
     /**
@@ -26,19 +34,139 @@ public class RequestTransportationPlannerJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        workRequestJTable = new javax.swing.JTable();
+        sendButton = new javax.swing.JButton();
+        refreshJButton = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+
+        workRequestJTable.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Product Name", "Message", "Sender", "Receiver", "Quant"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(workRequestJTable);
+
+        sendButton.setBackground(new java.awt.Color(204, 225, 152));
+        sendButton.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        sendButton.setText("Send");
+        sendButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                sendButtonActionPerformed(evt);
+            }
+        });
+
+        refreshJButton.setBackground(new java.awt.Color(204, 225, 152));
+        refreshJButton.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        refreshJButton.setText("Refresh");
+        refreshJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshJButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel10.setText("Request Warehouse");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel10)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(refreshJButton)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(sendButton)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel10)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(refreshJButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(sendButton)
+                .addContainerGap(195, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    public void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
+        model.setRowCount(0);
+        if (organization == null || organization.getWorkQueue() == null) {
+            System.out.println("No organization or no workqueue");
+            return;
+        }
+        
+        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()) {
+            if (request.getStatus().equals("")) {
+                Object[] row = new Object[5];
+                row[0] = request.getProductName();
+                row[1] = request;
+                row[2] = request.getSender() != null ? request.getSender().getEmployee().getName() : "N/A"; 
+                row[3] = request.getReceiver() != null ? request.getReceiver().getEmployee().getName() : "N/A"; 
+                row[4] = request.getProductQuant();
+                model.addRow(row);
+            }
+        }
+    }
+    private void sendButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_sendButtonActionPerformed
+        int selectedRow = workRequestJTable.getSelectedRow();
+
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, "Please select a row to request.");
+            return;
+        }
+
+        PrepareProductWorkRequest request = (PrepareProductWorkRequest) workRequestJTable.getValueAt(selectedRow, 1);
+
+        if ("Pending".equals(request.getStatus())) {
+            JOptionPane.showMessageDialog(null, "This request is already being sent.");
+            return;
+        }
+
+        request.setStatus("Pending");
+        populateTable();
+    }//GEN-LAST:event_sendButtonActionPerformed
+
+    private void refreshJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshJButtonActionPerformed
+        populateTable();
+    }//GEN-LAST:event_refreshJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton refreshJButton;
+    private javax.swing.JButton sendButton;
+    private javax.swing.JTable workRequestJTable;
     // End of variables declaration//GEN-END:variables
 }
