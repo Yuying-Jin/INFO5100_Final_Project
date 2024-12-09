@@ -281,9 +281,9 @@ public class ConfigureASystem {
         
         // Distribution Manager requests WarehouseManager to prepare products
         PrepareProductWorkRequest prepareWR = new PrepareProductWorkRequest();
-        org2.getWorkQueue().getWorkRequestList().add(prepareWR);
+        org7.getWorkQueue().getWorkRequestList().add(prepareWR);
         prepareWR.setMessage("Prepare 1000 phones to transport");
-        prepareWR.setStatus("Pending");
+//        prepareWR.setStatus("Pending");
         prepareWR.setProductName(productName);
         prepareWR.setProductQuant(productQuant);
         prepareWR.setSender(org7.getUserAccountDirectory().getUserAccountList().get(0));
@@ -302,7 +302,7 @@ public class ConfigureASystem {
         transWR.setSender(org7.getUserAccountDirectory().getUserAccountList().get(0));
         transWR.setReceiver(org7.getUserAccountDirectory().getUserAccountList().get(1));
         // Transportation Planner complete the request and set cost
-        transWR.setCost(50000);
+//        transWR.setCost(50000);
 //        transWR.setStatus("Complete");
         
         
