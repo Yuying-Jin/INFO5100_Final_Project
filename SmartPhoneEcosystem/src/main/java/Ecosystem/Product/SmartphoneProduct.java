@@ -36,14 +36,6 @@ public class SmartphoneProduct {
         return id;
     }
 
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
     public double getBudget() {
         return budget;
     }
