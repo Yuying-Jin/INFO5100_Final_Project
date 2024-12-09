@@ -268,6 +268,7 @@ public class ConfigureASystem {
         assemblyWR.setStatus("Completed");
         assemblyWR.setCost(25800.0);
         assemblyWR.setFailgureQuant(80);
+        assemblyWR.setFailgureCost(200);
         assemblyWR.setSender(org5.getUserAccountDirectory().getUserAccountList().get(0));
         assemblyWR.setReceiver(org4.getUserAccountDirectory().getUserAccountList().get(0));
         

@@ -51,6 +51,7 @@ public class EnterprisesAdminWorkAreaJPanel extends javax.swing.JPanel {
         btnManageWorkRequest = new javax.swing.JButton();
         enterpriseLabel = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
+        btnWorkflowPerformance = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 245, 175));
 
@@ -68,6 +69,15 @@ public class EnterprisesAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         valueLabel.setText("<value>");
 
+        btnWorkflowPerformance.setBackground(new java.awt.Color(204, 225, 152));
+        btnWorkflowPerformance.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        btnWorkflowPerformance.setText("Workflow Performance");
+        btnWorkflowPerformance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnWorkflowPerformanceActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -75,13 +85,15 @@ public class EnterprisesAdminWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(135, 135, 135)
-                        .addComponent(btnManageWorkRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(102, 102, 102)
                         .addComponent(enterpriseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(30, 30, 30)
-                        .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(valueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnManageWorkRequest, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                            .addComponent(btnWorkflowPerformance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(130, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -96,7 +108,9 @@ public class EnterprisesAdminWorkAreaJPanel extends javax.swing.JPanel {
                         .addComponent(valueLabel)))
                 .addGap(29, 29, 29)
                 .addComponent(btnManageWorkRequest)
-                .addContainerGap(263, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(btnWorkflowPerformance)
+                .addContainerGap(200, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -113,9 +127,23 @@ public class EnterprisesAdminWorkAreaJPanel extends javax.swing.JPanel {
       
     }//GEN-LAST:event_btnManageWorkRequestActionPerformed
 
+    private void btnWorkflowPerformanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnWorkflowPerformanceActionPerformed
+        // TODO add your handling code here:
+        WorkflowPerformanceJPanel workflowPerformanceJPanel = new WorkflowPerformanceJPanel(
+        userProcessContainer, 
+        account, 
+        enterprise, 
+        ecosystem
+    );
+    userProcessContainer.add("workflowPerformanceJPanel", workflowPerformanceJPanel);
+    CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+    layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnWorkflowPerformanceActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnManageWorkRequest;
+    private javax.swing.JButton btnWorkflowPerformance;
     private javax.swing.JLabel enterpriseLabel;
     private javax.swing.JLabel valueLabel;
     // End of variables declaration//GEN-END:variables
