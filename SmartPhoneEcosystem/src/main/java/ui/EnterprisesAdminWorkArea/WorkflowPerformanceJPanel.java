@@ -10,6 +10,8 @@ import Ecosystem.Organization.Organization;
 import Ecosystem.UserAccount.UserAccount;
 import Ecosystem.WorkQueue.AssemblyWorkRequest;
 import Ecosystem.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
+import java.awt.Component;
 import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -34,6 +36,7 @@ public class WorkflowPerformanceJPanel extends javax.swing.JPanel {
         this.account = account;
         this.enterprise = enterprise;
         this.ecosystem = business;
+        this.workRequestList = new ArrayList();
         
         for(Organization o : enterprise.getOrganizationDirectory().getOrganizationList()){
             for(WorkRequest wr : o.getWorkQueue().getWorkRequestList()){
@@ -58,11 +61,12 @@ public class WorkflowPerformanceJPanel extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         workRequestJTable = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtTotalCost = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
         btnCalculate = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtFailureCost = new javax.swing.JTextField();
+        backJButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 245, 175));
 
@@ -81,7 +85,7 @@ public class WorkflowPerformanceJPanel extends javax.swing.JPanel {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, true, true, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -101,9 +105,9 @@ public class WorkflowPerformanceJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel1.setText("Total Cost:");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtTotalCost.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtTotalCostActionPerformed(evt);
             }
         });
 
@@ -122,38 +126,53 @@ public class WorkflowPerformanceJPanel extends javax.swing.JPanel {
         jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel3.setText("Failure Cost:");
 
+        backJButton.setBackground(new java.awt.Color(204, 225, 152));
+        backJButton.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        backJButton.setText("<< Back");
+        backJButton.setMaximumSize(new java.awt.Dimension(80, 30));
+        backJButton.setMinimumSize(new java.awt.Dimension(80, 30));
+        backJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backJButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1)
-                .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(68, 68, 68)
                 .addComponent(jLabel3)
                 .addGap(40, 40, 40)
-                .addComponent(txtFailureCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addComponent(txtFailureCost, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(btnCalculate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txtTotalCost, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(117, 117, 117))
             .addGroup(layout.createSequentialGroup()
-                .addGap(183, 183, 183)
-                .addComponent(jLabel10)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(backJButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57)
+                        .addComponent(jLabel10)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
-                .addComponent(jLabel10)
-                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(backJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -164,43 +183,54 @@ public class WorkflowPerformanceJPanel extends javax.swing.JPanel {
                 .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtTotalCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(146, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtTotalCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTotalCostActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtTotalCostActionPerformed
 
     private void btnCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculateActionPerformed
         // TODO add your handling code here:
          double totalCost = 0.0; // Initialize the total cost
 
-        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
-        int rowCount = model.getRowCount();
 
-        for (int i = 0; i < rowCount; i++) {
-            Boolean isApproved = (Boolean) model.getValueAt(i, 2); // Column 2: Approved
-            if (isApproved != null && isApproved) {
-                Double cost = (Double) model.getValueAt(i, 6); // Column 6: Cost
-                if (cost != null) {
-                    totalCost += cost; // Sum up the approved costs
+        for (WorkRequest wr : workRequestList) {
+            if (wr.getIsApproved()) {
+                totalCost += wr.getCost(); // Sum up the approved costs
+                if(wr instanceof AssemblyWorkRequest){
+                    totalCost += ((AssemblyWorkRequest)wr).getFailgureCost();
                 }
             }
         }
+        txtTotalCost.setText(String.valueOf(totalCost));
 
     }//GEN-LAST:event_btnCalculateActionPerformed
 
+    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
+        userProcessContainer.remove(this);
+       
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        
+        EnterprisesAdminWorkAreaJPanel enterprisesAdminPanel = (EnterprisesAdminWorkAreaJPanel) component;
+        userProcessContainer.add("enterprisesAdminPanel", enterprisesAdminPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_backJButtonActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton backJButton;
     private javax.swing.JButton btnCalculate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txtFailureCost;
+    private javax.swing.JTextField txtTotalCost;
     private javax.swing.JTable workRequestJTable;
     // End of variables declaration//GEN-END:variables
 

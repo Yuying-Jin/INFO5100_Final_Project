@@ -10,6 +10,7 @@ import Ecosystem.Organization.Organization;
 import Ecosystem.UserAccount.UserAccount;
 import Ecosystem.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -55,6 +56,7 @@ public class ManageWorkRequestJPanel extends javax.swing.JPanel {
         approvalJButton = new javax.swing.JButton();
         refreshJButton = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
+        backJButton = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 245, 175));
 
@@ -107,6 +109,17 @@ public class ManageWorkRequestJPanel extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel10.setText("Manage Work Request");
 
+        backJButton.setBackground(new java.awt.Color(204, 225, 152));
+        backJButton.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        backJButton.setText("<< Back");
+        backJButton.setMaximumSize(new java.awt.Dimension(80, 30));
+        backJButton.setMinimumSize(new java.awt.Dimension(80, 30));
+        backJButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                backJButtonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -120,6 +133,8 @@ public class ManageWorkRequestJPanel extends javax.swing.JPanel {
                             .addGap(379, 379, 379))
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                             .addContainerGap()
+                            .addComponent(backJButton, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
                             .addComponent(jLabel10)
                             .addGap(58, 58, 58)
                             .addComponent(refreshJButton)))
@@ -134,8 +149,10 @@ public class ManageWorkRequestJPanel extends javax.swing.JPanel {
                 .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(refreshJButton)
-                    .addComponent(jLabel10))
-                .addGap(12, 12, 12)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel10)
+                        .addComponent(backJButton, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(9, 9, 9)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(approvalJButton)
@@ -188,10 +205,23 @@ public class ManageWorkRequestJPanel extends javax.swing.JPanel {
         populateTable();
     }//GEN-LAST:event_refreshJButtonActionPerformed
 
+    private void backJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_backJButtonActionPerformed
+        userProcessContainer.remove(this);
+       
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        
+        EnterprisesAdminWorkAreaJPanel enterprisesAdminPanel = (EnterprisesAdminWorkAreaJPanel) component;
+        userProcessContainer.add("enterprisesAdminPanel", enterprisesAdminPanel);
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+    }//GEN-LAST:event_backJButtonActionPerformed
+
   
    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton approvalJButton;
+    private javax.swing.JButton backJButton;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshJButton;
