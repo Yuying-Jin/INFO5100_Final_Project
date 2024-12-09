@@ -34,6 +34,7 @@ public class UIUXWorkAreaJPanel extends javax.swing.JPanel {
      */
     public UIUXWorkAreaJPanel() {
         initComponents();
+        tblWorkRequests.getTableHeader().setFont(new Font("Helvetica Neue", BOLD, 14));
     }
 
     public UIUXWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem ecosystem) {

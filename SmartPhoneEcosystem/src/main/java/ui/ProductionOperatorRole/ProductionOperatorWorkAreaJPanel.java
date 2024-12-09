@@ -14,6 +14,8 @@ import Ecosystem.WorkQueue.AssemblyWorkRequest;
 import Ecosystem.WorkQueue.QualityManagementWorkRequest;
 import Ecosystem.WorkQueue.WorkRequest;
 import java.awt.CardLayout;
+import java.awt.Font;
+import static java.awt.Font.BOLD;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -36,6 +38,9 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
      */
     public ProductionOperatorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem ecosystem) {
         initComponents();
+        
+        tblWorkRequests.getTableHeader().setFont(new Font("Helvetica Neue", BOLD, 14));
+        tblUserWorkRequests.getTableHeader().setFont(new Font("Helvetica Neue", BOLD, 14));
         
         this.workArea = userProcessContainer;
         this.userAccount = account;
@@ -69,8 +74,10 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         tblUserWorkRequests = new javax.swing.JTable();
 
+        setBackground(new java.awt.Color(255, 245, 175));
+
         btnRefresh.setBackground(new java.awt.Color(204, 225, 152));
-        btnRefresh.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnRefresh.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnRefresh.setText("Refresh");
         btnRefresh.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,7 +92,7 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1.setOpaque(false);
 
         btnAssign.setBackground(new java.awt.Color(204, 225, 152));
-        btnAssign.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnAssign.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnAssign.setText("Assign to me");
         btnAssign.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,7 +101,7 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         btnProcess.setBackground(new java.awt.Color(204, 225, 152));
-        btnProcess.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnProcess.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnProcess.setText("Process");
         btnProcess.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -103,7 +110,7 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         btnRequestQualityManagement.setBackground(new java.awt.Color(204, 225, 152));
-        btnRequestQualityManagement.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnRequestQualityManagement.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnRequestQualityManagement.setText("Request Quality Management");
         btnRequestQualityManagement.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,6 +141,7 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        tblWorkRequests.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         tblWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -162,12 +170,13 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(tblWorkRequests);
 
-        lblProductName1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblProductName1.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         lblProductName1.setText("Assembly Organization Work Request Table:");
 
-        lblProductName2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblProductName2.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         lblProductName2.setText("User Work Request Table:");
 
+        tblUserWorkRequests.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         tblUserWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -203,7 +212,7 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 141, Short.MAX_VALUE)
+                        .addGap(144, 144, 144)
                         .addComponent(lblHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnRefresh)
@@ -238,7 +247,7 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(lblProductName2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(17, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

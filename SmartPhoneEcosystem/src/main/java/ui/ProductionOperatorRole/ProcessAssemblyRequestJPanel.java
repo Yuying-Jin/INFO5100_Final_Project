@@ -51,8 +51,10 @@ public class ProcessAssemblyRequestJPanel extends javax.swing.JPanel {
         lblProductQuant = new javax.swing.JLabel();
         txtProductQuant = new javax.swing.JTextField();
 
+        setBackground(new java.awt.Color(255, 245, 175));
+
         btnBack.setBackground(new java.awt.Color(204, 225, 152));
-        btnBack.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnBack.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -61,7 +63,7 @@ public class ProcessAssemblyRequestJPanel extends javax.swing.JPanel {
         });
 
         btnSubmit.setBackground(new java.awt.Color(204, 225, 152));
-        btnSubmit.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnSubmit.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,15 +74,15 @@ public class ProcessAssemblyRequestJPanel extends javax.swing.JPanel {
         lblHeading.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         lblHeading.setText("Result Submission");
 
-        lblProductName.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblProductName.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         lblProductName.setText("Product Name:");
 
-        lblResult1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblResult1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         lblResult1.setText("Cost:");
 
         txtProductName.setEnabled(false);
 
-        lblProductQuant.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblProductQuant.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
         lblProductQuant.setText("Product Quant:");
 
         txtProductQuant.setEnabled(false);
@@ -112,7 +114,7 @@ public class ProcessAssemblyRequestJPanel extends javax.swing.JPanel {
                                 .addComponent(lblResult1)
                                 .addGap(104, 104, 104)
                                 .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(218, Short.MAX_VALUE))
+                .addContainerGap(212, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

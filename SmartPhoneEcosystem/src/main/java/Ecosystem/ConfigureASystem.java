@@ -110,25 +110,25 @@ public class ConfigureASystem {
                     ed.getEmployeeList().get(0),
                     new Role(Role.RoleType.SystemAdmin));
 
-        UserAccount smartAdmin = system.getUserAccountDirectory().createUserAccount(
+        UserAccount smartAdmin = enterpriseList.get(0).getUserAccountDirectory().createUserAccount(
             userList[1],
             password,
             ed.getEmployeeList().get(1),
             new Role(Role.RoleType.EnterprisesAdmin));
 
-        UserAccount componentAdmin = system.getUserAccountDirectory().createUserAccount(
+        UserAccount componentAdmin =  enterpriseList.get(1).getUserAccountDirectory().createUserAccount(
             userList[2],
             password,
             ed.getEmployeeList().get(2),
             new Role(Role.RoleType.EnterprisesAdmin));
 
-        UserAccount assemblyAdmin = system.getUserAccountDirectory().createUserAccount(
+        UserAccount assemblyAdmin =  enterpriseList.get(2).getUserAccountDirectory().createUserAccount(
             userList[3],
             password,
             ed.getEmployeeList().get(3),
             new Role(Role.RoleType.EnterprisesAdmin));
 
-        UserAccount logisticsAdmin = system.getUserAccountDirectory().createUserAccount(
+        UserAccount logisticsAdmin =  enterpriseList.get(3).getUserAccountDirectory().createUserAccount(
             userList[4],
             password,
             ed.getEmployeeList().get(4),
