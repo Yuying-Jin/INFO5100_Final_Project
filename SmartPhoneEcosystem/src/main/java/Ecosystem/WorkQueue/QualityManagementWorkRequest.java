@@ -10,4 +10,17 @@ package Ecosystem.WorkQueue;
  */
 public class QualityManagementWorkRequest extends WorkRequest {
     
+    private AssemblyWorkRequest assemblyWorkRequest;
+    public QualityManagementWorkRequest(AssemblyWorkRequest request){
+        this.assemblyWorkRequest = request;
+    }
+
+    public AssemblyWorkRequest getAssemblyWorkRequest() {
+        return assemblyWorkRequest;
+    }
+
+    public void setAssemblyWorkRequest(AssemblyWorkRequest assemblyWorkRequest) {
+        this.assemblyWorkRequest = assemblyWorkRequest;
+    }
+    
 }

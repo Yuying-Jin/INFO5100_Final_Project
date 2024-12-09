@@ -104,91 +104,89 @@ public class ConfigureASystem {
         roleList.add(new Role(Role.RoleType.TransportationPlanner)); // 13
         
         // Create user accounts
-        {
-            system.getUserAccountDirectory().createUserAccount(
-                        userList[0],
-                        password,
-                        ed.getEmployeeList().get(0),
-                        new Role(Role.RoleType.SystemAdmin));
+        UserAccount sysAdmin = system.getUserAccountDirectory().createUserAccount(
+                    userList[0],
+                    password,
+                    ed.getEmployeeList().get(0),
+                    new Role(Role.RoleType.SystemAdmin));
 
-            system.getUserAccountDirectory().createUserAccount(
-                userList[1],
-                password,
-                ed.getEmployeeList().get(1),
-                new Role(Role.RoleType.EnterprisesAdmin));
+        UserAccount smartAdmin = enterpriseList.get(0).getUserAccountDirectory().createUserAccount(
+            userList[1],
+            password,
+            ed.getEmployeeList().get(1),
+            new Role(Role.RoleType.EnterprisesAdmin));
 
-            system.getUserAccountDirectory().createUserAccount(
-                userList[2],
-                password,
-                ed.getEmployeeList().get(2),
-                new Role(Role.RoleType.EnterprisesAdmin));
+        UserAccount componentAdmin =  enterpriseList.get(1).getUserAccountDirectory().createUserAccount(
+            userList[2],
+            password,
+            ed.getEmployeeList().get(2),
+            new Role(Role.RoleType.EnterprisesAdmin));
 
-            system.getUserAccountDirectory().createUserAccount(
-                userList[3],
-                password,
-                ed.getEmployeeList().get(3),
-                new Role(Role.RoleType.EnterprisesAdmin));
+        UserAccount assemblyAdmin =  enterpriseList.get(2).getUserAccountDirectory().createUserAccount(
+            userList[3],
+            password,
+            ed.getEmployeeList().get(3),
+            new Role(Role.RoleType.EnterprisesAdmin));
 
-            system.getUserAccountDirectory().createUserAccount(
-                userList[4],
-                password,
-                ed.getEmployeeList().get(4),
-                new Role(Role.RoleType.EnterprisesAdmin));
+        UserAccount logisticsAdmin =  enterpriseList.get(3).getUserAccountDirectory().createUserAccount(
+            userList[4],
+            password,
+            ed.getEmployeeList().get(4),
+            new Role(Role.RoleType.EnterprisesAdmin));
 
-            org1.getUserAccountDirectory().createUserAccount(
-                userList[5],
-                password,
-                ed.getEmployeeList().get(5),
-                new Role(Role.RoleType.UIUXSpecialist));
+        UserAccount ui = org1.getUserAccountDirectory().createUserAccount(
+            userList[5],
+            password,
+            ed.getEmployeeList().get(5),
+            new Role(Role.RoleType.UIUXSpecialist));
 
-            org2.getUserAccountDirectory().createUserAccount(
-                userList[6],
-                password,
-                ed.getEmployeeList().get(6),
-                new Role(Role.RoleType.ProductionCoordinator));
+        UserAccount pc = org2.getUserAccountDirectory().createUserAccount(
+            userList[6],
+            password,
+            ed.getEmployeeList().get(6),
+            new Role(Role.RoleType.ProductionCoordinator));
 
-            org3.getUserAccountDirectory().createUserAccount(
-                userList[7],
-                password,
-                ed.getEmployeeList().get(7),
-                new Role(Role.RoleType.ComponentDevelopmentEngineer));
+        UserAccount cde = org3.getUserAccountDirectory().createUserAccount(
+            userList[7],
+            password,
+            ed.getEmployeeList().get(7),
+            new Role(Role.RoleType.ComponentDevelopmentEngineer));
 
-            org4.getUserAccountDirectory().createUserAccount(
-                userList[8],
-                password,
-                ed.getEmployeeList().get(8),
-                new Role(Role.RoleType.ProductionOperator));
+        UserAccount po = org4.getUserAccountDirectory().createUserAccount(
+            userList[8],
+            password,
+            ed.getEmployeeList().get(8),
+            new Role(Role.RoleType.ProductionOperator));
 
-            org5.getUserAccountDirectory().createUserAccount(
-                userList[9],
-                password,
-                ed.getEmployeeList().get(9),
-                new Role(Role.RoleType.QualityInspector));
+        UserAccount qi = org5.getUserAccountDirectory().createUserAccount(
+            userList[9],
+            password,
+            ed.getEmployeeList().get(9),
+            new Role(Role.RoleType.QualityInspector));
 
-            org6.getUserAccountDirectory().createUserAccount(
-                userList[10],
-                password,
-                ed.getEmployeeList().get(10),
-                new Role(Role.RoleType.WarehouseManager));
+        UserAccount wm = org6.getUserAccountDirectory().createUserAccount(
+            userList[10],
+            password,
+            ed.getEmployeeList().get(10),
+            new Role(Role.RoleType.WarehouseManager));
 
-            org6.getUserAccountDirectory().createUserAccount(
-                userList[11],
-                password,
-                ed.getEmployeeList().get(11),
-                new Role(Role.RoleType.WarehouseOperator));
+        UserAccount wo = org6.getUserAccountDirectory().createUserAccount(
+            userList[11],
+            password,
+            ed.getEmployeeList().get(11),
+            new Role(Role.RoleType.WarehouseOperator));
 
-            org7.getUserAccountDirectory().createUserAccount(
-                userList[12],
-                password,
-                ed.getEmployeeList().get(12),
-                new Role(Role.RoleType.DistributionManager));
+        UserAccount dm = org7.getUserAccountDirectory().createUserAccount(
+            userList[12],
+            password,
+            ed.getEmployeeList().get(12),
+            new Role(Role.RoleType.DistributionManager));
 
-            org7.getUserAccountDirectory().createUserAccount(
-                userList[13],
-                password,
-                ed.getEmployeeList().get(13),
-                new Role(Role.RoleType.TransportationPlanner));
-    }
+        UserAccount tp = org7.getUserAccountDirectory().createUserAccount(
+            userList[13],
+            password,
+            ed.getEmployeeList().get(13),
+            new Role(Role.RoleType.TransportationPlanner));
         
         // Create smartphone products
         SmartphoneEnterprise smartApple = (SmartphoneEnterprise)enterpriseList.get(0);
@@ -214,6 +212,8 @@ public class ConfigureASystem {
         org2.getHistoryWorkQueueList().add(smartWQ); // add the current work queue to the history work queue for data analysis later
         
         org2.getWorkQueue().getWorkRequestList().add(designWR);
+        pc.getWorkQueue().getWorkRequestList().add(designWR);
+        
         designWR.setMessage("UI design");
         designWR.setStatus("Completed");
         designWR.setCost(2000);
@@ -222,10 +222,12 @@ public class ConfigureASystem {
         designWR.setSender(org2.getUserAccountDirectory().getUserAccountList().get(0));
         designWR.setReceiver(org1.getUserAccountDirectory().getUserAccountList().get(0));
         org1.getWorkQueue().getWorkRequestList().add(designWR);
+        ui.getWorkQueue().getWorkRequestList().add(designWR);
         
         
         ComponentWorkRequest componentWR = new ComponentWorkRequest();
         org2.getWorkQueue().getWorkRequestList().add(componentWR);
+        pc.getWorkQueue().getWorkRequestList().add(componentWR);
         componentWR.setMessage("Needs chips");
         componentWR.setStatus("Completed");
         componentWR.setCost(300000);
@@ -234,10 +236,11 @@ public class ConfigureASystem {
         componentWR.setSender(org2.getUserAccountDirectory().getUserAccountList().get(0));
         componentWR.setReceiver(org3.getUserAccountDirectory().getUserAccountList().get(0));
         org3.getWorkQueue().getWorkRequestList().add(componentWR);
-
+        cde.getWorkQueue().getWorkRequestList().add(componentWR);
                 
         AssemblyWorkRequest assemblyWR = new AssemblyWorkRequest();
         org2.getWorkQueue().getWorkRequestList().add(assemblyWR);
+        pc.getWorkQueue().getWorkRequestList().add(assemblyWR);
         assemblyWR.setMessage("Assembly phones");
         assemblyWR.setStatus("Completed");
         assemblyWR.setCost(25000.0);
@@ -246,9 +249,10 @@ public class ConfigureASystem {
         assemblyWR.setSender(org2.getUserAccountDirectory().getUserAccountList().get(0));
         assemblyWR.setReceiver(org4.getUserAccountDirectory().getUserAccountList().get(0));
         org4.getWorkQueue().getWorkRequestList().add(assemblyWR);
+        po.getWorkQueue().getWorkRequestList().add(assemblyWR);
         
         
-        QualityManagementWorkRequest qmWR = new QualityManagementWorkRequest();
+        QualityManagementWorkRequest qmWR = new QualityManagementWorkRequest(assemblyWR);
         qmWR.setMessage("Check qualities");
         qmWR.setStatus("Completed");
         qmWR.setCost(10000.0);
@@ -257,6 +261,7 @@ public class ConfigureASystem {
         qmWR.setSender(org4.getUserAccountDirectory().getUserAccountList().get(0));
         qmWR.setReceiver(org5.getUserAccountDirectory().getUserAccountList().get(0));
         org5.getWorkQueue().getWorkRequestList().add(qmWR);
+        qi.getWorkQueue().getWorkRequestList().add(qmWR);
         
         // Reassumbly due to failgure
         assemblyWR.setMessage("Reassumbly phones");
@@ -270,6 +275,7 @@ public class ConfigureASystem {
         // Smartphone Enterprise Production Operator requests Distribution Manager
         TransportationWorkRequest transWR = new TransportationWorkRequest();
         org2.getWorkQueue().getWorkRequestList().add(transWR);
+        pc.getWorkQueue().getWorkRequestList().add(transWR);
         transWR.setMessage("Transport 1000 phones to stores");
         transWR.setStatus("Pending");
         transWR.setProductName(productName);
@@ -277,11 +283,13 @@ public class ConfigureASystem {
         transWR.setSender(org2.getUserAccountDirectory().getUserAccountList().get(0));
         transWR.setReceiver(org7.getUserAccountDirectory().getUserAccountList().get(0));
         org7.getWorkQueue().getWorkRequestList().add(transWR);
+        dm.getWorkQueue().getWorkRequestList().add(transWR);
 
         
         // Distribution Manager requests WarehouseManager to prepare products
         PrepareProductWorkRequest prepareWR = new PrepareProductWorkRequest();
         org2.getWorkQueue().getWorkRequestList().add(prepareWR);
+        pc.getWorkQueue().getWorkRequestList().add(prepareWR);
         prepareWR.setMessage("Prepare 1000 phones to transport");
         prepareWR.setStatus("Pending");
         prepareWR.setProductName(productName);
@@ -289,6 +297,7 @@ public class ConfigureASystem {
         prepareWR.setSender(org7.getUserAccountDirectory().getUserAccountList().get(0));
         prepareWR.setReceiver(org6.getUserAccountDirectory().getUserAccountList().get(0));
         org6.getWorkQueue().getWorkRequestList().add(prepareWR);
+        wm.getWorkQueue().getWorkRequestList().add(prepareWR);
         
         // Warehouse Manager passes work request to Warehouse Operator
         prepareWR.setSender(org6.getUserAccountDirectory().getUserAccountList().get(0));
@@ -303,7 +312,7 @@ public class ConfigureASystem {
         transWR.setReceiver(org7.getUserAccountDirectory().getUserAccountList().get(1));
         // Transportation Planner complete the request and set cost
         transWR.setCost(50000);
-        transWR.setStatus("Complete");
+//        transWR.setStatus("Completed");
         
         
         return system;

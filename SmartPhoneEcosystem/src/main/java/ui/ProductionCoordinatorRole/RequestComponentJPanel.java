@@ -4,17 +4,37 @@
  */
 package ui.ProductionCoordinatorRole;
 
+import Ecosystem.EcoSystem;
+import Ecosystem.Enterprise.Enterprise;
+import Ecosystem.Network.Network;
+import Ecosystem.Organization.Organization;
+import Ecosystem.Organization.ResearchAndDevelopmentOrganization;
+import Ecosystem.UserAccount.UserAccount;
+import Ecosystem.WorkQueue.ComponentWorkRequest;
+import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author sunny
  */
 public class RequestComponentJPanel extends javax.swing.JPanel {
+    
+    private JPanel workArea;
+    private UserAccount userAccount;
+    private EcoSystem system;
+    
 
     /**
      * Creates new form RequestComponentJPanel
      */
-    public RequestComponentJPanel() {
+    public RequestComponentJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem ecosystem) {
         initComponents();
+        this.workArea = userProcessContainer;
+        this.userAccount = account;
+        this.system = ecosystem;
     }
 
     /**
@@ -26,19 +46,225 @@ public class RequestComponentJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel10 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
+        lblProduct = new javax.swing.JLabel();
+        cbbProduct = new javax.swing.JComboBox<>();
+        btnRequest = new javax.swing.JButton();
+        lblMessage = new javax.swing.JLabel();
+        txtMessage = new javax.swing.JTextField();
+        lblProduct1 = new javax.swing.JLabel();
+        txtOther = new javax.swing.JTextField();
+        lblProduct2 = new javax.swing.JLabel();
+        txtQuant = new javax.swing.JTextField();
+
+        setBackground(new java.awt.Color(255, 245, 175));
+
+        jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel10.setText("Send Request Component");
+
+        btnBack.setBackground(new java.awt.Color(204, 225, 152));
+        btnBack.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        lblProduct.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        lblProduct.setText("Select a component:");
+
+        cbbProduct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Processor", "Memory", "Storage", "Battery", "Display", "Camera", "Speakers", "Sensors", "Circuit boards", "Casing", "Other" }));
+        cbbProduct.setSelectedItem(null);
+        cbbProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbbProductActionPerformed(evt);
+            }
+        });
+
+        btnRequest.setBackground(new java.awt.Color(204, 225, 152));
+        btnRequest.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        btnRequest.setText("Request");
+        btnRequest.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRequestActionPerformed(evt);
+            }
+        });
+
+        lblMessage.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        lblMessage.setText("Message:");
+
+        lblProduct1.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        lblProduct1.setText("Other component:");
+
+        txtOther.setEnabled(false);
+
+        lblProduct2.setFont(new java.awt.Font("Helvetica Neue", 1, 14)); // NOI18N
+        lblProduct2.setText("Quantity:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnBack)
+                        .addGap(27, 27, 27)
+                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 367, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(108, 108, 108)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblProduct1)
+                                    .addComponent(lblProduct)
+                                    .addComponent(lblProduct2)
+                                    .addComponent(lblMessage))
+                                .addGap(26, 26, 26)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtQuant)
+                                    .addComponent(txtOther)
+                                    .addComponent(cbbProduct, 0, 132, Short.MAX_VALUE)))
+                            .addComponent(btnRequest)
+                            .addComponent(txtMessage))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(btnBack))
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProduct)
+                    .addComponent(cbbProduct, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtOther, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProduct1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProduct2)
+                    .addComponent(txtQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblMessage)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txtMessage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(btnRequest)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        workArea.remove(this);
+        Component[] componentArray = workArea.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        ProductionCoordinatorWorkAreaJPanel jPanel = (ProductionCoordinatorWorkAreaJPanel) component;
+        jPanel.populateRequestTable();
+        CardLayout layout = (CardLayout) workArea.getLayout();
+        layout.previous(workArea);
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnRequestActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestActionPerformed
+
+        String message = txtMessage.getText();
+        String quant = txtQuant.getText();
+        
+        if(message.equals("") || message.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please enter something to send.");
+            return;
+        }
+        
+        if(cbbProduct.getSelectedItem()==null){
+            JOptionPane.showMessageDialog(null, "Please select a product.");
+            return;
+        }
+        
+        if(quant.equals("") || quant.isEmpty()){
+            JOptionPane.showMessageDialog(null, "Please enter the product quantity.");
+            return;
+        }
+        
+        int quantity;
+        try {
+        quantity = Integer.parseInt(quant);
+        if (quantity <= 0) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid positive number for the quantity.");
+            return;
+        }
+        } catch (NumberFormatException e) {
+        JOptionPane.showMessageDialog(null, "Quantity must be a valid number.");
+        return;
+        }
+
+        
+        String productName = txtOther.getText();
+        if(productName.equals("")){
+            productName = cbbProduct.getSelectedItem().toString();
+        }
+
+        ComponentWorkRequest request = new ComponentWorkRequest();
+        request.setProductName(productName);
+        request.setProductQuant(Integer.parseInt(quant));
+        request.setSender(userAccount);
+        request.setMessage(message);
+        request.setStatus("Sent");
+
+        Organization org = null;
+        for(Network network : system.getNetworkList()){
+            for(Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()){
+                for (Organization organization : enterprise.getOrganizationDirectory().getOrganizationList()){
+                        if (organization instanceof ResearchAndDevelopmentOrganization){
+                        org = organization;
+                        break;
+                    }
+                }
+            }
+        }
+        
+        if (org!=null){
+            org.getWorkQueue().getWorkRequestList().add(request);
+            userAccount.getWorkQueue().getWorkRequestList().add(request);
+        }
+
+        JOptionPane.showMessageDialog(null, "Request message sent");
+        cbbProduct.setSelectedItem(null);
+        txtQuant.setText("");
+        txtMessage.setText("");
+        txtOther.setText("");
+        
+    }//GEN-LAST:event_btnRequestActionPerformed
+
+    private void cbbProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbbProductActionPerformed
+        // TODO add your handling code here:
+        String selectedItem = (String) cbbProduct.getSelectedItem();
+        if ("Other".equals(selectedItem)) {
+            txtOther.setEnabled(true); // Enable text field
+        } else {
+            txtOther.setEnabled(false); // Disable text field
+            txtOther.setText(""); // Clear text field
+        }
+    }//GEN-LAST:event_cbbProductActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnRequest;
+    private javax.swing.JComboBox<String> cbbProduct;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel lblMessage;
+    private javax.swing.JLabel lblProduct;
+    private javax.swing.JLabel lblProduct1;
+    private javax.swing.JLabel lblProduct2;
+    private javax.swing.JTextField txtMessage;
+    private javax.swing.JTextField txtOther;
+    private javax.swing.JTextField txtQuant;
     // End of variables declaration//GEN-END:variables
 }
