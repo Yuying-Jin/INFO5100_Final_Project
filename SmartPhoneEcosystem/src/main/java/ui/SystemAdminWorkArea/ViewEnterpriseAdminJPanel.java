@@ -347,7 +347,7 @@ private JPanel userProcessContainer;
 
         
         if(enterprise != (Enterprise) enterpriseJComboBox.getSelectedItem()){
-            enterprise.getUserAccountDirectory().createUserAccount(username, password, 
+            enterprise.getUserAccountDirectory().createUserAccount(username, password, email,
                     userAccount.getEmployee(), new Role(Role.RoleType.SystemAdmin));
         }
         

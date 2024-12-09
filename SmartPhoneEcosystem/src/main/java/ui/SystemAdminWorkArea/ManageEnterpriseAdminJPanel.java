@@ -458,7 +458,7 @@ private JPanel userProcessContainer;
 
         Employee employee = enterprise.getEmployeeDirectory().createEmployee(name);
 
-        UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, employee, new Role(Role.RoleType.SystemAdmin));
+        UserAccount account = enterprise.getUserAccountDirectory().createUserAccount(username, password, email, employee, new Role(Role.RoleType.SystemAdmin));
         account.getEmployee().setGender(gender);
         account.getEmployee().setEmail(email);
         account.getEmployee().setNation(nation);

@@ -63,10 +63,10 @@ public class ConfigureASystem {
 
         for(int i = 0; i < 14; i++){
             String name = faker.name().fullName();
-            String email = faker.internet().emailAddress();
+            String email = i + "@northeastern.edu";
+//            System.out.println(email);
             String gender = (rand.nextBoolean()) ? "female" : "male"; 
             String phoneNum = faker.phoneNumber().phoneNumber();
-            
             Employee e = ed.createEmployee(name);
             e.setEmail(email);
             e.setGender(gender);
@@ -107,84 +107,98 @@ public class ConfigureASystem {
         UserAccount sysAdmin = system.getUserAccountDirectory().createUserAccount(
                     userList[0],
                     password,
+                    ed.getEmployeeList().get(0).getEmail(),
                     ed.getEmployeeList().get(0),
                     new Role(Role.RoleType.SystemAdmin));
 
         UserAccount smartAdmin = enterpriseList.get(0).getUserAccountDirectory().createUserAccount(
             userList[1],
             password,
+            ed.getEmployeeList().get(1).getEmail(),
             ed.getEmployeeList().get(1),
             new Role(Role.RoleType.EnterprisesAdmin));
 
         UserAccount componentAdmin =  enterpriseList.get(1).getUserAccountDirectory().createUserAccount(
             userList[2],
             password,
+            ed.getEmployeeList().get(2).getEmail(),
             ed.getEmployeeList().get(2),
             new Role(Role.RoleType.EnterprisesAdmin));
 
         UserAccount assemblyAdmin =  enterpriseList.get(2).getUserAccountDirectory().createUserAccount(
             userList[3],
             password,
+            ed.getEmployeeList().get(3).getEmail(),
             ed.getEmployeeList().get(3),
             new Role(Role.RoleType.EnterprisesAdmin));
 
         UserAccount logisticsAdmin =  enterpriseList.get(3).getUserAccountDirectory().createUserAccount(
             userList[4],
             password,
+            ed.getEmployeeList().get(4).getEmail(),
             ed.getEmployeeList().get(4),
             new Role(Role.RoleType.EnterprisesAdmin));
 
         UserAccount ui = org1.getUserAccountDirectory().createUserAccount(
             userList[5],
             password,
+            ed.getEmployeeList().get(5).getEmail(),
             ed.getEmployeeList().get(5),
             new Role(Role.RoleType.UIUXSpecialist));
 
         UserAccount pc = org2.getUserAccountDirectory().createUserAccount(
             userList[6],
             password,
+            ed.getEmployeeList().get(6).getEmail(),
             ed.getEmployeeList().get(6),
             new Role(Role.RoleType.ProductionCoordinator));
 
         UserAccount cde = org3.getUserAccountDirectory().createUserAccount(
             userList[7],
             password,
+            ed.getEmployeeList().get(7).getEmail(),
             ed.getEmployeeList().get(7),
             new Role(Role.RoleType.ComponentDevelopmentEngineer));
 
         UserAccount po = org4.getUserAccountDirectory().createUserAccount(
             userList[8],
             password,
+            ed.getEmployeeList().get(8).getEmail(),
             ed.getEmployeeList().get(8),
             new Role(Role.RoleType.ProductionOperator));
 
         UserAccount qi = org5.getUserAccountDirectory().createUserAccount(
             userList[9],
             password,
+            ed.getEmployeeList().get(9).getEmail(),
             ed.getEmployeeList().get(9),
             new Role(Role.RoleType.QualityInspector));
 
         UserAccount wm = org6.getUserAccountDirectory().createUserAccount(
             userList[10],
             password,
+            ed.getEmployeeList().get(10).getEmail(),
             ed.getEmployeeList().get(10),
             new Role(Role.RoleType.WarehouseManager));
 
         UserAccount wo = org6.getUserAccountDirectory().createUserAccount(
             userList[11],
             password,
+            ed.getEmployeeList().get(11).getEmail(),
             ed.getEmployeeList().get(11),
             new Role(Role.RoleType.WarehouseOperator));
 
         UserAccount dm = org7.getUserAccountDirectory().createUserAccount(
             userList[12],
             password,
+            ed.getEmployeeList().get(12).getEmail(),
             ed.getEmployeeList().get(12),
             new Role(Role.RoleType.DistributionManager));
 
         UserAccount tp = org7.getUserAccountDirectory().createUserAccount(
             userList[13],
             password,
+            ed.getEmployeeList().get(13).getEmail(),
             ed.getEmployeeList().get(13),
             new Role(Role.RoleType.TransportationPlanner));
         

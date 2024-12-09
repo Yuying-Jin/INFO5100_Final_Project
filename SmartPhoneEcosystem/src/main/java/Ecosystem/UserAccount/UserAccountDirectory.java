@@ -25,17 +25,32 @@ public class UserAccountDirectory {
     }
     
     public UserAccount authenticateUser(String username, String password){
-        for (UserAccount ua : userAccountList)
+        for (UserAccount ua : userAccountList) {
             if (ua.getUsername().equals(username) && ua.getPassword().equals(password)){
                 return ua;
             }
+            if (ua.getEmail().equals(username) && ua.getPassword().equals(password)){
+                return ua;
+            }
+        }
         return null;
     }
     
-    public UserAccount createUserAccount(String username, String password, Employee employee, Role role){
+    public UserAccount findUserAccount(String acc){
+        for (UserAccount ua : userAccountList) {
+//            System.out.println("[Debug]" + acc + " " + ua.getUsername() + " " + ua.getEmail());
+            if (ua.getEmail().equals(acc)){
+                return ua;
+            }
+        }
+        return null;
+    }
+    
+    public UserAccount createUserAccount(String username, String password, String email, Employee employee, Role role){
         UserAccount userAccount = new UserAccount();
         userAccount.setUsername(username);
         userAccount.setPassword(password);
+        userAccount.setEmail(email);
         userAccount.setEmployee(employee);
         userAccount.setRole(role);
         userAccountList.add(userAccount);
@@ -49,7 +64,8 @@ public class UserAccountDirectory {
         }
         return true;
     }
-      public void removeUserAccount(UserAccount userAccount) {
+    
+    public void removeUserAccount(UserAccount userAccount) {
         if (userAccountList != null && userAccount != null) {
             userAccountList.remove(userAccount);
         }
