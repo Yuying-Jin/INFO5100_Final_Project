@@ -43,6 +43,10 @@ public class WarehouseManagerWorkAreaJPanel extends javax.swing.JPanel {
         btnManageProductRequest = new javax.swing.JButton();
         warehouseLabel = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 245, 175));
+
+        btnManageProductRequest.setBackground(new java.awt.Color(204, 225, 152));
+        btnManageProductRequest.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnManageProductRequest.setText("Manage Product Request");
         btnManageProductRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,20 +62,23 @@ public class WarehouseManagerWorkAreaJPanel extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(135, 135, 135)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnManageProductRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(warehouseLabel))
-                .addContainerGap(165, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(135, 135, 135)
+                        .addComponent(warehouseLabel))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addComponent(btnManageProductRequest, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(150, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(115, 115, 115)
                 .addComponent(warehouseLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGap(34, 34, 34)
                 .addComponent(btnManageProductRequest)
-                .addContainerGap(235, Short.MAX_VALUE))
+                .addContainerGap(231, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

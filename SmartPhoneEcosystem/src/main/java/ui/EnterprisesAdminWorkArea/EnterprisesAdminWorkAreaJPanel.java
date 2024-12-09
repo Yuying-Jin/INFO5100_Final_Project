@@ -49,6 +49,10 @@ public class EnterprisesAdminWorkAreaJPanel extends javax.swing.JPanel {
         enterpriseLabel = new javax.swing.JLabel();
         valueLabel = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 245, 175));
+
+        btnManageWorkRequest.setBackground(new java.awt.Color(204, 225, 152));
+        btnManageWorkRequest.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnManageWorkRequest.setText("Manage Work Request");
         btnManageWorkRequest.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,7 +93,7 @@ public class EnterprisesAdminWorkAreaJPanel extends javax.swing.JPanel {
                         .addComponent(valueLabel)))
                 .addGap(29, 29, 29)
                 .addComponent(btnManageWorkRequest)
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addContainerGap(263, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

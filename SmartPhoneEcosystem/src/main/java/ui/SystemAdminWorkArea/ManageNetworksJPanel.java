@@ -8,8 +8,8 @@ import Ecosystem.EcoSystem;
 import Ecosystem.Network.Network;
 import java.awt.CardLayout;
 import java.awt.Component;
-import static java.time.Clock.system;
-import static java.time.InstantSource.system;
+import java.awt.Font;
+import static java.awt.Font.BOLD;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,7 +26,10 @@ public class ManageNetworksJPanel extends javax.swing.JPanel {
     public ManageNetworksJPanel(JPanel userProcessContainer, EcoSystem system) {
         initComponents();
         
+        networkJTable.getTableHeader().setFont(new Font("Helvetica Neue", BOLD, 14));
+        
         this.userProcessContainer = userProcessContainer;
+        this.system = system;
        
         populateNetworkTable();
         
@@ -47,6 +50,9 @@ public class ManageNetworksJPanel extends javax.swing.JPanel {
         btnSubmit = new javax.swing.JButton();
         txtNetworkName = new javax.swing.JTextField();
         btnBack = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 245, 175));
 
         networkJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -76,8 +82,10 @@ public class ManageNetworksJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(networkJTable);
 
+        lblName.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         lblName.setText("Name:");
 
+        btnSubmit.setBackground(new java.awt.Color(204, 225, 152));
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -85,7 +93,7 @@ public class ManageNetworksJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnBack.setBackground(new java.awt.Color(255, 153, 153));
+        btnBack.setBackground(new java.awt.Color(204, 225, 152));
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,14 +101,20 @@ public class ManageNetworksJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel10.setText("Manage Network ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBack)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnBack)
+                        .addGap(66, 66, 66)
+                        .addComponent(jLabel10))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(28, 28, 28)
@@ -110,32 +124,39 @@ public class ManageNetworksJPanel extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnSubmit))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(160, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnBack)
-                .addGap(18, 18, 18)
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBack)
+                    .addComponent(jLabel10))
+                .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27)
+                .addGap(39, 39, 39)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSubmit)
                     .addComponent(txtNetworkName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblName))
-                .addContainerGap(305, Short.MAX_VALUE))
+                .addContainerGap(218, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
 
-        String name = txtNetworkName.getText();
+        String name = txtNetworkName.getText().trim();
+        if (name.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Please enter a network name.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        return;
+    }
 
         Network network = system.createAndAddNetwork();
         network.setName(name);
 
         populateNetworkTable();
+        txtNetworkName.setText("");
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -152,6 +173,7 @@ public class ManageNetworksJPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblName;
     private javax.swing.JTable networkJTable;

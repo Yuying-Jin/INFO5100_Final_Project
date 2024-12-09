@@ -45,11 +45,11 @@ public class ProcessDesignRequestJPanel extends javax.swing.JPanel {
 
         setBackground(new java.awt.Color(255, 245, 175));
 
-        lblResult.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblResult.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         lblResult.setText("Result Message:");
 
         btnBack.setBackground(new java.awt.Color(204, 225, 152));
-        btnBack.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnBack.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -58,7 +58,7 @@ public class ProcessDesignRequestJPanel extends javax.swing.JPanel {
         });
 
         btnSubmit.setBackground(new java.awt.Color(204, 225, 152));
-        btnSubmit.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnSubmit.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,7 +69,13 @@ public class ProcessDesignRequestJPanel extends javax.swing.JPanel {
         lblHeading.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         lblHeading.setText("Result Submission");
 
-        lblResult1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtResults1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtResults1ActionPerformed(evt);
+            }
+        });
+
+        lblResult1.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         lblResult1.setText("Cost:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -98,7 +104,7 @@ public class ProcessDesignRequestJPanel extends javax.swing.JPanel {
                                 .addGap(57, 57, 57)
                                 .addComponent(lblHeading)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,6 +144,10 @@ public class ProcessDesignRequestJPanel extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null, "Message processed");
 
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void txtResults1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtResults1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtResults1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

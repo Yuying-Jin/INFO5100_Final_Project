@@ -4,17 +4,33 @@
  */
 package ui.ComponentDevelopmentEngineerRole;
 
+import Ecosystem.Organization.Organization;
+import Ecosystem.WorkQueue.ComponentWorkRequest;
+import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import ui.UIUXSpecialistRole.UIUXWorkAreaJPanel;
+
 /**
  *
  * @author sunny
  */
 public class ProcessComponentRequestJPanel extends javax.swing.JPanel {
-
+      private Organization organization;
+      private JPanel userProcessContainer;
+      private ComponentWorkRequest request;
     /**
      * Creates new form ProcessComponentRequestJPanel
      */
-    public ProcessComponentRequestJPanel() {
+    public ProcessComponentRequestJPanel(JPanel userProcessContainer, Organization organization, ComponentWorkRequest request) {
         initComponents();
+        this.organization = organization;
+        this.userProcessContainer = userProcessContainer;
+        this.request = request;
+        
+        txtProductName.setText(request.getProductName());
+        txtProductQuant.setText(String.valueOf(request.getProductQuant()));
     }
 
     /**
@@ -26,19 +42,181 @@ public class ProcessComponentRequestJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtCost = new javax.swing.JTextField();
+        lblcost = new javax.swing.JLabel();
+        lblResult = new javax.swing.JLabel();
+        txtProductName = new javax.swing.JTextField();
+        btnBack = new javax.swing.JButton();
+        btnSubmit = new javax.swing.JButton();
+        lblHeading = new javax.swing.JLabel();
+        lblProductQuant = new javax.swing.JLabel();
+        txtProductQuant = new javax.swing.JTextField();
+        lblProductName = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 245, 175));
+
+        txtCost.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCostActionPerformed(evt);
+            }
+        });
+
+        lblcost.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        lblcost.setText("Cost:");
+
+        lblResult.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+
+        txtProductName.setEnabled(false);
+        txtProductName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtProductNameActionPerformed(evt);
+            }
+        });
+
+        btnBack.setBackground(new java.awt.Color(204, 225, 152));
+        btnBack.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        btnSubmit.setBackground(new java.awt.Color(204, 225, 152));
+        btnSubmit.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        btnSubmit.setText("Submit");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
+
+        lblHeading.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        lblHeading.setText("Result Submission");
+
+        lblProductQuant.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        lblProductQuant.setText("Product Quant:");
+
+        txtProductQuant.setEnabled(false);
+
+        lblProductName.setText("Product Name:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblcost)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblProductQuant)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtProductQuant, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(lblProductName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnBack, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(57, 57, 57)
+                                .addComponent(lblHeading)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(lblResult)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, 294, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnSubmit))))))
+                .addGap(26, 26, 26))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblHeading)
+                    .addComponent(btnBack))
+                .addGap(72, 72, 72)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblResult)
+                    .addComponent(txtProductName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblProductName))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblProductQuant)
+                    .addComponent(txtProductQuant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblcost))
+                .addGap(26, 26, 26)
+                .addComponent(btnSubmit)
+                .addContainerGap(174, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtCostActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCostActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCostActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+
+        userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        ComponentDevelopmentWorkAreaJPanel cwjp = (ComponentDevelopmentWorkAreaJPanel)component; 
+        cwjp.populateTable();
+
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
+        
+        
+    }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+
+        String cost = txtCost.getText().trim();
+    
+    if (cost.isEmpty()) {
+        JOptionPane.showMessageDialog(this, "All fields are required.", "Error", JOptionPane.ERROR_MESSAGE);
+        return;
+    }
+    
+    try {
+       
+        request.setStatus("Completed");
+        request.setCost(Double.parseDouble(cost));
+        JOptionPane.showMessageDialog(this, "Message processed", "Success", JOptionPane.INFORMATION_MESSAGE);
+        
+        txtCost.setText("");
+    } catch (Exception e) {
+       
+        JOptionPane.showMessageDialog(this, "An error occurred: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+    }
+        
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void txtProductNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtProductNameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtProductNameActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnSubmit;
+    private javax.swing.JLabel lblHeading;
+    private javax.swing.JLabel lblProductName;
+    private javax.swing.JLabel lblProductQuant;
+    private javax.swing.JLabel lblResult;
+    private javax.swing.JLabel lblcost;
+    private javax.swing.JTextField txtCost;
+    private javax.swing.JTextField txtProductName;
+    private javax.swing.JTextField txtProductQuant;
     // End of variables declaration//GEN-END:variables
 }

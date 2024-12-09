@@ -9,6 +9,8 @@ import Ecosystem.Enterprise.Enterprise;
 import Ecosystem.Network.Network;
 import java.awt.CardLayout;
 import java.awt.Component;
+import java.awt.Font;
+import static java.awt.Font.BOLD;
 import static java.time.Clock.system;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -19,16 +21,21 @@ import javax.swing.table.DefaultTableModel;
  * @author sunny
  */
 public class ManageEnterpriseJPanel extends javax.swing.JPanel {
-  private JPanel userProcessContainer;
+    private JPanel userProcessContainer;
+    private EcoSystem system;
+
     /**
      * Creates new form ManageEnterpriseJPanel
      */
     public ManageEnterpriseJPanel(JPanel userProcessContainer, EcoSystem system) {
         this.userProcessContainer = userProcessContainer;
+        this.system = system;
 
+        initComponents();
+        enterpriseJTable.getTableHeader().setFont(new Font("Helvetica Neue", BOLD, 14));
         populateTable();
         populateComboBox();
-        initComponents();
+        
     }
 
     /**
@@ -50,7 +57,11 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         enterpriseTypeJComboBox = new javax.swing.JComboBox();
         submitJButton = new javax.swing.JButton();
         backJButton = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 245, 175));
+
+        enterpriseJTable.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         enterpriseJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
@@ -72,17 +83,27 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(enterpriseJTable);
 
+        jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel1.setText("Network");
 
+        networkJComboBox.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         networkJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        networkJComboBox.setPreferredSize(new java.awt.Dimension(76, 27));
 
+        jLabel2.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel2.setText("Name");
 
+        nameJTextField.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+
+        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         jLabel3.setText("Enterprise Type");
 
+        enterpriseTypeJComboBox.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         enterpriseTypeJComboBox.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        enterpriseTypeJComboBox.setPreferredSize(new java.awt.Dimension(92, 27));
 
-        submitJButton.setBackground(new java.awt.Color(255, 153, 153));
+        submitJButton.setBackground(new java.awt.Color(204, 225, 152));
+        submitJButton.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         submitJButton.setText("Submit");
         submitJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,7 +111,8 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
             }
         });
 
-        backJButton.setBackground(new java.awt.Color(255, 153, 153));
+        backJButton.setBackground(new java.awt.Color(204, 225, 152));
+        backJButton.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         backJButton.setText("<< Back");
         backJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,38 +120,45 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel10.setText("Manage Enterprise ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(54, 54, 54)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(submitJButton, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(layout.createSequentialGroup()
-                            .addGap(88, 88, 88)
+                            .addGap(49, 49, 49)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(jLabel1)
                                 .addComponent(jLabel2)
                                 .addComponent(jLabel3))
                             .addGap(52, 52, 52)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(enterpriseTypeJComboBox, 0, 161, Short.MAX_VALUE)
                                 .addComponent(networkJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(enterpriseTypeJComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(39, 39, 39)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(backJButton)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(submitJButton)))
-                .addContainerGap(17, Short.MAX_VALUE))
+                                .addComponent(nameJTextField)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 523, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(backJButton)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10)
+                            .addGap(84, 84, 84))))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(58, 58, 58)
+                .addGap(56, 56, 56)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(backJButton))
+                .addGap(50, 50, 50)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -143,11 +172,9 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(nameJTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(submitJButton)
-                    .addComponent(backJButton))
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addComponent(submitJButton)
+                .addGap(154, 154, 154))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -185,6 +212,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
     private javax.swing.JTable enterpriseJTable;
     private javax.swing.JComboBox enterpriseTypeJComboBox;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -197,7 +225,7 @@ public class ManageEnterpriseJPanel extends javax.swing.JPanel {
         DefaultTableModel model = (DefaultTableModel) enterpriseJTable.getModel();
 
         model.setRowCount(0);
-        for (Network network : EcoSystem.getInstance().getNetworkList()) {
+        for (Network network : system.getNetworkList()) { // Use the passed system object
             for (Enterprise enterprise : network.getEnterpriseDirectory().getEnterpriseList()) {
                 Object[] row = new Object[3];
                 row[0] = enterprise.getName();

@@ -7,6 +7,8 @@ package ui.WarehouseOperatorRole;
 import Ecosystem.Organization.Organization;
 import Ecosystem.WorkQueue.PrepareProductWorkRequest;
 import Ecosystem.WorkQueue.WorkRequest;
+import java.awt.Font;
+import static java.awt.Font.BOLD;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -16,9 +18,11 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ProcessProductRequestJPanel extends javax.swing.JPanel {
     private Organization organization;
+   
     public ProcessProductRequestJPanel(Organization organization) {
         this.organization = organization;
         initComponents();
+        workRequestJTable.getTableHeader().setFont(new Font("Helvetica Neue", BOLD, 14));
         populateTable();
     }
 
@@ -35,8 +39,11 @@ public class ProcessProductRequestJPanel extends javax.swing.JPanel {
         workRequestJTable = new javax.swing.JTable();
         completeJButton = new javax.swing.JButton();
         refreshJButton = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
 
+        setBackground(new java.awt.Color(255, 245, 175));
+
+        workRequestJTable.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
@@ -58,7 +65,8 @@ public class ProcessProductRequestJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(workRequestJTable);
 
-        completeJButton.setBackground(new java.awt.Color(255, 153, 153));
+        completeJButton.setBackground(new java.awt.Color(204, 225, 152));
+        completeJButton.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         completeJButton.setText("Complete");
         completeJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -66,7 +74,8 @@ public class ProcessProductRequestJPanel extends javax.swing.JPanel {
             }
         });
 
-        refreshJButton.setBackground(new java.awt.Color(255, 153, 153));
+        refreshJButton.setBackground(new java.awt.Color(204, 225, 152));
+        refreshJButton.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,9 +83,8 @@ public class ProcessProductRequestJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Process Product Preparation");
+        jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel10.setText("Process Product Request");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -84,28 +92,28 @@ public class ProcessProductRequestJPanel extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(72, 72, 72)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(completeJButton)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 594, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(refreshJButton, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(refreshJButton)))
                 .addContainerGap(47, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(197, 197, 197))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(refreshJButton)
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(refreshJButton)
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(completeJButton)
-                .addContainerGap(202, Short.MAX_VALUE))
+                .addContainerGap(199, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
     public void populateTable() {
@@ -157,7 +165,7 @@ public class ProcessProductRequestJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton completeJButton;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshJButton;
     private javax.swing.JTable workRequestJTable;

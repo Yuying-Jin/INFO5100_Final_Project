@@ -50,6 +50,9 @@ public class ManageWorkRequestJPanel extends javax.swing.JPanel {
         workRequestJTable = new javax.swing.JTable();
         approvalJButton = new javax.swing.JButton();
         refreshJButton = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+
+        setBackground(new java.awt.Color(255, 245, 175));
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -79,7 +82,8 @@ public class ManageWorkRequestJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(workRequestJTable);
 
-        approvalJButton.setBackground(new java.awt.Color(255, 153, 153));
+        approvalJButton.setBackground(new java.awt.Color(204, 225, 152));
+        approvalJButton.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
         approvalJButton.setText("Approve");
         approvalJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,7 +91,7 @@ public class ManageWorkRequestJPanel extends javax.swing.JPanel {
             }
         });
 
-        refreshJButton.setBackground(new java.awt.Color(255, 153, 153));
+        refreshJButton.setBackground(new java.awt.Color(204, 225, 152));
         refreshJButton.setText("Refresh");
         refreshJButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,32 +99,42 @@ public class ManageWorkRequestJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        jLabel10.setText("Manage Work Request");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(70, 70, 70)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(72, 72, 72)
+                            .addComponent(approvalJButton)
+                            .addGap(379, 379, 379))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(jLabel10)
+                            .addGap(58, 58, 58)
+                            .addComponent(refreshJButton)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(392, 392, 392)
-                        .addComponent(refreshJButton))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
-                        .addComponent(approvalJButton)))
-                .addContainerGap(108, Short.MAX_VALUE))
+                        .addGap(72, 72, 72)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 470, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(106, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addComponent(refreshJButton)
-                .addGap(5, 5, 5)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(refreshJButton)
+                    .addComponent(jLabel10))
                 .addGap(12, 12, 12)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(approvalJButton)
-                .addContainerGap(143, Short.MAX_VALUE))
+                .addContainerGap(158, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -176,6 +190,7 @@ public class ManageWorkRequestJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton approvalJButton;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton refreshJButton;
     private javax.swing.JTable workRequestJTable;
