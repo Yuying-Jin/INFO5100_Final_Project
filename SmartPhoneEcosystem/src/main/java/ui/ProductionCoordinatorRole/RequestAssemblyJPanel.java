@@ -6,11 +6,9 @@ package ui.ProductionCoordinatorRole;
 
 import Ecosystem.EcoSystem;
 import Ecosystem.Enterprise.Enterprise;
-import Ecosystem.Enterprise.SmartphoneEnterprise;
 import Ecosystem.Network.Network;
 import Ecosystem.Organization.AssemblyOrganization;
 import Ecosystem.Organization.Organization;
-import Ecosystem.Organization.ResearchAndDevelopmentOrganization;
 import Ecosystem.Product.SmartphoneProduct;
 import Ecosystem.Product.SmartphoneProductCatalog;
 import Ecosystem.UserAccount.UserAccount;

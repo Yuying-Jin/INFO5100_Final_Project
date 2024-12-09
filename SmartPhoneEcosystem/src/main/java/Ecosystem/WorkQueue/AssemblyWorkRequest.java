@@ -10,6 +10,7 @@ package Ecosystem.WorkQueue;
  */
 public class AssemblyWorkRequest extends WorkRequest {
     private int failgureQuant;
+    private double failgureCost;
 
     public AssemblyWorkRequest() {
     }
@@ -21,5 +22,15 @@ public class AssemblyWorkRequest extends WorkRequest {
     public void setFailgureQuant(int failgureQuant) {
         this.failgureQuant = failgureQuant;
     }
+
+    public double getFailgureCost() {
+        return failgureCost;
+    }
+
+    public void setFailgureCost(double failgureCost) {
+        this.failgureCost = failgureCost;
+    }
+    
+    
     
 }

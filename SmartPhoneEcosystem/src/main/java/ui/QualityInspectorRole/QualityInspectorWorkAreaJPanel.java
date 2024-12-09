@@ -8,19 +8,40 @@ import Ecosystem.EcoSystem;
 import Ecosystem.Enterprise.Enterprise;
 import Ecosystem.Organization.Organization;
 import Ecosystem.UserAccount.UserAccount;
+import Ecosystem.WorkQueue.AssemblyWorkRequest;
+import Ecosystem.WorkQueue.QualityManagementWorkRequest;
+import Ecosystem.WorkQueue.WorkRequest;
+import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author sunny
  */
 public class QualityInspectorWorkAreaJPanel extends javax.swing.JPanel {
-
+    private JPanel workArea;
+    private UserAccount userAccount;
+    private Organization organization;
+    private Enterprise enterprise;
+    private EcoSystem system;
+    
     /**
      * Creates new form QualityInspectorWorkAreaJPanel
      */
     public QualityInspectorWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, Organization organization, Enterprise enterprise, EcoSystem ecosystem) {
         initComponents();
+        
+        this.workArea = userProcessContainer;
+        this.userAccount = account;
+        this.organization = organization;
+        this.enterprise = enterprise;
+        this.system = ecosystem;
+        
+        populateQualityManagementRequestsTable();
+        populateReassemblyRequestsTable();
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,19 +52,340 @@ public class QualityInspectorWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        lblHeading = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        btnAssign = new javax.swing.JButton();
+        btnProcess = new javax.swing.JButton();
+        btnRequestReassembly = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tblWorkRequests = new javax.swing.JTable();
+        lblProductName1 = new javax.swing.JLabel();
+        lblProductName2 = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tblReassemblyWorkRequests = new javax.swing.JTable();
+        btnRefresh = new javax.swing.JButton();
+
+        lblHeading.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
+        lblHeading.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHeading.setText("Quality Inspector Work Area");
+
+        jPanel1.setOpaque(false);
+
+        btnAssign.setBackground(new java.awt.Color(204, 225, 152));
+        btnAssign.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnAssign.setText("Assign to me");
+        btnAssign.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAssignActionPerformed(evt);
+            }
+        });
+
+        btnProcess.setBackground(new java.awt.Color(204, 225, 152));
+        btnProcess.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnProcess.setText("Process");
+        btnProcess.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnProcessActionPerformed(evt);
+            }
+        });
+
+        btnRequestReassembly.setBackground(new java.awt.Color(204, 225, 152));
+        btnRequestReassembly.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnRequestReassembly.setText("Request Re-assembly");
+        btnRequestReassembly.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRequestReassemblyActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(btnAssign)
+                .addGap(18, 18, 18)
+                .addComponent(btnProcess, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 233, Short.MAX_VALUE)
+                .addComponent(btnRequestReassembly)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAssign)
+                    .addComponent(btnProcess)
+                    .addComponent(btnRequestReassembly))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        tblWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Product Name", "Message", "Sender", "Receiver", "Quant", "Failure Quant", "Cost", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tblWorkRequests);
+
+        lblProductName1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblProductName1.setText("Quality Management Organization Work Request Table:");
+
+        lblProductName2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        lblProductName2.setText("Reassembly Request Table:");
+
+        tblReassemblyWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Product Name", "Message", "Sender", "Receiver", "Quant", "Failure Quant", "Cost", "Status"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(tblReassemblyWorkRequests);
+
+        btnRefresh.setBackground(new java.awt.Color(204, 225, 152));
+        btnRefresh.setFont(new java.awt.Font("Segoe UI", 0, 16)); // NOI18N
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblHeading, javax.swing.GroupLayout.PREFERRED_SIZE, 438, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnRefresh)
+                        .addGap(14, 14, 14))
+                    .addComponent(jScrollPane3)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblProductName1)
+                                    .addComponent(lblProductName2))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblHeading)
+                    .addComponent(btnRefresh))
+                .addGap(5, 5, 5)
+                .addComponent(lblProductName1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblProductName2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAssignActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAssignActionPerformed
+
+        int selectedRow = tblWorkRequests.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            WorkRequest request = (WorkRequest) tblWorkRequests.getValueAt(selectedRow, 1);
+            if (request.getStatus().equalsIgnoreCase("Completed")) {
+                JOptionPane.showMessageDialog(null, "Request already processed.");
+                return;
+            } else {
+                userAccount.getWorkQueue().getWorkRequestList().add(request);
+                request.setReceiver(userAccount);
+                request.setStatus("Pending");
+                populateQualityManagementRequestsTable();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Choose a reuest to process.");
+            return;
+        }
+    }//GEN-LAST:event_btnAssignActionPerformed
+
+    private void btnProcessActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProcessActionPerformed
+        int selectedRow = tblWorkRequests.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            QualityManagementWorkRequest request = (QualityManagementWorkRequest) tblWorkRequests.getValueAt(selectedRow, 1);
+
+            if (request.getStatus().equalsIgnoreCase("Completed")) {
+                JOptionPane.showMessageDialog(null, "Request already processed.");
+                return;
+            }
+
+            if(userAccount.getWorkQueue().getWorkRequestList().indexOf(request) == -1){
+                JOptionPane.showMessageDialog(null, "This request wasn't assigned to you.");
+                return;
+            }
+            request.setStatus("Processing");
+
+            CheckAssemblyRequestJPanel processWorkRequestJPanel = new CheckAssemblyRequestJPanel(workArea, request);
+            workArea.add("processWorkRequestJPanel", processWorkRequestJPanel);
+            CardLayout layout = (CardLayout) workArea.getLayout();
+            layout.next(workArea);
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a request message to process.");
+            return;
+        }
+    }//GEN-LAST:event_btnProcessActionPerformed
+
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+        populateQualityManagementRequestsTable();
+        populateReassemblyRequestsTable();
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
+    private void btnRequestReassemblyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRequestReassemblyActionPerformed
+        // TODO add your handling code here:
+        int selectedRow = tblWorkRequests.getSelectedRow();
+
+        if (selectedRow >= 0) {
+            QualityManagementWorkRequest qmRequest = (QualityManagementWorkRequest) tblWorkRequests.getValueAt(selectedRow, 1);
+            AssemblyWorkRequest assemblyWorkRequest = qmRequest.getAssemblyWorkRequest();
+            
+            if (qmRequest.getStatus().equalsIgnoreCase("Pending") || qmRequest.getStatus().equalsIgnoreCase("Processing")) {
+                JOptionPane.showMessageDialog(null, "Request is being checked.");
+                return;
+            }
+            
+            if(userAccount.getWorkQueue().getWorkRequestList().indexOf(qmRequest) == -1){
+                JOptionPane.showMessageDialog(null, "This request wasn't assigned to you.");
+                return;
+            }
+            
+            if (assemblyWorkRequest.getStatus().equalsIgnoreCase("Completed")) {
+                JOptionPane.showMessageDialog(null, "Request already processed.");
+                return;
+            }
+            
+            if (assemblyWorkRequest.getStatus().equalsIgnoreCase("Returned")) {
+                JOptionPane.showMessageDialog(null, "Request already created.");
+                return;
+            }
+
+            assemblyWorkRequest.setStatus("Returned");
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Please select a request message to process.");
+            return;
+        }
+
+        populateQualityManagementRequestsTable();
+        populateReassemblyRequestsTable();
+    }//GEN-LAST:event_btnRequestReassemblyActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAssign;
+    private javax.swing.JButton btnProcess;
+    private javax.swing.JButton btnRefresh;
+    private javax.swing.JButton btnRequestReassembly;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel lblHeading;
+    private javax.swing.JLabel lblProductName1;
+    private javax.swing.JLabel lblProductName2;
+    private javax.swing.JTable tblReassemblyWorkRequests;
+    private javax.swing.JTable tblWorkRequests;
     // End of variables declaration//GEN-END:variables
+
+    void populateQualityManagementRequestsTable(){
+        DefaultTableModel model = (DefaultTableModel) tblWorkRequests.getModel();
+        model.setRowCount(0);
+        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
+            if (request instanceof QualityManagementWorkRequest) {
+                Object[] row = new Object[8];
+                row[0] = request.getProductName();
+                row[1] = request;
+                row[2] = request.getSender();
+                row[3] = request.getReceiver();
+                row[4] = request.getProductQuant();
+                row[5] = ((QualityManagementWorkRequest) request).getAssemblyWorkRequest().getFailgureQuant();
+                row[6] = request.getCost();
+                row[7] = request.getStatus();
+
+                model.addRow(row);
+            }
+        }
+    }
+    
+    void populateReassemblyRequestsTable(){
+        DefaultTableModel model = (DefaultTableModel) tblReassemblyWorkRequests.getModel();
+        model.setRowCount(0);
+        for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
+            AssemblyWorkRequest assemblyRW = ((QualityManagementWorkRequest) request).getAssemblyWorkRequest();
+            
+            if (assemblyRW.getFailgureQuant() != 0) { 
+                
+                Object[] row = new Object[8];
+                row[0] = assemblyRW.getProductName();
+                row[1] = assemblyRW;
+                row[2] = assemblyRW.getSender();
+                row[3] = assemblyRW.getReceiver();
+                row[4] = assemblyRW.getProductQuant();
+                row[5] = assemblyRW.getFailgureQuant();
+                row[6] = request.getCost();
+                row[7] = assemblyRW.getStatus();
+
+                model.addRow(row);
+            }
+        }
+    }
 }

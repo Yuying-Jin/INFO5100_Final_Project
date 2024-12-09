@@ -6,7 +6,6 @@ package ui.ProductionOperatorRole;
 
 import Ecosystem.EcoSystem;
 import Ecosystem.Enterprise.Enterprise;
-import Ecosystem.Enterprise.LogisticsEnterprise;
 import Ecosystem.Organization.Organization;
 import Ecosystem.Organization.QualityManagementOrganization;
 import Ecosystem.UserAccount.UserAccount;
@@ -19,7 +18,6 @@ import static java.awt.Font.BOLD;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
-import ui.QualityInspectorRole.CheckAssemblyRequestJPanel;
 
 /**
  *
@@ -144,20 +142,20 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
         tblWorkRequests.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         tblWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Product Name", "Message", "Sender", "Receiver", "Quant", "Cost", "Status"
+                "Product Name", "Message", "Sender", "Receiver", "Quant", "Failuare Quant", "Cost", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -179,20 +177,20 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
         tblUserWorkRequests.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
         tblUserWorkRequests.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Product Name", "Message", "Sender", "Receiver", "Quant", "Cost", "Status"
+                "Product Name", "Message", "Sender", "Receiver", "Quant", "Failure Quant", "Cost", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -281,8 +279,7 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
 
         if (selectedRow >= 0) {
             AssemblyWorkRequest request = (AssemblyWorkRequest) tblWorkRequests.getValueAt(selectedRow, 1);
-
-            if (request.getStatus().equalsIgnoreCase("Completed")) {
+            if (request.getStatus().equalsIgnoreCase("Uncheck") || request.getStatus().equalsIgnoreCase("Completed")) {
                 JOptionPane.showMessageDialog(null, "Request already processed.");
                 return;
             }
@@ -309,17 +306,28 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
         
         if (selectedRow >= 0) {
             AssemblyWorkRequest request = (AssemblyWorkRequest) tblWorkRequests.getValueAt(selectedRow, 1);
-
             
-            if (!request.getStatus().equalsIgnoreCase("Completed")) {
+            if (request.getStatus().equalsIgnoreCase("Pending") || request.getStatus().equalsIgnoreCase("Processing") ) {
                 JOptionPane.showMessageDialog(null, "Request not processed yet.");
                 return;
             }
 
+            if (request.getStatus().equalsIgnoreCase("Completed")) {
+                JOptionPane.showMessageDialog(null, "Request already processed.");
+                return;
+            }
+
+            if (request.getStatus().equalsIgnoreCase("Checking")) {
+                JOptionPane.showMessageDialog(null, "Request already created.");
+                return;
+            }
+            
             if(userAccount.getWorkQueue().getWorkRequestList().indexOf(request) == -1){
                 JOptionPane.showMessageDialog(null, "This request wasn't assigned to you.");
                 return;
             }
+            
+            
             
             request.setStatus("Checking");
             
@@ -328,6 +336,7 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
             qualityWorkRequest.setProductQuant(request.getProductQuant());
             qualityWorkRequest.setSender(userAccount);
             qualityWorkRequest.setStatus("Sent");
+            qualityWorkRequest.setMessage("Check quality");
             
             Organization org = null;
             for (Organization o : enterprise.getOrganizationDirectory().getOrganizationList()){
@@ -347,6 +356,7 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
         }
         
         populateQualityRequestsTable();
+        populateAssemblyRequestsTable();
         
     }//GEN-LAST:event_btnRequestQualityManagementActionPerformed
 
@@ -371,14 +381,15 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
         
         model.setRowCount(0);
         for (WorkRequest request : organization.getWorkQueue().getWorkRequestList()){
-            Object[] row = new Object[7];
+            Object[] row = new Object[8];
             row[0] = request.getProductName();
             row[1] = request;
             row[2] = request.getSender();
             row[3] = request.getReceiver();
             row[4] = request.getProductQuant();
-            row[5] = request.getCost();
-            row[6] = request.getStatus();
+            row[5] = ((AssemblyWorkRequest) request).getFailgureQuant();
+            row[6] = request.getCost();
+            row[7] = request.getStatus();
             
             model.addRow(row);
         }
@@ -389,14 +400,15 @@ public class ProductionOperatorWorkAreaJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         for (WorkRequest request : userAccount.getWorkQueue().getWorkRequestList()){
             if (request instanceof QualityManagementWorkRequest) { 
-                Object[] row = new Object[7];
+                Object[] row = new Object[8];
                 row[0] = request.getProductName();
                 row[1] = request;
                 row[2] = request.getSender();
                 row[3] = request.getReceiver();
                 row[4] = request.getProductQuant();
-                row[5] = request.getCost();
-                row[6] = request.getStatus();
+                row[5] = ((QualityManagementWorkRequest) request).getAssemblyWorkRequest().getFailgureQuant();
+                row[6] = request.getCost();
+                row[7] = request.getStatus();
 
                 model.addRow(row);
             }
