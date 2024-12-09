@@ -4,17 +4,46 @@
  */
 package ui.EnterprisesAdminWorkArea;
 
+import Ecosystem.EcoSystem;
+import Ecosystem.Enterprise.Enterprise;
+import Ecosystem.Organization.Organization;
+import Ecosystem.UserAccount.UserAccount;
+import Ecosystem.WorkQueue.AssemblyWorkRequest;
+import Ecosystem.WorkQueue.WorkRequest;
+import java.util.ArrayList;
+import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author lingduan
  */
 public class WorkflowPerformanceJPanel extends javax.swing.JPanel {
-
+      JPanel userProcessContainer;
+    private Organization organization;
+    private Enterprise enterprise;
+    private UserAccount account;
+    private EcoSystem ecosystem;
+    private ArrayList<WorkRequest> workRequestList;
     /**
      * Creates new form WorkflowPerformance
      */
-    public WorkflowPerformanceJPanel() {
+    public WorkflowPerformanceJPanel(JPanel userProcessContainer, UserAccount account, Enterprise enterprise, EcoSystem business) {
         initComponents();
+        this.userProcessContainer = userProcessContainer;
+        this.account = account;
+        this.enterprise = enterprise;
+        this.ecosystem = business;
+        
+        for(Organization o : enterprise.getOrganizationDirectory().getOrganizationList()){
+            for(WorkRequest wr : o.getWorkQueue().getWorkRequestList()){
+                workRequestList.add(wr);
+            }
+        }
+        
+        
+        
+        populateTable();
     }
 
     /**
@@ -31,6 +60,11 @@ public class WorkflowPerformanceJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
+        btnCalculate = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        txtFailureCost = new javax.swing.JTextField();
+
+        setBackground(new java.awt.Color(255, 245, 175));
 
         workRequestJTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -40,14 +74,14 @@ public class WorkflowPerformanceJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Approved", "Message", "Sender", "Receiver", "Cost", "Status", "Product Name", "Product Quant"
+                "Product Name", "Product Quant", "Approved", "Message", "Sender", "Receiver", "Cost", "Status"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Boolean.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                true, false, false, false, false, false, true, true
+                true, true, true, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -59,6 +93,10 @@ public class WorkflowPerformanceJPanel extends javax.swing.JPanel {
             }
         });
         jScrollPane1.setViewportView(workRequestJTable);
+        if (workRequestJTable.getColumnModel().getColumnCount() > 0) {
+            workRequestJTable.getColumnModel().getColumn(0).setPreferredWidth(150);
+            workRequestJTable.getColumnModel().getColumn(1).setPreferredWidth(150);
+        }
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 0, 18)); // NOI18N
         jLabel1.setText("Total Cost:");
@@ -72,39 +110,62 @@ public class WorkflowPerformanceJPanel extends javax.swing.JPanel {
         jLabel10.setFont(new java.awt.Font("Helvetica Neue", 0, 24)); // NOI18N
         jLabel10.setText("Workflow Performance ");
 
+        btnCalculate.setBackground(new java.awt.Color(204, 225, 152));
+        btnCalculate.setFont(new java.awt.Font("Helvetica Neue", 0, 16)); // NOI18N
+        btnCalculate.setText("Calculate Total Cost");
+        btnCalculate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalculateActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Helvetica Neue", 0, 14)); // NOI18N
+        jLabel3.setText("Failure Cost:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(35, 35, 35)
+                .addComponent(jScrollPane1)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(68, 68, 68)
+                .addComponent(jLabel3)
+                .addGap(40, 40, 40)
+                .addComponent(txtFailureCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(btnCalculate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 579, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(56, 56, 56))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(183, 183, 183)
-                        .addComponent(jLabel10)))
-                .addContainerGap(60, Short.MAX_VALUE))
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(117, 117, 117))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(183, 183, 183)
+                .addComponent(jLabel10)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(47, 47, 47)
                 .addComponent(jLabel10)
-                .addGap(44, 44, 44)
+                .addGap(41, 41, 41)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(44, 44, 44)
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCalculate)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(txtFailureCost, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -112,12 +173,64 @@ public class WorkflowPerformanceJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void btnCalculateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalculateActionPerformed
+        // TODO add your handling code here:
+         double totalCost = 0.0; // Initialize the total cost
+
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
+        int rowCount = model.getRowCount();
+
+        for (int i = 0; i < rowCount; i++) {
+            Boolean isApproved = (Boolean) model.getValueAt(i, 2); // Column 2: Approved
+            if (isApproved != null && isApproved) {
+                Double cost = (Double) model.getValueAt(i, 6); // Column 6: Cost
+                if (cost != null) {
+                    totalCost += cost; // Sum up the approved costs
+                }
+            }
+        }
+
+    }//GEN-LAST:event_btnCalculateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCalculate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtFailureCost;
     private javax.swing.JTable workRequestJTable;
     // End of variables declaration//GEN-END:variables
+
+    private void populateTable() {
+        DefaultTableModel model = (DefaultTableModel) workRequestJTable.getModel();
+        model.setRowCount(0); // Clear any existing rows
+        
+        for(WorkRequest wr : workRequestList){
+            Object[] row = new Object[8];
+            row[0] = wr.getProductName();
+            row[1] = wr.getProductQuant();
+            row[2] = wr.getIsApproved();
+            row[3] = wr.getMessage();
+            row[4] = wr.getSender().getEmployee().getName();
+            row[5] = (wr.getReceiver() != null) ? wr.getReceiver().getEmployee().getName() : "N/A"; 
+            row[6] = wr.getCost(); 
+            row[7] = wr.getStatus(); 
+
+            model.addRow(row);
+        }
+      
+    }
+    
+    private void calculateFailureCost(){
+        double failureCost = 0;
+        for(WorkRequest wr : workRequestList){
+            if(wr instanceof AssemblyWorkRequest){
+                failureCost += ((AssemblyWorkRequest)wr).getFailgureCost();
+            }
+        }
+        txtFailureCost.setText(String.valueOf(failureCost));
+    }
 }

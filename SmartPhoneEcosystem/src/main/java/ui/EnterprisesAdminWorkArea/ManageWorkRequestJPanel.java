@@ -159,6 +159,7 @@ public class ManageWorkRequestJPanel extends javax.swing.JPanel {
         }
 
         selectedRequest.setStatus("Approved");
+        selectedRequest.setIsApproved(true);
         JOptionPane.showMessageDialog(null, "Request approved successfully.");
         populateTable();
     }
