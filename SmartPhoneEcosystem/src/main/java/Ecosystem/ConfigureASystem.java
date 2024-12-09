@@ -295,7 +295,7 @@ public class ConfigureASystem {
         prepareWR.setReceiver(org6.getUserAccountDirectory().getUserAccountList().get(1));
         prepareWR.setProductQuantHad(rand.nextInt(200) + productQuant);
         // Warehouse Operator complete the request and set cost
-        prepareWR.setCost(5000);
+//        prepareWR.setCost(5000);
 //        prepareWR.setStatus("Completed");
 
         // After product prepared, Distribution Manager pass work request to Transportation Planner
